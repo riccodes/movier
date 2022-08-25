@@ -19,8 +19,7 @@ const MovieCard = ({ movie }) => {
         <Card variant="elevation" sx={{margin: "8px"}}>
             <CardMedia
                 component="img"
-                height="280px"
-                src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`}
+                src={`https://image.tmdb.org/t/p/w300/${movie.poster_path}`}
                 alt={movie.title}
             />
             <CardContent>
@@ -40,27 +39,27 @@ const MovieCard = ({ movie }) => {
                 </Stack>
             </CardContent>
             <CardContent>
-                <Typography variant="body1" color="text.secondary">
+                <Typography variant="caption" color="text.secondary">
                     {movie.overview}
                 </Typography>
             </CardContent>
-            <CardContent>
+            <CardContent sx={{background: "#efefef"}}>
                 <Box sx={{marginBottom: "4px"}}>
                     <Typography variant="subtitle2">Free</Typography>
                     <Typography variant="caption">
-                        {providers?.free.map(p => p.provider_name + ", ")}
+                        {providers?.free?.map(p => p.provider_name + ", ")}
                     </Typography>
                 </Box>
                 <Box sx={{marginBottom: "4px"}}>
                     <Typography variant="subtitle2">Rent</Typography>
                     <Typography variant="caption">
-                        {providers?.rent.map(p => p.provider_name + ", ")}
+                        {providers?.rent?.map(p => p.provider_name + ", ")}
                     </Typography>
                 </Box>
                 <Box sx={{marginBottom: "4px"}}>
                     <Typography variant="subtitle2">Buy</Typography>
                     <Typography variant="caption">
-                        {providers?.buy.map(p => p.provider_name + ", ")}
+                        {providers?.buy?.map(p => p.provider_name + ", ")}
                     </Typography>
                 </Box>
             </CardContent>

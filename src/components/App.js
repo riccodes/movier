@@ -10,12 +10,12 @@ function App() {
 
     useEffect(() => {
         discover().then(response => {
-            setMovies(response.data)
+            setMovies(response.data.results)
         })
     }, [])
 
     return (
-        <ImageList cols={6} maxWidth="xl">
+        <ImageList rowHeight="auto" cols={5} maxWidth="xl">
             {movies.map( movie => <MovieCard movie={movie}/> )}
         </ImageList>
     )
