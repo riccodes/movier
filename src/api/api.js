@@ -19,7 +19,7 @@ const fakeDiscoverUrl = "http://localhost:3001/discover"
 //         })
 // }
 
-export const discover = (year) => axios.get(host + discoverUrl,
+export const discover = (year = "") => axios.get(host + discoverUrl,
     { params: {
             api_key,
             language,
