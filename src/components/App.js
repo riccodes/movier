@@ -1,7 +1,7 @@
 import './App.css';
-import {discover} from "../api/api";
+import {discover, getGenreList} from "../api/api";
 import {useEffect, useState} from "react";
-import {Container, ImageList, Slider, Stack} from "@mui/material";
+import {Container, FormControl, ImageList, InputLabel, MenuItem, Select, Slider, Stack} from "@mui/material";
 import MovieCard from "./MovieCard";
 
 function App() {
@@ -9,34 +9,58 @@ function App() {
     const minYear = 1881
     const currentYear = new Date().getFullYear()
     const [movies, setMovies] = useState([])
+    const [genres, setGenres] = useState([])
+    const [selectedGenre, setSelectedGenre] = useState({name: ""})
     const [year, setYear] = useState("")
 
     useEffect(() => {
-        discover(year).then(response => { setMovies(response.data.results) })
-    }, [year])
+        discover(selectedGenre.id, year).then(response => {
+            setMovies(response.data.results)
+        })
+    }, [year, selectedGenre])
 
-    const handleSliderChange = newValue => {
-        setYear(newValue)
+    useEffect(() => {
+        getGenreList().then(response => {
+            setGenres(response.data.genres)
+        })
+    }, [])
+
+    const handleYearSelect = newValue => setYear(newValue)
+    const handleGenreSelect = e => {
+        const genreId = genres.find(genre => genre.name === e.target.value)
+        setSelectedGenre(genreId)
     }
 
     return (
-        <Container maxWidth="xl">
-        <Stack spacing={2} direction="row" sx={{ mb: 1 }} alignItems="center">
-            {minYear}
-            <Slider
-                sx={{margin: "32px"}}
-                aria-label="Set year"
-                defaultValue={currentYear}
-                valueLabelDisplay="on"
-                onChangeCommitted={(_, newValue) => handleSliderChange(newValue)}
-                step={1}
-                min={minYear}
-                max={currentYear}/>
-            {currentYear}
-        </Stack>
-        <ImageList rowHeight="auto" cols={5} maxWidth="xl">
-            {movies.map( movie => <MovieCard movie={movie}/> )}
-        </ImageList>
+        <Container sx={{marginTop: "16px"}} maxWidth="xl">
+            <FormControl fullWidth>
+                <InputLabel id="genre-select-label">Genre</InputLabel>
+                <Select
+                    labelId="genre-select-label"
+                    id="genre-select"
+                    value={selectedGenre.name}
+                    label="Genre selection"
+                    onChange={handleGenreSelect}
+                >
+                    {genres.map(genre => <MenuItem value={genre.name}>{genre.name}</MenuItem>)}
+                </Select>
+            </FormControl>
+            <Stack spacing={2} direction="row" sx={{mb: 1}} alignItems="center">
+                {minYear}
+                <Slider
+                    sx={{margin: "32px"}}
+                    aria-label="Set year"
+                    defaultValue={currentYear}
+                    valueLabelDisplay="on"
+                    onChangeCommitted={(_, newValue) => handleYearSelect(newValue)}
+                    step={1}
+                    min={minYear}
+                    max={currentYear}/>
+                {currentYear}
+            </Stack>
+            <ImageList rowHeight="auto" cols={5} maxWidth="xl">
+                {movies.map(movie => <MovieCard movie={movie}/>)}
+            </ImageList>
         </Container>
     )
 }
