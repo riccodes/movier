@@ -5,15 +5,33 @@ import {getWatchProviders} from "../api/api";
 
 const getYear = date => date.slice(0, 4)
 
-const MovieCard = ({ movie }) => {
+const MovieCard = ({movie}) => {
 
     const [providers, setProviders] = useState()
+    // const [isDisplay, setIsDisplay] = useState(true)
 
     useEffect(() => {
         getWatchProviders(movie.id).then(providers => {
             setProviders(providers.data.results["US"])
         })
     }, [])
+
+    //TODO-FIX make conditional render of providers work
+    const renderProviders = (provs, label) => {
+        if (provs) {
+            // setIsDisplay(true)
+            return (
+                <Box sx={{marginBottom: "4px"}}>
+                    <Typography variant="subtitle2">{label}</Typography>
+                    <Typography variant="caption">
+                        {provs?.map(p => p.provider_name + ", ")}
+                    </Typography>
+                </Box>
+            )
+        }
+
+        return <div/>
+    }
 
     return (
         <Card variant="elevation" sx={{margin: "8px"}}>
@@ -44,24 +62,9 @@ const MovieCard = ({ movie }) => {
                 </Typography>
             </CardContent>
             <CardContent sx={{background: "#efefef"}}>
-                <Box sx={{marginBottom: "4px"}}>
-                    <Typography variant="subtitle2">Free</Typography>
-                    <Typography variant="caption">
-                        {providers?.free?.map(p => p.provider_name + ", ")}
-                    </Typography>
-                </Box>
-                <Box sx={{marginBottom: "4px"}}>
-                    <Typography variant="subtitle2">Rent</Typography>
-                    <Typography variant="caption">
-                        {providers?.rent?.map(p => p.provider_name + ", ")}
-                    </Typography>
-                </Box>
-                <Box sx={{marginBottom: "4px"}}>
-                    <Typography variant="subtitle2">Buy</Typography>
-                    <Typography variant="caption">
-                        {providers?.buy?.map(p => p.provider_name + ", ")}
-                    </Typography>
-                </Box>
+                {renderProviders(providers?.free, "Free")}
+                {renderProviders(providers?.rent, "Rent")}
+                {renderProviders(providers?.buy, "Buy")}
             </CardContent>
         </Card>
     )
