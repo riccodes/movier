@@ -1,0 +1,637 @@
+{
+  "movie": [
+    {
+      "adult": false,
+      "backdrop_path": "/ikR2qy9xJCHX7M8i5rcvuNfdYXs.jpg",
+      "belongs_to_collection": null,
+      "budget": 12800000,
+      "genres": [
+        {
+          "id": 18,
+          "name": "Drama"
+        },
+        {
+          "id": 80,
+          "name": "Crime"
+        }
+      ],
+      "homepage": "",
+      "id": 16,
+      "imdb_id": "tt0168629",
+      "original_language": "en",
+      "original_title": "Dancer in the Dark",
+      "overview": "Selma, a Czech immigrant on the verge of blindness, struggles to make ends meet for herself and her son, who has inherited the same genetic disorder and will suffer the same fate without an expensive operation. When life gets too difficult, Selma learns to cope through her love of musicals, escaping life's troubles - even if just for a moment - by dreaming up little numbers to the rhythmic beats of her surroundings.",
+      "popularity": 13.548,
+      "poster_path": "/uXvyCRpoTRLSEia59Yj7nAZOSej.jpg",
+      "production_companies": [
+        {
+          "id": 8,
+          "logo_path": "/78ilmDNTpdCfsakrsLqmAUkFTrO.png",
+          "name": "Fine Line Features",
+          "origin_country": ""
+        },
+        {
+          "id": 46,
+          "logo_path": "/3xFdKHLXPGHEbrAkmsepGE8974Y.png",
+          "name": "WDR",
+          "origin_country": "DE"
+        },
+        {
+          "id": 47,
+          "logo_path": "/i7Z9ot2o3N5Sa3HrF09kniFs2y8.png",
+          "name": "Constantin Film",
+          "origin_country": "DE"
+        },
+        {
+          "id": 76,
+          "logo_path": "/nebkQYtQKhZyHJfh5v0oGpNbPzu.png",
+          "name": "Zentropa Entertainments",
+          "origin_country": "DK"
+        },
+        {
+          "id": 94,
+          "logo_path": "/huC7HqorvUThGIrENrbcHmQVUA0.png",
+          "name": "ARTE France Cinéma",
+          "origin_country": "FR"
+        },
+        {
+          "id": 104,
+          "logo_path": "/9aotxauvc9685tq9pTcRJszuT06.png",
+          "name": "Canal+",
+          "origin_country": "FR"
+        },
+        {
+          "id": 119,
+          "logo_path": "/1di2gITGUZr730AMuMKiCrP90Vl.png",
+          "name": "DR",
+          "origin_country": "DK"
+        },
+        {
+          "id": 157,
+          "logo_path": null,
+          "name": "SVT Drama",
+          "origin_country": ""
+        },
+        {
+          "id": 201,
+          "logo_path": "/6UIpEURdjnmcJPwgTDRzVRuwADr.png",
+          "name": "ARTE",
+          "origin_country": "FR"
+        },
+        {
+          "id": 321,
+          "logo_path": "/pfp6VWF3tYfOHHVRHpYe2iGcYrf.png",
+          "name": "Memfis Film",
+          "origin_country": "SE"
+        },
+        {
+          "id": 447,
+          "logo_path": null,
+          "name": "TV 1000 Sverige",
+          "origin_country": "SE"
+        },
+        {
+          "id": 591,
+          "logo_path": "/q5I5RDwMEiqoNmfaJgd2LraEOJY.png",
+          "name": "France 3 Cinéma",
+          "origin_country": "FR"
+        },
+        {
+          "id": 2801,
+          "logo_path": "/bswb1PLLsKDUXMLgy42bZtCtIde.png",
+          "name": "Film i Väst",
+          "origin_country": "SE"
+        },
+        {
+          "id": 2996,
+          "logo_path": null,
+          "name": "Angel films",
+          "origin_country": ""
+        },
+        {
+          "id": 5975,
+          "logo_path": "/vvjgoKygWWYZvYyidT3RmOCq5If.png",
+          "name": "YLE",
+          "origin_country": "FI"
+        },
+        {
+          "id": 6705,
+          "logo_path": "/e8EXNSfwr5E9d3TR8dHKbQnQK4W.png",
+          "name": "Film4 Productions",
+          "origin_country": "GB"
+        },
+        {
+          "id": 7330,
+          "logo_path": null,
+          "name": "Blind Spot Pictures",
+          "origin_country": "FI"
+        },
+        {
+          "id": 8659,
+          "logo_path": "/96hCWEsfmTZQsoUap0CcG21qaA.png",
+          "name": "VPRO",
+          "origin_country": "NL"
+        },
+        {
+          "id": 11239,
+          "logo_path": null,
+          "name": "Liberator Productions",
+          "origin_country": "FR"
+        },
+        {
+          "id": 14937,
+          "logo_path": null,
+          "name": "Íslenska kvikmyndasamsteypan",
+          "origin_country": "IS"
+        },
+        {
+          "id": 30268,
+          "logo_path": null,
+          "name": "Pain Unlimited GmbH Filmproduktion",
+          "origin_country": ""
+        },
+        {
+          "id": 53667,
+          "logo_path": null,
+          "name": "Trust Film Svenska",
+          "origin_country": ""
+        },
+        {
+          "id": 53668,
+          "logo_path": null,
+          "name": "Cinematograph A/S",
+          "origin_country": ""
+        },
+        {
+          "id": 53669,
+          "logo_path": null,
+          "name": "What Else? B.V",
+          "origin_country": ""
+        },
+        {
+          "id": 53670,
+          "logo_path": null,
+          "name": "Filmek A/S",
+          "origin_country": ""
+        },
+        {
+          "id": 53671,
+          "logo_path": null,
+          "name": "Lantia Cinema & Audiovisivi",
+          "origin_country": ""
+        }
+      ],
+      "production_countries": [
+        {
+          "iso_3166_1": "AR",
+          "name": "Argentina"
+        },
+        {
+          "iso_3166_1": "DK",
+          "name": "Denmark"
+        },
+        {
+          "iso_3166_1": "FI",
+          "name": "Finland"
+        },
+        {
+          "iso_3166_1": "FR",
+          "name": "France"
+        },
+        {
+          "iso_3166_1": "DE",
+          "name": "Germany"
+        },
+        {
+          "iso_3166_1": "IS",
+          "name": "Iceland"
+        },
+        {
+          "iso_3166_1": "IT",
+          "name": "Italy"
+        },
+        {
+          "iso_3166_1": "NL",
+          "name": "Netherlands"
+        },
+        {
+          "iso_3166_1": "NO",
+          "name": "Norway"
+        },
+        {
+          "iso_3166_1": "SE",
+          "name": "Sweden"
+        },
+        {
+          "iso_3166_1": "GB",
+          "name": "United Kingdom"
+        },
+        {
+          "iso_3166_1": "US",
+          "name": "United States of America"
+        }
+      ],
+      "release_date": "2000-06-30",
+      "revenue": 40031879,
+      "runtime": 141,
+      "spoken_languages": [
+        {
+          "english_name": "English",
+          "iso_639_1": "en",
+          "name": "English"
+        }
+      ],
+      "status": "Released",
+      "tagline": "You don't need eyes to see.",
+      "title": "Dancer in the Dark",
+      "video": false,
+      "vote_average": 7.9,
+      "vote_count": 1438
+    }
+  ],
+  "discover" : [
+    {
+      "adult": false,
+      "backdrop_path": "/7ZO9yoEU2fAHKhmJWfAc2QIPWJg.jpg",
+      "genre_ids": [
+        28,
+        878,
+        27
+      ],
+      "id": 766507,
+      "original_language": "en",
+      "original_title": "Prey",
+      "overview": "When danger threatens her camp, the fierce and highly skilled Comanche warrior Naru sets out to protect her people. But the prey she stalks turns out to be a highly evolved alien predator with a technically advanced arsenal.",
+      "popularity": 6339.21,
+      "poster_path": "/ujr5pztc1oitbe7ViMUOilFaJ7s.jpg",
+      "release_date": "2022-08-02",
+      "title": "Prey",
+      "video": false,
+      "vote_average": 8.1,
+      "vote_count": 2996
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/odJ4hx6g6vBt4lBWKFD1tI8WS4x.jpg",
+      "genre_ids": [
+        28,
+        18
+      ],
+      "id": 361743,
+      "original_language": "en",
+      "original_title": "Top Gun: Maverick",
+      "overview": "After more than thirty years of service as one of the Navy’s top aviators, and dodging the advancement in rank that would ground him, Pete “Maverick” Mitchell finds himself training a detachment of TOP GUN graduates for a specialized mission the likes of which no living pilot has ever seen.",
+      "popularity": 4165.949,
+      "poster_path": "/62HCnUTziyWcpDaBO2i1DX17ljH.jpg",
+      "release_date": "2022-05-24",
+      "title": "Top Gun: Maverick",
+      "video": false,
+      "vote_average": 8.3,
+      "vote_count": 2499
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/AfvIjhDu9p64jKcmohS4hsPG95Q.jpg",
+      "genre_ids": [
+        27,
+        53
+      ],
+      "id": 756999,
+      "original_language": "en",
+      "original_title": "The Black Phone",
+      "overview": "Finney Blake, a shy but clever 13-year-old boy, is abducted by a sadistic killer and trapped in a soundproof basement where screaming is of little use. When a disconnected phone on the wall begins to ring, Finney discovers that he can hear the voices of the killer’s previous victims. And they are dead set on making sure that what happened to them doesn’t happen to Finney.",
+      "popularity": 2323.16,
+      "poster_path": "/lr11mCT85T1JanlgjMuhs9nMht4.jpg",
+      "release_date": "2022-06-22",
+      "title": "The Black Phone",
+      "video": false,
+      "vote_average": 8,
+      "vote_count": 2067
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/3VQj6m0I6gkuRaljmhNZl0XR3by.jpg",
+      "genre_ids": [
+        16,
+        12,
+        35,
+        14
+      ],
+      "id": 585511,
+      "original_language": "en",
+      "original_title": "Luck",
+      "overview": "Suddenly finding herself in the never-before-seen Land of Luck, the unluckiest person in the world must unite with the magical creatures there to turn her luck around.",
+      "popularity": 2080.559,
+      "poster_path": "/1HOYvwGFioUFL58UVvDRG6beEDm.jpg",
+      "release_date": "2022-08-05",
+      "title": "Luck",
+      "video": false,
+      "vote_average": 8.1,
+      "vote_count": 503
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/tHR34A5n0my4maACNdLpWGd6QYq.jpg",
+      "genre_ids": [
+        18,
+        53
+      ],
+      "id": 698948,
+      "original_language": "en",
+      "original_title": "Thirteen Lives",
+      "overview": "Based on the true nail-biting mission that captivated the world. Twelve boys and the coach of a Thai soccer team explore the Tham Luang cave when an unexpected rainstorm traps them in a chamber inside the mountain. Entombed behind a maze of flooded cave tunnels, they face impossible odds. A team of world-class divers navigate through miles of dangerous cave networks to discover that finding the boys is only the beginning.",
+      "popularity": 784.659,
+      "poster_path": "/yi5KcJqFxy0D6yP8nCfcF8gJGg5.jpg",
+      "release_date": "2022-07-18",
+      "title": "Thirteen Lives",
+      "video": false,
+      "vote_average": 8.1,
+      "vote_count": 477
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/iQlJyRecJeGGzQGT2rEcyAgz89F.jpg",
+      "genre_ids": [
+        10749,
+        18
+      ],
+      "id": 762975,
+      "original_language": "en",
+      "original_title": "Purple Hearts",
+      "overview": "An aspiring musician agrees to a marriage of convenience with a soon-to-deploy Marine, but a tragedy soon turns their fake relationship all too real.",
+      "popularity": 603.269,
+      "poster_path": "/4JyNWkryifWbWXJyxcWh3pVya6N.jpg",
+      "release_date": "2022-07-29",
+      "title": "Purple Hearts",
+      "video": false,
+      "vote_average": 8.5,
+      "vote_count": 1247
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/rLo9T9jEg67UZPq3midjLnTUYYi.jpg",
+      "genre_ids": [
+        10402,
+        18,
+        36
+      ],
+      "id": 614934,
+      "original_language": "en",
+      "original_title": "Elvis",
+      "overview": "The life story of Elvis Presley as seen through the complicated relationship with his enigmatic manager, Colonel Tom Parker.",
+      "popularity": 697.055,
+      "poster_path": "/qBOKWqAFbveZ4ryjJJwbie6tXkQ.jpg",
+      "release_date": "2022-06-22",
+      "title": "Elvis",
+      "video": false,
+      "vote_average": 7.9,
+      "vote_count": 1161
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/iGHFjqxH5c8zRibnZbh9qEYTBho.jpg",
+      "genre_ids": [
+        28
+      ],
+      "id": 1008779,
+      "original_language": "es",
+      "original_title": "La Princesa",
+      "overview": "Refusing to marry a drug lord, Grecia is determined to pay her father's debt herself. To earn the money, she decides to bet in the Sinaloa palenques, where she meets Armando. He is immediately captivated by her beauty and fearless attitude. But, little does he know that falling for her will be his most dangerous endeavor. Based on the famous corrido hit \"La Princesa\", by Alfredo Ríos \"El Komander\".",
+      "popularity": 597.726,
+      "poster_path": "/ksxiXqwPuEjh3gct1zUpyzNoQFt.jpg",
+      "release_date": "2022-08-05",
+      "title": "The princess",
+      "video": false,
+      "vote_average": 8,
+      "vote_count": 1
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/wp3vpSWAIjKSEeYb8F5NSZfONqw.jpg",
+      "genre_ids": [
+        28,
+        12,
+        878
+      ],
+      "id": 545611,
+      "original_language": "en",
+      "original_title": "Everything Everywhere All at Once",
+      "overview": "An aging Chinese immigrant is swept up in an insane adventure, where she alone can save what's important to her by connecting with the lives she could have led in other universes.",
+      "popularity": 183.659,
+      "poster_path": "/w3LxiVYdWWRvEVdn5RYq6jIqkb1.jpg",
+      "release_date": "2022-03-24",
+      "title": "Everything Everywhere All at Once",
+      "video": false,
+      "vote_average": 8.3,
+      "vote_count": 1385
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/pCp9kiUEqDBJQiC9o5p2jrfSJbJ.jpg",
+      "genre_ids": [
+        35,
+        10751,
+        10749
+      ],
+      "id": 937337,
+      "original_language": "es",
+      "original_title": "¡Qué despadre!",
+      "overview": "Pedro is a single man in his forties who likes to party, has no children and lives at night. Everything changes when he meets Alin. She mentions to him that she is looking for her dad and that there is a high probability that it is him.",
+      "popularity": 148.561,
+      "poster_path": "/wGcxQDM60CDgKeBzsCg0pV6RAyW.jpg",
+      "release_date": "2022-02-09",
+      "title": "What a Father!",
+      "video": false,
+      "vote_average": 8.4,
+      "vote_count": 126
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/ktSsmJ6h2IeQgxFwUOQ9ZOxbUP3.jpg",
+      "genre_ids": [
+        18
+      ],
+      "id": 860852,
+      "original_language": "en",
+      "original_title": "Tyson's Run",
+      "overview": "When fifteen-year-old Tyson attends public school for the first time, his life is changed forever. While helping his father clean up after the football team, Tyson befriends champion marathon runner Aklilu. Never letting his autism hold him back, Tyson becomes determined to run his first marathon in hopes of winning his father's approval.  With the help of an unlikely friend and his parents, Tyson learns that with faith in yourself and the courage to take the first step, anything is possible.",
+      "popularity": 145.943,
+      "poster_path": "/7WXIBSt5fvAy8NMxSoT80fJ4T7N.jpg",
+      "release_date": "2022-03-04",
+      "title": "Tyson's Run",
+      "video": false,
+      "vote_average": 8.4,
+      "vote_count": 39
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/gcNo2gnODCQN2AfEhsAnwrqASRX.jpg",
+      "genre_ids": [
+        99
+      ],
+      "id": 912826,
+      "original_language": "es",
+      "original_title": "Rubius X",
+      "overview": "On the 10th anniversary of the publication of his first video on the Internet, \"Rubius X\" is a documentary that deals with the origin, motivation and secrets behind Rubius, one of the most followed Spanish content creators in the world. A review of the history of a pioneer, the icon of a whole generation, who represents like few others the revolution of the new digital media.",
+      "popularity": 172.543,
+      "poster_path": "/k6KAAVebtdVb0FRU2PWqYLnhgRA.jpg",
+      "release_date": "2022-07-21",
+      "title": "Rubius X",
+      "video": false,
+      "vote_average": 8.6,
+      "vote_count": 114
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/tTrZap8lEJsdpnab5yIR3d9bedg.jpg",
+      "genre_ids": [
+        16,
+        10751,
+        35,
+        878
+      ],
+      "id": 1010819,
+      "original_language": "en",
+      "original_title": "The Little Guy",
+      "overview": "Groot discovers a miniature civilization that believes the seemingly enormous tree toddler is the hero they’ve been waiting for.",
+      "popularity": 111.138,
+      "poster_path": "/lPzcizL8PdS2U1q0rfhlVn00b9l.jpg",
+      "release_date": "2022-08-10",
+      "title": "The Little Guy",
+      "video": false,
+      "vote_average": 8,
+      "vote_count": 66
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/a2BeIDEOq94NS9b8mYB6fiV2Ijx.jpg",
+      "genre_ids": [
+        16,
+        10751
+      ],
+      "id": 991833,
+      "original_language": "en",
+      "original_title": "Cat Pack: A PAW Patrol Exclusive Event",
+      "overview": "When Mayor Humdinger transforms his robot cat Meow-Meow into a tiger-sized metal-eating menace, the PAW Patrol calls in the Cat Pack for help in the stopping the creature.",
+      "popularity": 166.439,
+      "poster_path": "/l3rIbP71sR7hKtz77E6x7mdz6vG.jpg",
+      "release_date": "2022-06-24",
+      "title": "Cat Pack: A PAW Patrol Exclusive Event",
+      "video": false,
+      "vote_average": 8.6,
+      "vote_count": 24
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/4bsz75kSdeVQm9u5aD87ciRpYVW.jpg",
+      "genre_ids": [
+        16,
+        10751,
+        35,
+        878
+      ],
+      "id": 1010821,
+      "original_language": "en",
+      "original_title": "Groot Takes a Bath",
+      "overview": "Everybody needs some alone time to relax and wash up, but things go quite differently when you’re a Flora Colossi toddler.",
+      "popularity": 111.138,
+      "poster_path": "/sN7FJP06TsNNtK9Jr77dc25yI82.jpg",
+      "release_date": "2022-08-10",
+      "title": "Groot Takes a Bath",
+      "video": false,
+      "vote_average": 7.9,
+      "vote_count": 65
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/z2vSWntsTcs2iarUgf5un6kreSG.jpg",
+      "genre_ids": [
+        28
+      ],
+      "id": 988595,
+      "original_language": "ms",
+      "original_title": "Mat Kilau",
+      "overview": "This film tells the rise of a Malay warrior named Mat Kilau and his friends against the British colonialists who came to Pahang in 1890. The greed of British officials and policies, which have imposed excessive taxes, confiscated land belonging to the Malays to reap the treasures of Pahang and disrupted the Islamic way in Pahang has caused dissatisfaction among the rulers and the Malays. The patriotic spirit of Mat Kilau and his friends who rose up against British violence had caused Captain Syers to launch an attack on Mat Kilau. Witness the heroic spirit of Mat Kilau, Tok Gajah and Mat Kilau's best friends use their wisdom to fight in the jungle against the British soldiers. Did Mat Kilau and his friends succeed in driving out the barbaric and greedy British army to reap gold and tin in Pahang?",
+      "popularity": 74.022,
+      "poster_path": "/nIxzJv94a35SL0X7eC6EULHVHTC.jpg",
+      "release_date": "2022-06-23",
+      "title": "Mat Kilau",
+      "video": true,
+      "vote_average": 10,
+      "vote_count": 2
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/pubrPXxhw0ip7hGqob01YxKr5yR.jpg",
+      "genre_ids": [],
+      "id": 994418,
+      "original_language": "es",
+      "original_title": "Misterio en Marbella",
+      "overview": "",
+      "popularity": 50.484,
+      "poster_path": "/5tgEZASnYITcT2eF0OeywyrMw0u.jpg",
+      "release_date": "2022-05-20",
+      "title": "Misterio en Marbella",
+      "video": false,
+      "vote_average": 7.9,
+      "vote_count": 28
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/jBIMZ0AlUYuFNsKbd4L6FojWMoy.jpg",
+      "genre_ids": [
+        16,
+        35,
+        10749
+      ],
+      "id": 820067,
+      "original_language": "ja",
+      "original_title": "映画 五等分の花嫁",
+      "overview": "Fuutarou struggles to prepare for the school festival while keeping an eye on Ichika's studies, who has decided to take a leave of absence to focus on acting, and Yotsuba is even more determined than usual to make it a school festival with no regrets. Dizzying days go by, and before you know it, it's the eve of the school festival. Fuutarou is encouraged by Itsuki's decision not to give up, and searches for answers to Nino's feelings, Miku's determination, and his feelings for Ichika, Yotsuba, and Itsuki. With each of them having their own thoughts and feelings, the first day of the school festival, the last event of their high school life, finally began. \"Come to the classroom at 3:00 p.m., the first day of the school festival.\" The quintuplets gather in the classroom and Fuutarou finally informs them that he will make a decision...",
+      "popularity": 57.955,
+      "poster_path": "/wenxWlscwXPNFj2GDXRhPb9xlWM.jpg",
+      "release_date": "2022-05-20",
+      "title": "The Quintessential Quintuplets the Movie",
+      "video": false,
+      "vote_average": 9.5,
+      "vote_count": 20
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/ndTjjoXdkExEo4on7iCv0Y1k70S.jpg",
+      "genre_ids": [
+        10402,
+        35
+      ],
+      "id": 684006,
+      "original_language": "en",
+      "original_title": "Fisherman's Friends: One and All",
+      "overview": "Following the unexpected success of the band’s debut album “No Hopers, Jokers and Rogues”, we re-join them almost a year later, struggling with the pressures, pitfalls and temptations of their newfound fame, second album syndrome, and performing on the pyramid stage at Glastonbury.",
+      "popularity": 43.396,
+      "poster_path": "/6lRPlb4SjY3l61KoFWVQThpuXVf.jpg",
+      "release_date": "2022-08-19",
+      "title": "Fisherman's Friends: One and All",
+      "video": false,
+      "vote_average": 10,
+      "vote_count": 1
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/53wnlJcSXOwGXU8Yq3ICAx6ZL1W.jpg",
+      "genre_ids": [
+        10749
+      ],
+      "id": 971961,
+      "original_language": "en",
+      "original_title": "Gabriel's Rapture: Part III",
+      "overview": "In the sixth installment of the Gabriel's Inferno series, Julia deals with the aftermath of Gabriel's departure, while Gabriel goes on a journey of self-discovery. Will they reunite and be able to repair what is broken?",
+      "popularity": 28.546,
+      "poster_path": "/n6uoqY6y352j0EtSXK8w4qOEwvD.jpg",
+      "release_date": "2022-08-12",
+      "title": "Gabriel's Rapture: Part III",
+      "video": false,
+      "vote_average": 8.3,
+      "vote_count": 53
+    }
+  ]
+}
