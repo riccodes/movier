@@ -633,5 +633,610 @@
       "vote_average": 8.3,
       "vote_count": 53
     }
-  ]
+  ],
+  "watchProviders" : {
+    "results": {
+      "AU": {
+        "link": "https://www.themoviedb.org/movie/16-dancer-in-the-dark/watch?locale=AU",
+        "rent": [
+          {
+            "display_priority": 2,
+            "logo_path": "/peURlLlr8jggOwK53fJ5wdQl05y.jpg",
+            "provider_id": 2,
+            "provider_name": "Apple iTunes"
+          },
+          {
+            "display_priority": 3,
+            "logo_path": "/tbEdFQDwx5LEVr8WpSeXQSIirVq.jpg",
+            "provider_id": 3,
+            "provider_name": "Google Play Movies"
+          },
+          {
+            "display_priority": 13,
+            "logo_path": "/oIkQkEkwfmcG7IGpRR1NB8frZZM.jpg",
+            "provider_id": 192,
+            "provider_name": "YouTube"
+          }
+        ],
+        "buy": [
+          {
+            "display_priority": 2,
+            "logo_path": "/peURlLlr8jggOwK53fJ5wdQl05y.jpg",
+            "provider_id": 2,
+            "provider_name": "Apple iTunes"
+          },
+          {
+            "display_priority": 3,
+            "logo_path": "/tbEdFQDwx5LEVr8WpSeXQSIirVq.jpg",
+            "provider_id": 3,
+            "provider_name": "Google Play Movies"
+          },
+          {
+            "display_priority": 13,
+            "logo_path": "/oIkQkEkwfmcG7IGpRR1NB8frZZM.jpg",
+            "provider_id": 192,
+            "provider_name": "YouTube"
+          }
+        ]
+      },
+      "CA": {
+        "link": "https://www.themoviedb.org/movie/16-dancer-in-the-dark/watch?locale=CA",
+        "buy": [
+          {
+            "display_priority": 2,
+            "logo_path": "/peURlLlr8jggOwK53fJ5wdQl05y.jpg",
+            "provider_id": 2,
+            "provider_name": "Apple iTunes"
+          },
+          {
+            "display_priority": 3,
+            "logo_path": "/tbEdFQDwx5LEVr8WpSeXQSIirVq.jpg",
+            "provider_id": 3,
+            "provider_name": "Google Play Movies"
+          },
+          {
+            "display_priority": 13,
+            "logo_path": "/oIkQkEkwfmcG7IGpRR1NB8frZZM.jpg",
+            "provider_id": 192,
+            "provider_name": "YouTube"
+          },
+          {
+            "display_priority": 48,
+            "logo_path": "/shq88b09gTBYC4hA7K7MUL8Q4zP.jpg",
+            "provider_id": 68,
+            "provider_name": "Microsoft Store"
+          }
+        ],
+        "rent": [
+          {
+            "display_priority": 2,
+            "logo_path": "/peURlLlr8jggOwK53fJ5wdQl05y.jpg",
+            "provider_id": 2,
+            "provider_name": "Apple iTunes"
+          },
+          {
+            "display_priority": 3,
+            "logo_path": "/tbEdFQDwx5LEVr8WpSeXQSIirVq.jpg",
+            "provider_id": 3,
+            "provider_name": "Google Play Movies"
+          },
+          {
+            "display_priority": 13,
+            "logo_path": "/oIkQkEkwfmcG7IGpRR1NB8frZZM.jpg",
+            "provider_id": 192,
+            "provider_name": "YouTube"
+          },
+          {
+            "display_priority": 48,
+            "logo_path": "/shq88b09gTBYC4hA7K7MUL8Q4zP.jpg",
+            "provider_id": 68,
+            "provider_name": "Microsoft Store"
+          }
+        ]
+      },
+      "CH": {
+        "link": "https://www.themoviedb.org/movie/16-dancer-in-the-dark/watch?locale=CH",
+        "flatrate": [
+          {
+            "display_priority": 3,
+            "logo_path": "/hGvUo8KZTRLDZWcfFJS3gA8aenB.jpg",
+            "provider_id": 381,
+            "provider_name": "Canal+"
+          }
+        ]
+      },
+      "DK": {
+        "link": "https://www.themoviedb.org/movie/16-dancer-in-the-dark/watch?locale=DK",
+        "rent": [
+          {
+            "display_priority": 2,
+            "logo_path": "/peURlLlr8jggOwK53fJ5wdQl05y.jpg",
+            "provider_id": 2,
+            "provider_name": "Apple iTunes"
+          },
+          {
+            "display_priority": 3,
+            "logo_path": "/tbEdFQDwx5LEVr8WpSeXQSIirVq.jpg",
+            "provider_id": 3,
+            "provider_name": "Google Play Movies"
+          },
+          {
+            "display_priority": 20,
+            "logo_path": "/3QsJbibv5dFW2IYuXbTjxDmGGRZ.jpg",
+            "provider_id": 423,
+            "provider_name": "Blockbuster"
+          }
+        ],
+        "buy": [
+          {
+            "display_priority": 2,
+            "logo_path": "/peURlLlr8jggOwK53fJ5wdQl05y.jpg",
+            "provider_id": 2,
+            "provider_name": "Apple iTunes"
+          },
+          {
+            "display_priority": 3,
+            "logo_path": "/tbEdFQDwx5LEVr8WpSeXQSIirVq.jpg",
+            "provider_id": 3,
+            "provider_name": "Google Play Movies"
+          },
+          {
+            "display_priority": 20,
+            "logo_path": "/3QsJbibv5dFW2IYuXbTjxDmGGRZ.jpg",
+            "provider_id": 423,
+            "provider_name": "Blockbuster"
+          },
+          {
+            "display_priority": 21,
+            "logo_path": "/dNcz2AZHPEgt4BIKJe56r4visuK.jpg",
+            "provider_id": 426,
+            "provider_name": "SF Anytime"
+          }
+        ]
+      },
+      "FI": {
+        "link": "https://www.themoviedb.org/movie/16-dancer-in-the-dark/watch?locale=FI",
+        "rent": [
+          {
+            "display_priority": 2,
+            "logo_path": "/peURlLlr8jggOwK53fJ5wdQl05y.jpg",
+            "provider_id": 2,
+            "provider_name": "Apple iTunes"
+          },
+          {
+            "display_priority": 3,
+            "logo_path": "/tbEdFQDwx5LEVr8WpSeXQSIirVq.jpg",
+            "provider_id": 3,
+            "provider_name": "Google Play Movies"
+          },
+          {
+            "display_priority": 16,
+            "logo_path": "/xTVM8uXT9QocigQ07LE7Irc65W2.jpg",
+            "provider_id": 553,
+            "provider_name": "Telia Play"
+          },
+          {
+            "display_priority": 20,
+            "logo_path": "/3QsJbibv5dFW2IYuXbTjxDmGGRZ.jpg",
+            "provider_id": 423,
+            "provider_name": "Blockbuster"
+          },
+          {
+            "display_priority": 48,
+            "logo_path": "/shq88b09gTBYC4hA7K7MUL8Q4zP.jpg",
+            "provider_id": 68,
+            "provider_name": "Microsoft Store"
+          }
+        ],
+        "buy": [
+          {
+            "display_priority": 2,
+            "logo_path": "/peURlLlr8jggOwK53fJ5wdQl05y.jpg",
+            "provider_id": 2,
+            "provider_name": "Apple iTunes"
+          },
+          {
+            "display_priority": 3,
+            "logo_path": "/tbEdFQDwx5LEVr8WpSeXQSIirVq.jpg",
+            "provider_id": 3,
+            "provider_name": "Google Play Movies"
+          },
+          {
+            "display_priority": 20,
+            "logo_path": "/3QsJbibv5dFW2IYuXbTjxDmGGRZ.jpg",
+            "provider_id": 423,
+            "provider_name": "Blockbuster"
+          },
+          {
+            "display_priority": 21,
+            "logo_path": "/dNcz2AZHPEgt4BIKJe56r4visuK.jpg",
+            "provider_id": 426,
+            "provider_name": "SF Anytime"
+          },
+          {
+            "display_priority": 48,
+            "logo_path": "/shq88b09gTBYC4hA7K7MUL8Q4zP.jpg",
+            "provider_id": 68,
+            "provider_name": "Microsoft Store"
+          }
+        ]
+      },
+      "FR": {
+        "link": "https://www.themoviedb.org/movie/16-dancer-in-the-dark/watch?locale=FR",
+        "flatrate": [
+          {
+            "display_priority": 3,
+            "logo_path": "/hGvUo8KZTRLDZWcfFJS3gA8aenB.jpg",
+            "provider_id": 381,
+            "provider_name": "Canal+"
+          }
+        ]
+      },
+      "GB": {
+        "link": "https://www.themoviedb.org/movie/16-dancer-in-the-dark/watch?locale=GB",
+        "rent": [
+          {
+            "display_priority": 11,
+            "logo_path": "/5NyLm42TmCqCMOZFvH4fcoSNKEW.jpg",
+            "provider_id": 10,
+            "provider_name": "Amazon Video"
+          },
+          {
+            "display_priority": 20,
+            "logo_path": "/ugFkAFzcZm6I1ftFumwAmhtFaVO.jpg",
+            "provider_id": 189,
+            "provider_name": "Curzon Home Cinema"
+          }
+        ],
+        "buy": [
+          {
+            "display_priority": 11,
+            "logo_path": "/5NyLm42TmCqCMOZFvH4fcoSNKEW.jpg",
+            "provider_id": 10,
+            "provider_name": "Amazon Video"
+          }
+        ]
+      },
+      "IE": {
+        "link": "https://www.themoviedb.org/movie/16-dancer-in-the-dark/watch?locale=IE",
+        "rent": [
+          {
+            "display_priority": 10,
+            "logo_path": "/cEFDMwXFueD1II3lwcTawSnmOaj.jpg",
+            "provider_id": 53,
+            "provider_name": "Volta"
+          }
+        ],
+        "buy": [
+          {
+            "display_priority": 10,
+            "logo_path": "/cEFDMwXFueD1II3lwcTawSnmOaj.jpg",
+            "provider_id": 53,
+            "provider_name": "Volta"
+          }
+        ]
+      },
+      "IT": {
+        "link": "https://www.themoviedb.org/movie/16-dancer-in-the-dark/watch?locale=IT",
+        "buy": [
+          {
+            "display_priority": 10,
+            "logo_path": "/mT9kIe6JVz72ikWJ58x0q8ckUW3.jpg",
+            "provider_id": 40,
+            "provider_name": "Chili"
+          }
+        ],
+        "rent": [
+          {
+            "display_priority": 10,
+            "logo_path": "/mT9kIe6JVz72ikWJ58x0q8ckUW3.jpg",
+            "provider_id": 40,
+            "provider_name": "Chili"
+          }
+        ]
+      },
+      "JP": {
+        "link": "https://www.themoviedb.org/movie/16-dancer-in-the-dark/watch?locale=JP",
+        "flatrate": [
+          {
+            "display_priority": 2,
+            "logo_path": "/g8jqHtXJsMlc8B1Gb0Rt8AvUJMn.jpg",
+            "provider_id": 85,
+            "provider_name": "dTV"
+          }
+        ]
+      },
+      "KR": {
+        "link": "https://www.themoviedb.org/movie/16-dancer-in-the-dark/watch?locale=KR",
+        "rent": [
+          {
+            "display_priority": 3,
+            "logo_path": "/tbEdFQDwx5LEVr8WpSeXQSIirVq.jpg",
+            "provider_id": 3,
+            "provider_name": "Google Play Movies"
+          }
+        ],
+        "buy": [
+          {
+            "display_priority": 3,
+            "logo_path": "/tbEdFQDwx5LEVr8WpSeXQSIirVq.jpg",
+            "provider_id": 3,
+            "provider_name": "Google Play Movies"
+          },
+          {
+            "display_priority": 6,
+            "logo_path": "/a4ciTQc27FsgdUp7PCrToHPygcw.jpg",
+            "provider_id": 96,
+            "provider_name": "Naver Store"
+          }
+        ]
+      },
+      "NL": {
+        "link": "https://www.themoviedb.org/movie/16-dancer-in-the-dark/watch?locale=NL",
+        "rent": [
+          {
+            "display_priority": 48,
+            "logo_path": "/shq88b09gTBYC4hA7K7MUL8Q4zP.jpg",
+            "provider_id": 68,
+            "provider_name": "Microsoft Store"
+          }
+        ],
+        "buy": [
+          {
+            "display_priority": 48,
+            "logo_path": "/shq88b09gTBYC4hA7K7MUL8Q4zP.jpg",
+            "provider_id": 68,
+            "provider_name": "Microsoft Store"
+          }
+        ]
+      },
+      "NO": {
+        "link": "https://www.themoviedb.org/movie/16-dancer-in-the-dark/watch?locale=NO",
+        "buy": [
+          {
+            "display_priority": 2,
+            "logo_path": "/peURlLlr8jggOwK53fJ5wdQl05y.jpg",
+            "provider_id": 2,
+            "provider_name": "Apple iTunes"
+          },
+          {
+            "display_priority": 3,
+            "logo_path": "/tbEdFQDwx5LEVr8WpSeXQSIirVq.jpg",
+            "provider_id": 3,
+            "provider_name": "Google Play Movies"
+          },
+          {
+            "display_priority": 20,
+            "logo_path": "/3QsJbibv5dFW2IYuXbTjxDmGGRZ.jpg",
+            "provider_id": 423,
+            "provider_name": "Blockbuster"
+          },
+          {
+            "display_priority": 21,
+            "logo_path": "/dNcz2AZHPEgt4BIKJe56r4visuK.jpg",
+            "provider_id": 426,
+            "provider_name": "SF Anytime"
+          }
+        ],
+        "rent": [
+          {
+            "display_priority": 2,
+            "logo_path": "/peURlLlr8jggOwK53fJ5wdQl05y.jpg",
+            "provider_id": 2,
+            "provider_name": "Apple iTunes"
+          },
+          {
+            "display_priority": 3,
+            "logo_path": "/tbEdFQDwx5LEVr8WpSeXQSIirVq.jpg",
+            "provider_id": 3,
+            "provider_name": "Google Play Movies"
+          },
+          {
+            "display_priority": 20,
+            "logo_path": "/3QsJbibv5dFW2IYuXbTjxDmGGRZ.jpg",
+            "provider_id": 423,
+            "provider_name": "Blockbuster"
+          }
+        ],
+        "flatrate": [
+          {
+            "display_priority": 35,
+            "logo_path": "/gKno1uvHwHyhQTKMflDvEqj5oGJ.jpg",
+            "provider_id": 578,
+            "provider_name": "Strim"
+          }
+        ]
+      },
+      "NZ": {
+        "link": "https://www.themoviedb.org/movie/16-dancer-in-the-dark/watch?locale=NZ",
+        "buy": [
+          {
+            "display_priority": 2,
+            "logo_path": "/peURlLlr8jggOwK53fJ5wdQl05y.jpg",
+            "provider_id": 2,
+            "provider_name": "Apple iTunes"
+          },
+          {
+            "display_priority": 3,
+            "logo_path": "/tbEdFQDwx5LEVr8WpSeXQSIirVq.jpg",
+            "provider_id": 3,
+            "provider_name": "Google Play Movies"
+          }
+        ],
+        "rent": [
+          {
+            "display_priority": 2,
+            "logo_path": "/peURlLlr8jggOwK53fJ5wdQl05y.jpg",
+            "provider_id": 2,
+            "provider_name": "Apple iTunes"
+          },
+          {
+            "display_priority": 3,
+            "logo_path": "/tbEdFQDwx5LEVr8WpSeXQSIirVq.jpg",
+            "provider_id": 3,
+            "provider_name": "Google Play Movies"
+          }
+        ]
+      },
+      "RU": {
+        "link": "https://www.themoviedb.org/movie/16-dancer-in-the-dark/watch?locale=RU",
+        "ads": [
+          {
+            "display_priority": 17,
+            "logo_path": "/krABGbxTRmPtUA10fkwhwUdCd4I.jpg",
+            "provider_id": 556,
+            "provider_name": "tvzavr"
+          }
+        ]
+      },
+      "SE": {
+        "link": "https://www.themoviedb.org/movie/16-dancer-in-the-dark/watch?locale=SE",
+        "buy": [
+          {
+            "display_priority": 2,
+            "logo_path": "/peURlLlr8jggOwK53fJ5wdQl05y.jpg",
+            "provider_id": 2,
+            "provider_name": "Apple iTunes"
+          },
+          {
+            "display_priority": 3,
+            "logo_path": "/tbEdFQDwx5LEVr8WpSeXQSIirVq.jpg",
+            "provider_id": 3,
+            "provider_name": "Google Play Movies"
+          },
+          {
+            "display_priority": 20,
+            "logo_path": "/3QsJbibv5dFW2IYuXbTjxDmGGRZ.jpg",
+            "provider_id": 423,
+            "provider_name": "Blockbuster"
+          },
+          {
+            "display_priority": 21,
+            "logo_path": "/dNcz2AZHPEgt4BIKJe56r4visuK.jpg",
+            "provider_id": 426,
+            "provider_name": "SF Anytime"
+          },
+          {
+            "display_priority": 48,
+            "logo_path": "/shq88b09gTBYC4hA7K7MUL8Q4zP.jpg",
+            "provider_id": 68,
+            "provider_name": "Microsoft Store"
+          }
+        ],
+        "rent": [
+          {
+            "display_priority": 2,
+            "logo_path": "/peURlLlr8jggOwK53fJ5wdQl05y.jpg",
+            "provider_id": 2,
+            "provider_name": "Apple iTunes"
+          },
+          {
+            "display_priority": 3,
+            "logo_path": "/tbEdFQDwx5LEVr8WpSeXQSIirVq.jpg",
+            "provider_id": 3,
+            "provider_name": "Google Play Movies"
+          },
+          {
+            "display_priority": 20,
+            "logo_path": "/3QsJbibv5dFW2IYuXbTjxDmGGRZ.jpg",
+            "provider_id": 423,
+            "provider_name": "Blockbuster"
+          },
+          {
+            "display_priority": 48,
+            "logo_path": "/shq88b09gTBYC4hA7K7MUL8Q4zP.jpg",
+            "provider_id": 68,
+            "provider_name": "Microsoft Store"
+          }
+        ]
+      },
+      "US": {
+        "link": "https://www.themoviedb.org/movie/16-dancer-in-the-dark/watch?locale=US",
+        "rent": [
+          {
+            "display_priority": 2,
+            "logo_path": "/peURlLlr8jggOwK53fJ5wdQl05y.jpg",
+            "provider_id": 2,
+            "provider_name": "Apple iTunes"
+          },
+          {
+            "display_priority": 3,
+            "logo_path": "/tbEdFQDwx5LEVr8WpSeXQSIirVq.jpg",
+            "provider_id": 3,
+            "provider_name": "Google Play Movies"
+          },
+          {
+            "display_priority": 11,
+            "logo_path": "/5NyLm42TmCqCMOZFvH4fcoSNKEW.jpg",
+            "provider_id": 10,
+            "provider_name": "Amazon Video"
+          },
+          {
+            "display_priority": 13,
+            "logo_path": "/oIkQkEkwfmcG7IGpRR1NB8frZZM.jpg",
+            "provider_id": 192,
+            "provider_name": "YouTube"
+          },
+          {
+            "display_priority": 37,
+            "logo_path": "/21dEscfO8n1tL35k4DANixhffsR.jpg",
+            "provider_id": 7,
+            "provider_name": "Vudu"
+          },
+          {
+            "display_priority": 48,
+            "logo_path": "/shq88b09gTBYC4hA7K7MUL8Q4zP.jpg",
+            "provider_id": 68,
+            "provider_name": "Microsoft Store"
+          }
+        ],
+        "free": [
+          {
+            "display_priority": 46,
+            "logo_path": "/wbCleYwRFpUtWcNi7BLP3E1f6VI.jpg",
+            "provider_id": 191,
+            "provider_name": "Kanopy"
+          }
+        ],
+        "buy": [
+          {
+            "display_priority": 2,
+            "logo_path": "/peURlLlr8jggOwK53fJ5wdQl05y.jpg",
+            "provider_id": 2,
+            "provider_name": "Apple iTunes"
+          },
+          {
+            "display_priority": 3,
+            "logo_path": "/tbEdFQDwx5LEVr8WpSeXQSIirVq.jpg",
+            "provider_id": 3,
+            "provider_name": "Google Play Movies"
+          },
+          {
+            "display_priority": 11,
+            "logo_path": "/5NyLm42TmCqCMOZFvH4fcoSNKEW.jpg",
+            "provider_id": 10,
+            "provider_name": "Amazon Video"
+          },
+          {
+            "display_priority": 13,
+            "logo_path": "/oIkQkEkwfmcG7IGpRR1NB8frZZM.jpg",
+            "provider_id": 192,
+            "provider_name": "YouTube"
+          },
+          {
+            "display_priority": 37,
+            "logo_path": "/21dEscfO8n1tL35k4DANixhffsR.jpg",
+            "provider_id": 7,
+            "provider_name": "Vudu"
+          },
+          {
+            "display_priority": 48,
+            "logo_path": "/shq88b09gTBYC4hA7K7MUL8Q4zP.jpg",
+            "provider_id": 68,
+            "provider_name": "Microsoft Store"
+          }
+        ]
+      }
+    }
+  }
 }
