@@ -1,9 +1,8 @@
 import './App.css';
 import {discover, getGenreList} from "../api/api";
 import {useEffect, useState} from "react";
-import {Container, FormControl, ImageList, InputLabel, MenuItem, Select, Slider, Stack} from "@mui/material";
+import {Container, FormControl, Grid, InputLabel, MenuItem, Select, Slider, Stack} from "@mui/material";
 import MovieCard from "./MovieCard";
-import axios from "axios";
 
 function App() {
 
@@ -31,7 +30,7 @@ function App() {
         const genreId = genres.find(genre => genre.name === e.target.value)
         setSelectedGenre(genreId)
     }
-    console.log(movies)
+
     return (
         <Container sx={{marginTop: "16px"}} maxWidth="xl">
             <FormControl fullWidth>
@@ -43,7 +42,7 @@ function App() {
                     label="Genre selection"
                     onChange={handleGenreSelect}
                 >
-                    {genres.map(genre => <MenuItem value={genre.name}>{genre.name}</MenuItem>)}
+                    {genres.map(genre => <MenuItem key={genre.id} value={genre.name}>{genre.name}</MenuItem>)}
                 </Select>
             </FormControl>
             <Stack spacing={2} direction="row" sx={{mb: 1}} alignItems="center">
@@ -59,9 +58,9 @@ function App() {
                     max={currentYear}/>
                 {currentYear}
             </Stack>
-            <ImageList rowHeight="auto" cols={5} maxWidth="xl">
+            <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 2, sm: 8, md: 20 }}>
                 {movies.map(movie => <MovieCard movie={movie}/>)}
-            </ImageList>
+            </Grid>
         </Container>
     )
 }

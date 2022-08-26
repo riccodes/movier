@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Box, Card, CardContent, CardMedia, Chip, Stack, Typography} from "@mui/material";
+import {Box, Card, CardContent, CardMedia, Chip, Grid, Stack, Typography} from "@mui/material";
 import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
 import {getWatchProviders} from "../api/api";
 
@@ -39,6 +39,7 @@ const MovieCard = ({movie}) => {
     }
 
     return (
+        <Grid item xs={2} sm={4} md={4}>
         <Card variant="elevation" sx={{margin: "8px"}}>
             <CardMedia
                 component="img"
@@ -72,6 +73,7 @@ const MovieCard = ({movie}) => {
                 {renderProviders(providers?.buy, "Buy")}
             </CardContent>
         </Card>
+        </Grid>
     )
 }
 
