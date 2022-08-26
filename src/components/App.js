@@ -6,6 +6,10 @@ import api from "themoviedb-javascript-library";
 
 function App() {
 
+    api.common.api_key = "28fa7353824f928bc291c6978cfb86c6";
+    api.common.base_uri = "https://api.themoviedb.org/3/";
+    api.common.images_uri = "https://image.tmdb.org/t/p/";
+
     const minYear = 1881
     const currentYear = new Date().getFullYear()
     const [movies, setMovies] = useState([])
