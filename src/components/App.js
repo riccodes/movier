@@ -14,7 +14,7 @@ function App() {
     const [year, setYear] = useState("")
 
     useEffect(() => {
-        discover().then(response => {
+        discover(selectedGenre.id, year).then(response => {
             setMovies(response.data.results)
         })
     }, [year, selectedGenre])
