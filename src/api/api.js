@@ -3,7 +3,7 @@ import axios from "axios";
 const api_key = "28fa7353824f928bc291c6978cfb86c6"
 const language = "en-US"
 
-const host = "https://api.themoviedb.org/3"
+const host = "http://api.themoviedb.org/3"
 const discoverUrl = "/discover/movie/"
 const genreListUrl = "/genre/movie/list"
 const watchListUrl = id => `/movie/${id}/watch/providers`
