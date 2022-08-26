@@ -3,7 +3,12 @@ import {Box, Card, CardContent, CardMedia, Chip, Stack, Typography} from "@mui/m
 import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
 import {getWatchProviders} from "../api/api";
 
-const getYear = date => date.slice(0, 4)
+const getYear = date => {
+    if(date)
+        return date.slice(0, 4)
+
+    return ""
+}
 
 const MovieCard = ({movie}) => {
 

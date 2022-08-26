@@ -18,17 +18,19 @@ const watchListUrl = id => `/movie/${id}/watch/providers`
 //         })
 // }
 
-export const discover = (genre = "", year = "") => axios.get(host + discoverUrl,
-        {
-            params: {
-                api_key,
-                language,
-                watch_region: "US",
-                with_genres: genre,
-                primary_release_year: year,
-                sort_by: "popularity.desc"
-            }
-        })
+// export const discover = (genre = "", year = "") => axios.get(host + discoverUrl,
+//         {
+//             params: {
+//                 api_key,
+//                 language,
+//                 watch_region: "US",
+//                 with_genres: genre,
+//                 primary_release_year: year,
+//                 sort_by: "popularity.desc"
+//             }
+//         })
+
+export const discover = () => axios.get("https://api.themoviedb.org/3/trending/all/day?api_key=28fa7353824f928bc291c6978cfb86c6")
 
 export const getWatchProviders = id => axios.get(host + watchListUrl(id), {params: {api_key, language}})
 

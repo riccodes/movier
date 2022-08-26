@@ -3,6 +3,7 @@ import {discover, getGenreList} from "../api/api";
 import {useEffect, useState} from "react";
 import {Container, FormControl, ImageList, InputLabel, MenuItem, Select, Slider, Stack} from "@mui/material";
 import MovieCard from "./MovieCard";
+import axios from "axios";
 
 function App() {
 
@@ -14,7 +15,7 @@ function App() {
     const [year, setYear] = useState("")
 
     useEffect(() => {
-        discover(selectedGenre.id, year).then(response => {
+        discover().then(response => {
             setMovies(response.data.results)
         })
     }, [year, selectedGenre])
@@ -30,7 +31,7 @@ function App() {
         const genreId = genres.find(genre => genre.name === e.target.value)
         setSelectedGenre(genreId)
     }
-
+    console.log(movies)
     return (
         <Container sx={{marginTop: "16px"}} maxWidth="xl">
             <FormControl fullWidth>
