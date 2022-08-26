@@ -1,8 +1,8 @@
 import './App.css';
-import {discover, getGenreList} from "../api/api";
 import {useEffect, useState} from "react";
 import {Container, FormControl, Grid, InputLabel, MenuItem, Select, Slider, Stack} from "@mui/material";
 import MovieCard from "./MovieCard";
+import api from "themoviedb-javascript-library";
 
 function App() {
 
@@ -12,23 +12,31 @@ function App() {
     const [genres, setGenres] = useState([])
     const [selectedGenre, setSelectedGenre] = useState({name: ""})
     const [year, setYear] = useState("")
+    const jsonify = string => JSON.parse(string)
 
     useEffect(() => {
-        discover(selectedGenre.id, year).then(response => {
-            setMovies(response.data.results)
-        })
+        api.discover.getMovies({
+                watch_region: "US",
+                with_genres: selectedGenre.id,
+                primary_release_year: year,
+                sort_by: "popularity.desc"
+            },
+            (response) => { setMovies(jsonify(response).results) },
+            (error) => { console.error(error) }
+        )
     }, [year, selectedGenre])
 
     useEffect(() => {
-        getGenreList().then(response => {
-            setGenres(response.data.genres)
-        })
+        api.genres.getMovieList({},
+            (response) => { setGenres(jsonify(response).genres) },
+            (error) => { console.error(error) }
+        )
     }, [])
 
     const handleYearSelect = newValue => setYear(newValue)
     const handleGenreSelect = e => {
-        const genreId = genres.find(genre => genre.name === e.target.value)
-        setSelectedGenre(genreId)
+        const genre = genres.find(genre => genre.name === e.target.value)
+        setSelectedGenre(genre)
     }
 
     return (
@@ -59,7 +67,7 @@ function App() {
                 {currentYear}
             </Stack>
             <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 2, sm: 8, md: 20 }}>
-                {movies.map(movie => <MovieCard movie={movie}/>)}
+                {movies?.map(movie => <MovieCard movie={movie}/>)}
             </Grid>
         </Container>
     )
