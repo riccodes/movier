@@ -18,8 +18,7 @@ const watchListUrl = id => `/movie/${id}/watch/providers`
 //         })
 // }
 
-export const discover = (genre = "", year = "") => axios
-    .get(host + discoverUrl,
+export const discover = (genre = "", year = "") => axios.get(host + discoverUrl,
         {
             params: {
                 api_key,
