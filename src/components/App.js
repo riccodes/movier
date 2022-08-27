@@ -50,7 +50,7 @@ function App() {
                 watch_region: "US",
                 with_genres: selectedGenre.id,
                 primary_release_year: year,
-                sort_by: selectedSort
+                sort_by: selectedSort.name
             },
             (response) => { setMovies(jsonify(response).results) },
             (error) => { console.error(error) }
@@ -69,7 +69,7 @@ function App() {
         const genre = genres.find(genre => genre.name === e.target.value)
         setSelectedGenre(genre)
     }
-    const handleSortSelect = e => { setSelectedSort(e.target.value) }
+    const handleSortSelect = e => { setSelectedSort(sorts.find(sort => sort.name === e.target.value)) }
     const setDisplayMessage = (show, message) => {
         setAlertMessage(message)
         setIsMessageDisplay(show)
@@ -97,7 +97,7 @@ function App() {
                 <Select
                     labelId="sort-select-label"
                     id="sort-select"
-                    value={selectedSort}
+                    value={selectedSort.name}
                     label="Sort selection"
                     onChange={handleSortSelect}
                 >

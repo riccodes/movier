@@ -4,10 +4,9 @@ import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
 import {getWatchProviders} from "../api/api";
 import tmdb from "themoviedb-javascript-library";
 
-const getYear = date => (date ? date.slice(0, 4) : "")
-
 const MovieCard = ({movie, setDisplayMessage, setMovies}) => {
 
+    const getYear = date => (date ? date.slice(0, 4) : "")
     const [providers, setProviders] = useState()
 
     //TODO-FIX make conditional render of providers
