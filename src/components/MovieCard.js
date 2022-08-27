@@ -59,7 +59,7 @@ const MovieCard = ({movie, setDisplayMessage, setMovies}) => {
                         alignItems="flex-start"
                         spacing={2}
                     >
-                        <Typography gutterBottom variant="h5">
+                        <Typography gutterBottom variant="subtitle1" >
                             {movie.title} ({getYear(movie.release_date)})
                         </Typography>
                         <Chip
