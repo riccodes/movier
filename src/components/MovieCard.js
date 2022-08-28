@@ -16,7 +16,7 @@ const MovieCard = ({movie, setDisplayMessage, setMovies}) => {
         getWatchProviders(movie.id).then(providers => {
             setProviders(providers.data.results["US"])
         })
-    }, [])
+    }, [movie.id])
 
     const getRecommendations = () => {
         tmdb.movies.getRecommendations({id: movie.id},
@@ -44,7 +44,7 @@ const MovieCard = ({movie, setDisplayMessage, setMovies}) => {
     }
 
     return (
-        <Grid item xs={2} sm={4} md={4}>
+        <Grid xs={2} sm={4} md={4}>
             <Card variant="elevation" sx={{margin: "8px"}}>
                 <CardMedia
                     component="img"

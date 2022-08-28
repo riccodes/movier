@@ -1,20 +1,10 @@
 import './App.css';
 import {useEffect, useState} from "react";
-import {
-    Alert,
-    Container,
-    FormControl,
-    Grid,
-    InputLabel,
-    MenuItem,
-    Select,
-    Slider,
-    Stack,
-    Typography
-} from "@mui/material";
+import {Alert, Container, Grid, Slider, Stack, Typography} from "@mui/material";
 import SettingsSuggestTwoToneIcon from '@mui/icons-material/SettingsSuggestTwoTone';
 import MovieCard from "./MovieCard";
 import tmdb from "themoviedb-javascript-library";
+import Selector from "./Selector";
 
 function App() {
 
@@ -35,8 +25,10 @@ function App() {
     const currentYear = new Date().getFullYear()
     const [movies, setMovies] = useState([])
     const [genres, setGenres] = useState([])
+    const [certifications, setCertifications] = useState([])
     const [selectedGenre, setSelectedGenre] = useState({name: ""})
     const [selectedSort, setSelectedSort] = useState(sorts.find(sort => sort.key === "pop.desc"))
+    const [selectedCertification, setSelectedCertification] = useState({certification: ""})
     const [year, setYear] = useState("")
     const [alertMessage, setAlertMessage] = useState()
     const [isMessageDisplay, setIsMessageDisplay] = useState()
@@ -50,18 +42,25 @@ function App() {
                 watch_region: "US",
                 with_genres: selectedGenre.id,
                 primary_release_year: year,
-                sort_by: selectedSort.name
+                sort_by: selectedSort.name,
+                certification_country: "US",
+                "certification.gte": selectedCertification.certification
             },
             (response) => { setMovies(jsonify(response).results) },
             (error) => { console.error(error) }
         )
-    }, [year, selectedGenre, selectedSort])
+    }, [selectedCertification, selectedGenre, selectedSort, year])
 
     useEffect(() => {
         tmdb.genres.getMovieList({},
             (response) => { setGenres(jsonify(response).genres) },
             (error) => { console.error(error) }
         )
+
+        tmdb.certifications.getMovieList(
+            (response) => { setCertifications(jsonify(response).certifications.US) },
+            (error) => { console.error(error) }
+            )
     }, [])
 
     const handleYearSelect = newValue => setYear(newValue)
@@ -69,7 +68,10 @@ function App() {
         const genre = genres.find(genre => genre.name === e.target.value)
         setSelectedGenre(genre)
     }
-    const handleSortSelect = e => { setSelectedSort(sorts.find(sort => sort.name === e.target.value)) }
+    const handleSortSelect = e => setSelectedSort(sorts.find(sort => sort.name === e.target.value))
+    const handleCertificationSelect = e =>
+        setSelectedCertification(certifications.find(cert => cert.certification === e.target.value))
+
     const setDisplayMessage = (show, message) => {
         setAlertMessage(message)
         setIsMessageDisplay(show)
@@ -77,33 +79,26 @@ function App() {
 
     return (
         <Container sx={{marginTop: "16px"}} maxWidth="xl">
-            <Typography sx={{marginBottom : "16px"}} variant="h3">
+            <Typography sx={{marginBottom: "16px"}} variant="h3">
                 MovieR <Typography variant="overline">by riccodes</Typography>
             </Typography>
-            <FormControl sx={{marginRight : "2px", width: "49%"}}>
-                <InputLabel id="genre-select-label">Genre</InputLabel>
-                <Select
-                    labelId="genre-select-label"
-                    id="genre-select"
-                    value={selectedGenre.name}
-                    label="Genre selection"
-                    onChange={handleGenreSelect}
-                >
-                    {genres.map(genre => <MenuItem key={genre.id} value={genre.name}>{genre.name}</MenuItem>)}
-                </Select>
-            </FormControl>
-            <FormControl sx={{ width: "50%"}}>
-                <InputLabel id="sort-select-label">Sort By</InputLabel>
-                <Select
-                    labelId="sort-select-label"
-                    id="sort-select"
-                    value={selectedSort.name}
-                    label="Sort selection"
-                    onChange={handleSortSelect}
-                >
-                    {sorts.map(sort => <MenuItem key={sort.key} value={sort.name}>{sort.label}</MenuItem>)}
-                </Select>
-            </FormControl>
+            <Selector
+                handleSelection={handleGenreSelect}
+                label="Genres"
+                items={genres}
+                target="name"
+                value={selectedGenre.name}/>
+            <Selector
+                handleSelection={handleSortSelect}
+                label="Sort By"
+                items={sorts}
+                target="name"
+                value={selectedSort.name}/>
+            <Selector
+                handleSelection={handleCertificationSelect}
+                label="Rating" items={certifications}
+                target="certification"
+                value={selectedCertification.certification}/>
             <Stack spacing={2} direction="row" sx={{mb: 1}} alignItems="center">
                 {minYear}
                 <Slider
