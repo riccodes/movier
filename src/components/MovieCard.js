@@ -5,9 +5,17 @@ import {getWatchProviders} from "../api/api";
 import tmdb from "themoviedb-javascript-library";
 import {getYear, handleError, handleSuccess} from "../util";
 
-const MovieCard = ({movie, setDisplayMessage, setMovies}) => {
+const MovieCard = ({movie, setDisplayMessage, setMovies, setTrailer, setTrailerOPen}) => {
 
     const [providers, setProviders] = useState()
+    const [trailers, setTrailers] = useState([])
+
+    const setTrailerModal = () => {
+        if(trailers.length > 0) {
+            setTrailer(trailers[0])
+            setTrailerOPen(true)
+        }
+    }
 
     //TODO-ADD make conditional render of providers
         // const [isProvidersDisplay, setIsProvidersDisplay] = useState(true)
@@ -18,6 +26,8 @@ const MovieCard = ({movie, setDisplayMessage, setMovies}) => {
         })
     }, [movie.id])
 
+    useEffect(() => { setTrailerModal() }, [trailers])
+
     const setMessage =  ()=> setDisplayMessage(true, `Recommendations based on ${movie.title}`)
 
     const getRecommendations = () => tmdb.movies.getRecommendations(
@@ -25,6 +35,12 @@ const MovieCard = ({movie, setDisplayMessage, setMovies}) => {
             (res) => handleSuccess(res, "results", setMovies, setMessage),
             handleError
     )
+
+    const getTrailers = () => tmdb.movies.getVideos(
+            {id: movie.id},
+            res => handleSuccess(res, "results", setTrailers),
+            handleError
+        )
 
     const renderProviders = (provs, label) => {
         if (provs) {
@@ -47,8 +63,7 @@ const MovieCard = ({movie, setDisplayMessage, setMovies}) => {
                 <CardMedia
                     component="img"
                     src={`https://image.tmdb.org/t/p/w300/${movie.poster_path}`}
-                    alt={movie.title}
-                />
+                    alt={movie.title}/>
                 <CardContent>
                     <Stack
                         direction="row"
@@ -78,6 +93,7 @@ const MovieCard = ({movie, setDisplayMessage, setMovies}) => {
                 <CardActions>
                     {/*//TODO-ADD preview link*/}
                     <Button onClick={getRecommendations} size="small">Recommendations</Button>
+                    <Button onClick={getTrailers} size="small">Trailer</Button>
                 </CardActions>
             </Card>
         </Grid>

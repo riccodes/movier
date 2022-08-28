@@ -2,7 +2,7 @@ import React from "react";
 import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
 
 const Selector = ({handleSelection, label, items, target, value}) => (
-    <FormControl sx={{marginRight: "2px", width: "33%"}}>
+    <FormControl fullWidth>
         <InputLabel id="select-label">{label}</InputLabel>
         <Select
             labelId="select-label"
