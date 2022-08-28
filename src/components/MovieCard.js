@@ -13,7 +13,13 @@ const MovieCard = ({movie, setDisplayMessage, setMovies, setTrailer, setTrailerO
 
     const setTrailerModal = () => {
         if (trailers.length > 0) {
-            setTrailer(trailers[0])
+            const trailer = trailers.filter(video => video.type === "Trailer")
+
+            if(trailer.length > 0)
+                setTrailer(trailer[0])
+            else
+                setTrailer(trailers[0])
+
             setTrailerOPen(true)
         }
     }
