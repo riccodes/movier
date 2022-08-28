@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from "react";
-import {Box, Button, Card, CardActions, CardContent, CardMedia, Chip, Grid, Stack, Typography} from "@mui/material";
+import {Button, Card, CardActions, CardContent, CardMedia, Chip, Grid, Stack, Typography} from "@mui/material";
 import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
 import {getWatchProviders} from "../api/api";
 import tmdb from "themoviedb-javascript-library";
 import {getYear, handleError, handleSuccess, jsonify} from "../util";
+import WatchProvider from "./WatchProvider";
 
 const MovieCard = ({movie, setDisplayMessage, setMovies, setTrailer, setTrailerOPen}) => {
 
@@ -11,14 +12,11 @@ const MovieCard = ({movie, setDisplayMessage, setMovies, setTrailer, setTrailerO
     const [trailers, setTrailers] = useState([])
 
     const setTrailerModal = () => {
-        if(trailers.length > 0) {
+        if (trailers.length > 0) {
             setTrailer(trailers[0])
             setTrailerOPen(true)
         }
     }
-
-    //TODO-FIX make conditional render of providers
-    // const [isProvidersDisplay, setIsProvidersDisplay] = useState(true)
 
     useEffect(() => {
         getWatchProviders(movie.id).then(providers => {
@@ -26,36 +24,38 @@ const MovieCard = ({movie, setDisplayMessage, setMovies, setTrailer, setTrailerO
         })
     }, [movie.id])
 
-    useEffect(() => { setTrailerModal() }, [trailers])
+    useEffect(() => {
+        setTrailerModal()
+    }, [trailers])
 
-    const setMessage = response=> {
-        if(response.results.length > 0)
+    const setMessage = response => {
+        if (response.results.length > 0)
             setDisplayMessage(true, `Recommendations based on ${movie.title}`)
         else
             alert('no recommendations found')
     }
 
     const getRecommendations = () => tmdb.movies.getRecommendations(
-            {id: movie.id},
-            (res) => handleSuccess(res, "results", setMovies, () => setMessage(jsonify(res))),
-            handleError
+        {id: movie.id},
+        (res) => handleSuccess(res, "results", setMovies, () => setMessage(jsonify(res))),
+        handleError
     )
 
     const getTrailers = () => tmdb.movies.getVideos(
-            {id: movie.id},
-            res => handleSuccess(res, "results", setTrailers),
-            handleError
-        )
+        {id: movie.id},
+        res => handleSuccess(res, "results", setTrailers),
+        handleError
+    )
 
-    const renderProviders = (provs, label) => {
-        if (provs) {
+    const renderProviders = () => {
+        if (providers) {
             return (
-                <Box sx={{marginBottom: "4px"}}>
-                    <Typography variant="subtitle2">{label}</Typography>
-                    <Typography variant="caption">
-                        {provs?.map(p => p.provider_name + ", ")}
-                    </Typography>
-                </Box>
+                <CardContent sx={{background: "#efefef"}}>
+                    <WatchProvider provs={providers["free"]} label="Free"/>
+                    <WatchProvider provs={providers["flatrate"]} label="Streaming"/>
+                    <WatchProvider provs={providers["rent"]} label="Rent"/>
+                    <WatchProvider provs={providers?.buy} label="Buy"/>
+                </CardContent>
             )
         }
 
@@ -76,7 +76,7 @@ const MovieCard = ({movie, setDisplayMessage, setMovies, setTrailer, setTrailerO
                         alignItems="flex-start"
                         spacing={2}
                     >
-                        <Typography gutterBottom variant="subtitle1" >
+                        <Typography gutterBottom variant="subtitle1">
                             {movie.title} ({getYear(movie.release_date)})
                         </Typography>
                         <Chip
@@ -90,11 +90,7 @@ const MovieCard = ({movie, setDisplayMessage, setMovies, setTrailer, setTrailerO
                         {movie.overview}
                     </Typography>
                 </CardContent>
-                <CardContent sx={{background: "#efefef"}}>
-                    {renderProviders(providers?.free, "Free")}
-                    {renderProviders(providers?.rent, "Rent")}
-                    {renderProviders(providers?.buy, "Buy")}
-                </CardContent>
+                {renderProviders()}
                 <CardActions>
                     <Button onClick={getRecommendations} size="small">Recommendations</Button>
                     <Button onClick={getTrailers} size="small">Trailer</Button>
