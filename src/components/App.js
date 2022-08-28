@@ -2,19 +2,21 @@ import './App.css';
 import {useEffect, useState} from "react";
 import {
     Alert,
+    Autocomplete,
+    Box,
     Container,
     FormControl,
     Grid,
-    InputLabel,
-    MenuItem,
-    Select,
     Slider,
     Stack,
+    TextField,
     Typography
 } from "@mui/material";
 import SettingsSuggestTwoToneIcon from '@mui/icons-material/SettingsSuggestTwoTone';
 import MovieCard from "./MovieCard";
 import tmdb from "themoviedb-javascript-library";
+import Selector from "./Selector";
+import {currentYear, generatePersonsOptions, handleError, handleSuccess, jsonify, minYear, sorts} from "../util";
 
 function App() {
 
@@ -22,87 +24,101 @@ function App() {
     tmdb.common.base_uri = "https://api.themoviedb.org/3/";
     tmdb.common.images_uri = "https://image.tmdb.org/t/p/";
 
-    const sorts = [
-        { key: "pop.desc", name : "popularity.desc", label : "popularity desc"},
-        { key: "pop.asc", name : "popularity.asc", label : "popularity asc"},
-        { key: "rel.desc", name : "release_date.desc", label : "release date desc"},
-        { key: "rel.asc", name : "release_date.asc", label : "release date asc"},
-        { key: "vot.desc", name : "vote_average.desc", label : "vote average desc"},
-        { key: "vot.asc", name : "vote_average.asc", label : "vote average asc"}
-    ]
-
-    const minYear = 1881
-    const currentYear = new Date().getFullYear()
     const [movies, setMovies] = useState([])
     const [genres, setGenres] = useState([])
+    const [persons, setPersons] = useState([])
+    const [personQuery, setPersonQuery] = useState()
+    const [certifications, setCertifications] = useState([])
     const [selectedGenre, setSelectedGenre] = useState({name: ""})
+    const [selectedPerson, setSelectedPerson] = useState({id: ""})
     const [selectedSort, setSelectedSort] = useState(sorts.find(sort => sort.key === "pop.desc"))
+    const [selectedCertification, setSelectedCertification] = useState({certification: ""})
     const [year, setYear] = useState("")
     const [alertMessage, setAlertMessage] = useState()
     const [isMessageDisplay, setIsMessageDisplay] = useState()
-    const jsonify = string => JSON.parse(string)
 
     useEffect(() => {
         setIsMessageDisplay(false)
         setAlertMessage(null)
 
         tmdb.discover.getMovies({
+                certification_country: "US",
                 watch_region: "US",
                 with_genres: selectedGenre.id,
+                with_people: selectedPerson.id,
                 primary_release_year: year,
-                sort_by: selectedSort.name
+                sort_by: selectedSort.name,
+                "certification.gte": selectedCertification.certification
             },
-            (response) => { setMovies(jsonify(response).results) },
-            (error) => { console.error(error) } //TODO-FIX refactor for reuse
+            res => handleSuccess(res, "results", setMovies), handleError
         )
-    }, [year, selectedGenre, selectedSort])
+    }, [selectedCertification, selectedGenre, selectedPerson, selectedSort, year])
 
     useEffect(() => {
-        tmdb.genres.getMovieList({},
-            (response) => { setGenres(jsonify(response).genres) },
-            (error) => { console.error(error) }
-        )
+        tmdb.genres.getMovieList({}, res => handleSuccess(res, "genres", setGenres), handleError)
+        tmdb.certifications.getMovieList((response) => setCertifications(jsonify(response).certifications.US), handleError)
     }, [])
+
+    useEffect(() => {
+        tmdb.search.getPerson({query: personQuery},res => handleSuccess(res, "results", setPersons), handleError)
+    }, [personQuery])
 
     const handleYearSelect = newValue => setYear(newValue)
     const handleGenreSelect = e => {
         const genre = genres.find(genre => genre.name === e.target.value)
         setSelectedGenre(genre)
     }
-    const handleSortSelect = e => { setSelectedSort(sorts.find(sort => sort.name === e.target.value)) }
+    const handleSortSelect = e => setSelectedSort(sorts.find(sort => sort.name === e.target.value))
+    const handleCertificationSelect = e => setSelectedCertification(certifications.find(cert => cert.certification === e.target.value))
     const setDisplayMessage = (show, message) => {
         setAlertMessage(message)
         setIsMessageDisplay(show)
     }
+    const handleQueryChange = e => {
+        const val = e.target.value
+
+        if (val?.length > 1) setPersonQuery(val)
+    }
+    const handlePersonSelect = (e, newValue) => {
+        if (newValue)
+            setSelectedPerson(persons.find(person => person.name === newValue))
+    }
 
     return (
         <Container sx={{marginTop: "16px"}} maxWidth="xl">
-            <Typography sx={{marginBottom : "16px"}} variant="h3">
+            <Typography sx={{marginBottom: "16px"}} variant="h3">
                 MovieR <Typography variant="overline">by riccodes</Typography>
             </Typography>
-            <FormControl sx={{marginRight : "2px", width: "49%"}}>
-                <InputLabel id="genre-select-label">Genre</InputLabel>
-                <Select
-                    labelId="genre-select-label"
-                    id="genre-select"
-                    value={selectedGenre.name}
-                    label="Genre selection"
-                    onChange={handleGenreSelect}
-                >
-                    {genres.map(genre => <MenuItem key={genre.id} value={genre.name}>{genre.name}</MenuItem>)}
-                </Select>
-            </FormControl>
-            <FormControl sx={{ width: "50%"}}>
-                <InputLabel id="sort-select-label">Sort By</InputLabel>
-                <Select
-                    labelId="sort-select-label"
-                    id="sort-select"
-                    value={selectedSort.name}
-                    label="Sort selection"
-                    onChange={handleSortSelect}
-                >
-                    {sorts.map(sort => <MenuItem key={sort.key} value={sort.name}>{sort.label}</MenuItem>)}
-                </Select>
+            <Box component="form">
+                <Selector
+                    handleSelection={handleGenreSelect}
+                    label="Genres"
+                    items={genres}
+                    target="name"
+                    value={selectedGenre.name}/>
+                <Selector
+                    handleSelection={handleSortSelect}
+                    label="Sort By"
+                    items={sorts}
+                    target="name"
+                    value={selectedSort.name}/>
+                <Selector
+                    handleSelection={handleCertificationSelect}
+                    label="Rating" items={certifications}
+                    target="certification"
+                    value={selectedCertification.certification}/>
+            </Box>
+            <FormControl fullWidth>
+                <Autocomplete
+                    sx={{marginTop: "16px"}}
+                    disablePortal
+                    fullWidth
+                    id="search-person"
+                    options={generatePersonsOptions(persons)}
+                    onInputChange={handleQueryChange}
+                    onChange={handlePersonSelect}
+                    renderInput={(params) => <TextField {...params} label="Search for by person"/>}
+                />
             </FormControl>
             <Stack spacing={2} direction="row" sx={{mb: 1}} alignItems="center">
                 {minYear}
@@ -121,7 +137,7 @@ function App() {
                 <Alert sx={{marginBottom: "32px"}}
                        icon={<SettingsSuggestTwoToneIcon fontSize="inherit"/>}>{alertMessage}</Alert>
             )}
-            <Grid container spacing={{xs: 2, md: 3}} columns={{xs: 2, sm: 8, md: 20}}>
+            <Grid item container spacing={{xs: 2, md: 3}} columns={{xs: 2, sm: 8, md: 20}}>
                 {movies?.map(movie =>
                     <MovieCard
                         setDisplayMessage={setDisplayMessage}

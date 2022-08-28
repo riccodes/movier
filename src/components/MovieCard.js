@@ -3,10 +3,10 @@ import {Box, Button, Card, CardActions, CardContent, CardMedia, Chip, Grid, Stac
 import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
 import {getWatchProviders} from "../api/api";
 import tmdb from "themoviedb-javascript-library";
+import {getYear, handleError, handleSuccess} from "../util";
 
 const MovieCard = ({movie, setDisplayMessage, setMovies}) => {
 
-    const getYear = date => (date ? date.slice(0, 4) : "")
     const [providers, setProviders] = useState()
 
     //TODO-ADD make conditional render of providers
@@ -16,17 +16,15 @@ const MovieCard = ({movie, setDisplayMessage, setMovies}) => {
         getWatchProviders(movie.id).then(providers => {
             setProviders(providers.data.results["US"])
         })
-    }, [])
+    }, [movie.id])
 
-    const getRecommendations = () => {
-        tmdb.movies.getRecommendations({id: movie.id},
-            (response) => {
-                setMovies(JSON.parse(response).results)
-                setDisplayMessage(true, `Recommendations based on ${movie.title}`)
-            },
-            (error) => { console.error(error) }
-        )
-    }
+    const setMessage =  ()=> setDisplayMessage(true, `Recommendations based on ${movie.title}`)
+
+    const getRecommendations = () => tmdb.movies.getRecommendations(
+            {id: movie.id},
+            (res) => handleSuccess(res, "results", setMovies, setMessage),
+            handleError
+    )
 
     const renderProviders = (provs, label) => {
         if (provs) {
