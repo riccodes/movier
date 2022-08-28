@@ -11,7 +11,13 @@ const MovieCard = ({movie, setDisplayMessage, setMovies, setTrailer, setTrailerO
     const [providers, setProviders] = useState()
     const [trailers, setTrailers] = useState([])
 
-    const setTrailerModal = () => {
+    useEffect(() => {
+        getWatchProviders(movie.id).then(providers => {
+            setProviders(providers.data.results["US"])
+        })
+    }, [movie.id])
+
+    useEffect(() => {
         if (trailers.length > 0) {
             const trailer = trailers.filter(video => video.type === "Trailer")
 
@@ -22,17 +28,7 @@ const MovieCard = ({movie, setDisplayMessage, setMovies, setTrailer, setTrailerO
 
             setTrailerOPen(true)
         }
-    }
-
-    useEffect(() => {
-        getWatchProviders(movie.id).then(providers => {
-            setProviders(providers.data.results["US"])
-        })
-    }, [movie.id])
-
-    useEffect(() => {
-        setTrailerModal()
-    }, [trailers])
+    }, [trailers, setTrailer, setTrailerOPen])
 
     const setMessage = response => {
         if (response.results.length > 0)
