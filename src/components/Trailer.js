@@ -1,5 +1,5 @@
 import React from "react";
-import {Dialog} from "@mui/material";
+import {Button, Dialog, DialogActions} from "@mui/material";
 
 const Trailer = ({ open, setTrailerOpen, trailer }) => {
     return(
@@ -15,6 +15,11 @@ const Trailer = ({ open, setTrailerOpen, trailer }) => {
                     allowFullScreen
                     title={trailer.name}
                 />
+            <DialogActions>
+                <Button aria-label="Close" onClick={()=> setTrailerOpen(false)}>
+                    Close
+                </Button>
+            </DialogActions>
         </Dialog>
     )
 }
