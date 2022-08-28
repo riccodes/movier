@@ -4,10 +4,9 @@ import {
     Alert,
     Autocomplete,
     Box,
-    Container, Dialog,
+    Container,
     FormControl,
     Grid,
-    Rating,
     Slider,
     Stack,
     TextField,
@@ -125,12 +124,12 @@ function App() {
                         renderInput={(params) => <TextField {...params} label="Search for by person"/>}
                     />
                 </FormControl>
-                <Container sx={{width: "30%", marginLeft: "16px", direction: "center"}}>
-                    <Typography>Minimum Rating</Typography>
-                    <Rating onClick={(e) => {
-                        console.log(e.target.value)
-                    }} name="customized-10" defaultValue={0} max={10}/>
-                </Container>
+                {/*<Container sx={{width: "30%", marginLeft: "16px", direction: "center"}}>*/}
+                {/*    <Typography>Minimum Rating</Typography>*/}
+                    {/*<Rating onClick={(e) => {*/}
+                    {/*    console.log(e.target.value)*/}
+                    {/*}} name="customized-10" defaultValue={0} max={10}/>*/}
+                {/*</Container>*/}
             </Stack>
             <Stack spacing={2} direction="row" sx={{mb: 1}} alignItems="center">
                 {minYear}

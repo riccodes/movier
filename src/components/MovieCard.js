@@ -58,13 +58,12 @@ const MovieCard = ({movie, setDisplayMessage, setMovies, setTrailer, setTrailerO
     }
 
     return (
-        <Grid item xs={2} sm={4} md={4}>
+        <Grid xs={2} sm={4} md={4}>
             <Card variant="elevation" sx={{margin: "8px"}}>
                 <CardMedia
                     component="img"
                     src={`https://image.tmdb.org/t/p/w300/${movie.poster_path}`}
-                    alt={movie.title}
-                />
+                    alt={movie.title}/>
                 <CardContent>
                     <Stack
                         direction="row"
