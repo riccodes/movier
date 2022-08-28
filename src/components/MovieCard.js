@@ -9,8 +9,8 @@ const MovieCard = ({movie, setDisplayMessage, setMovies}) => {
     const getYear = date => (date ? date.slice(0, 4) : "")
     const [providers, setProviders] = useState()
 
-    //TODO-FIX make conditional render of providers
-    // const [isProvidersDisplay, setIsProvidersDisplay] = useState(true)
+    //TODO-ADD make conditional render of providers
+        // const [isProvidersDisplay, setIsProvidersDisplay] = useState(true)
 
     useEffect(() => {
         getWatchProviders(movie.id).then(providers => {
@@ -44,7 +44,7 @@ const MovieCard = ({movie, setDisplayMessage, setMovies}) => {
     }
 
     return (
-        <Grid item xs={2} sm={4} md={4}>
+        <Grid xs={2} sm={4} md={4}>
             <Card variant="elevation" sx={{margin: "8px"}}>
                 <CardMedia
                     component="img"
@@ -78,6 +78,7 @@ const MovieCard = ({movie, setDisplayMessage, setMovies}) => {
                     {renderProviders(providers?.buy, "Buy")}
                 </CardContent>
                 <CardActions>
+                    {/*//TODO-ADD preview link*/}
                     <Button onClick={getRecommendations} size="small">Recommendations</Button>
                 </CardActions>
             </Card>

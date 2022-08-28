@@ -53,7 +53,7 @@ function App() {
                 sort_by: selectedSort.name
             },
             (response) => { setMovies(jsonify(response).results) },
-            (error) => { console.error(error) }
+            (error) => { console.error(error) } //TODO-FIX refactor for reuse
         )
     }, [year, selectedGenre, selectedSort])
 
