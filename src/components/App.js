@@ -1,6 +1,17 @@
 import './App.css';
 import {useEffect, useState} from "react";
-import {Alert, Autocomplete, Container, Grid, Slider, Stack, TextField, Typography} from "@mui/material";
+import {
+    Alert,
+    Autocomplete,
+    Box,
+    Container,
+    FormControl,
+    Grid,
+    Slider,
+    Stack,
+    TextField,
+    Typography
+} from "@mui/material";
 import SettingsSuggestTwoToneIcon from '@mui/icons-material/SettingsSuggestTwoTone';
 import MovieCard from "./MovieCard";
 import tmdb from "themoviedb-javascript-library";
@@ -50,27 +61,43 @@ function App() {
                 certification_country: "US",
                 "certification.gte": selectedCertification.certification
             },
-            (response) => { setMovies(jsonify(response).results) },
-            (error) => { console.error(error) }
+            (response) => {
+                setMovies(jsonify(response).results)
+            },
+            (error) => {
+                console.error(error)
+            }
         )
     }, [selectedCertification, selectedGenre, selectedPerson, selectedSort, year])
 
     useEffect(() => {
         tmdb.genres.getMovieList({},
-            (response) => { setGenres(jsonify(response).genres) },
-            (error) => { console.error(error) }
+            (response) => {
+                setGenres(jsonify(response).genres)
+            },
+            (error) => {
+                console.error(error)
+            }
         )
 
         tmdb.certifications.getMovieList(
-            (response) => { setCertifications(jsonify(response).certifications.US) },
-            (error) => { console.error(error) }
+            (response) => {
+                setCertifications(jsonify(response).certifications.US)
+            },
+            (error) => {
+                console.error(error)
+            }
         )
     }, [])
 
     useEffect(() => {
         tmdb.search.getPerson({query: personQuery},
-            (response) => { setPersons(JSON.parse(response).results) },
-            (error) => { console.error(error) }
+            (response) => {
+                setPersons(JSON.parse(response).results)
+            },
+            (error) => {
+                console.error(error)
+            }
         )
     }, [personQuery])
 
