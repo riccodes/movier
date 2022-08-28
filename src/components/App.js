@@ -4,9 +4,10 @@ import {
     Alert,
     Autocomplete,
     Box,
-    Container,
+    Container, Dialog,
     FormControl,
     Grid,
+    Rating,
     Slider,
     Stack,
     TextField,
@@ -17,6 +18,7 @@ import MovieCard from "./MovieCard";
 import tmdb from "themoviedb-javascript-library";
 import Selector from "./Selector";
 import {currentYear, generatePersonsOptions, handleError, handleSuccess, jsonify, minYear, sorts} from "../util";
+import Trailer from "./Trailer";
 
 function App() {
 
@@ -36,6 +38,8 @@ function App() {
     const [year, setYear] = useState("")
     const [alertMessage, setAlertMessage] = useState()
     const [isMessageDisplay, setIsMessageDisplay] = useState()
+    const [trailerOpen, setTrailerOpen] = useState(false)
+    const [trailer, setTrailer] = useState({})
 
     useEffect(() => {
         setIsMessageDisplay(false)
@@ -60,7 +64,7 @@ function App() {
     }, [])
 
     useEffect(() => {
-        tmdb.search.getPerson({query: personQuery},res => handleSuccess(res, "results", setPersons), handleError)
+        tmdb.search.getPerson({query: personQuery}, res => handleSuccess(res, "results", setPersons), handleError)
     }, [personQuery])
 
     const handleYearSelect = newValue => setYear(newValue)
@@ -86,6 +90,7 @@ function App() {
 
     return (
         <Container sx={{marginTop: "16px"}} maxWidth="xl">
+            <Trailer open={trailerOpen} setTrailerOpen={setTrailerOpen} trailer={trailer} />
             <Typography sx={{marginBottom: "16px"}} variant="h3">
                 MovieR <Typography variant="overline">by riccodes</Typography>
             </Typography>
@@ -108,18 +113,25 @@ function App() {
                     target="certification"
                     value={selectedCertification.certification}/>
             </Box>
-            <FormControl fullWidth>
-                <Autocomplete
-                    sx={{marginTop: "16px"}}
-                    disablePortal
-                    fullWidth
-                    id="search-person"
-                    options={generatePersonsOptions(persons)}
-                    onInputChange={handleQueryChange}
-                    onChange={handlePersonSelect}
-                    renderInput={(params) => <TextField {...params} label="Search for by person"/>}
-                />
-            </FormControl>
+            <Stack direction="row">
+                <FormControl sx={{width: "70%"}}>
+                    <Autocomplete
+                        sx={{marginTop: "16px"}}
+                        disablePortal
+                        id="search-person"
+                        options={generatePersonsOptions(persons)}
+                        onInputChange={handleQueryChange}
+                        onChange={handlePersonSelect}
+                        renderInput={(params) => <TextField {...params} label="Search for by person"/>}
+                    />
+                </FormControl>
+                <Container sx={{width: "30%", marginLeft: "16px", direction: "center"}}>
+                    <Typography>Minimum Rating</Typography>
+                    <Rating onClick={(e) => {
+                        console.log(e.target.value)
+                    }} name="customized-10" defaultValue={0} max={10}/>
+                </Container>
+            </Stack>
             <Stack spacing={2} direction="row" sx={{mb: 1}} alignItems="center">
                 {minYear}
                 <Slider
@@ -142,6 +154,8 @@ function App() {
                     <MovieCard
                         setDisplayMessage={setDisplayMessage}
                         setMovies={setMovies}
+                        setTrailerOPen={setTrailerOpen}
+                        setTrailer={setTrailer}
                         movie={movie}/>)}
             </Grid>
         </Container>
