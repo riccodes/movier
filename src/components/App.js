@@ -13,12 +13,12 @@ function App() {
     tmdb.common.images_uri = "https://image.tmdb.org/t/p/";
 
     const sorts = [
-        { key: "pop.desc", name : "popularity.desc", label : "popularity desc"},
-        { key: "pop.asc", name : "popularity.asc", label : "popularity asc"},
-        { key: "rel.desc", name : "release_date.desc", label : "release date desc"},
-        { key: "rel.asc", name : "release_date.asc", label : "release date asc"},
-        { key: "vot.desc", name : "vote_average.desc", label : "vote average desc"},
-        { key: "vot.asc", name : "vote_average.asc", label : "vote average asc"}
+        {key: "pop.desc", name: "popularity.desc", label: "popularity desc"},
+        {key: "pop.asc", name: "popularity.asc", label: "popularity asc"},
+        {key: "rel.desc", name: "release_date.desc", label: "release date desc"},
+        {key: "rel.asc", name: "release_date.asc", label: "release date asc"},
+        {key: "vot.desc", name: "vote_average.desc", label: "vote average desc"},
+        {key: "vot.asc", name: "vote_average.asc", label: "vote average asc"}
     ]
 
     const minYear = 1881
@@ -91,11 +91,11 @@ function App() {
     const handleQueryChange = e => {
         const val = e.target.value
 
-        if(val?.length > 1) setPersonQuery(val)
+        if (val?.length > 1) setPersonQuery(val)
     }
 
     const handlePersonSelect = (e, newValue) => {
-        if(newValue)
+        if (newValue)
             setSelectedPerson(persons.find(person => person.name === newValue))
     }
 
@@ -106,33 +106,37 @@ function App() {
             <Typography sx={{marginBottom: "16px"}} variant="h3">
                 MovieR <Typography variant="overline">by riccodes</Typography>
             </Typography>
-            <Selector
-                handleSelection={handleGenreSelect}
-                label="Genres"
-                items={genres}
-                target="name"
-                value={selectedGenre.name}/>
-            <Selector
-                handleSelection={handleSortSelect}
-                label="Sort By"
-                items={sorts}
-                target="name"
-                value={selectedSort.name}/>
-            <Selector
-                handleSelection={handleCertificationSelect}
-                label="Rating" items={certifications}
-                target="certification"
-                value={selectedCertification.certification}/>
-            <Autocomplete
-                disablePortal
-                fullWidth
-                id="search-person"
-                options={generatePersonsOptions()}
-                onInputChange={handleQueryChange}
-                onChange={ handlePersonSelect }
-                sx={{ width: 300 }}
-                renderInput={(params) => <TextField {...params} label="Search for by person" />}
-            />
+            <Box component="form">
+                <Selector
+                    handleSelection={handleGenreSelect}
+                    label="Genres"
+                    items={genres}
+                    target="name"
+                    value={selectedGenre.name}/>
+                <Selector
+                    handleSelection={handleSortSelect}
+                    label="Sort By"
+                    items={sorts}
+                    target="name"
+                    value={selectedSort.name}/>
+                <Selector
+                    handleSelection={handleCertificationSelect}
+                    label="Rating" items={certifications}
+                    target="certification"
+                    value={selectedCertification.certification}/>
+            </Box>
+            <FormControl fullWidth>
+                <Autocomplete
+                    sx={{marginTop: "16px"}}
+                    disablePortal
+                    fullWidth
+                    id="search-person"
+                    options={generatePersonsOptions()}
+                    onInputChange={handleQueryChange}
+                    onChange={handlePersonSelect}
+                    renderInput={(params) => <TextField {...params} label="Search for by person"/>}
+                />
+            </FormControl>
             <Stack spacing={2} direction="row" sx={{mb: 1}} alignItems="center">
                 {minYear}
                 <Slider
