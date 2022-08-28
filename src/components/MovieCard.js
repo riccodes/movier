@@ -3,7 +3,7 @@ import {Box, Button, Card, CardActions, CardContent, CardMedia, Chip, Grid, Stac
 import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
 import {getWatchProviders} from "../api/api";
 import tmdb from "themoviedb-javascript-library";
-import {getYear, handleError, handleSuccess} from "../util";
+import {getYear, handleError, handleSuccess, jsonify} from "../util";
 
 const MovieCard = ({movie, setDisplayMessage, setMovies, setTrailer, setTrailerOPen}) => {
 
@@ -28,11 +28,16 @@ const MovieCard = ({movie, setDisplayMessage, setMovies, setTrailer, setTrailerO
 
     useEffect(() => { setTrailerModal() }, [trailers])
 
-    const setMessage =  ()=> setDisplayMessage(true, `Recommendations based on ${movie.title}`)
+    const setMessage = response=> {
+        if(response.results.length > 0)
+            setDisplayMessage(true, `Recommendations based on ${movie.title}`)
+        else
+            alert('no recommendations found')
+    }
 
     const getRecommendations = () => tmdb.movies.getRecommendations(
             {id: movie.id},
-            (res) => handleSuccess(res, "results", setMovies, setMessage),
+            (res) => handleSuccess(res, "results", setMovies, () => setMessage(jsonify(res))),
             handleError
     )
 
