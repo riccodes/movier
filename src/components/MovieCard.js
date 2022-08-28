@@ -44,7 +44,7 @@ const MovieCard = ({movie, setDisplayMessage, setMovies}) => {
     }
 
     return (
-        <Grid xs={2} sm={4} md={4}>
+        <Grid item xs={2} sm={4} md={4}>
             <Card variant="elevation" sx={{margin: "8px"}}>
                 <CardMedia
                     component="img"

@@ -1,6 +1,6 @@
 import './App.css';
 import {useEffect, useState} from "react";
-import {Alert, Container, Grid, Slider, Stack, Typography} from "@mui/material";
+import {Alert, Autocomplete, Container, Grid, Slider, Stack, TextField, Typography} from "@mui/material";
 import SettingsSuggestTwoToneIcon from '@mui/icons-material/SettingsSuggestTwoTone';
 import MovieCard from "./MovieCard";
 import tmdb from "themoviedb-javascript-library";
@@ -25,8 +25,11 @@ function App() {
     const currentYear = new Date().getFullYear()
     const [movies, setMovies] = useState([])
     const [genres, setGenres] = useState([])
+    const [persons, setPersons] = useState([])
+    const [personQuery, setPersonQuery] = useState()
     const [certifications, setCertifications] = useState([])
     const [selectedGenre, setSelectedGenre] = useState({name: ""})
+    const [selectedPerson, setSelectedPerson] = useState({id: ""})
     const [selectedSort, setSelectedSort] = useState(sorts.find(sort => sort.key === "pop.desc"))
     const [selectedCertification, setSelectedCertification] = useState({certification: ""})
     const [year, setYear] = useState("")
@@ -41,6 +44,7 @@ function App() {
         tmdb.discover.getMovies({
                 watch_region: "US",
                 with_genres: selectedGenre.id,
+                with_people: selectedPerson.id,
                 primary_release_year: year,
                 sort_by: selectedSort.name,
                 certification_country: "US",
@@ -49,7 +53,7 @@ function App() {
             (response) => { setMovies(jsonify(response).results) },
             (error) => { console.error(error) }
         )
-    }, [selectedCertification, selectedGenre, selectedSort, year])
+    }, [selectedCertification, selectedGenre, selectedPerson, selectedSort, year])
 
     useEffect(() => {
         tmdb.genres.getMovieList({},
@@ -60,8 +64,15 @@ function App() {
         tmdb.certifications.getMovieList(
             (response) => { setCertifications(jsonify(response).certifications.US) },
             (error) => { console.error(error) }
-            )
+        )
     }, [])
+
+    useEffect(() => {
+        tmdb.search.getPerson({query: personQuery},
+            (response) => { setPersons(JSON.parse(response).results) },
+            (error) => { console.error(error) }
+        )
+    }, [personQuery])
 
     const handleYearSelect = newValue => setYear(newValue)
     const handleGenreSelect = e => {
@@ -76,6 +87,19 @@ function App() {
         setAlertMessage(message)
         setIsMessageDisplay(show)
     }
+
+    const handleQueryChange = e => {
+        const val = e.target.value
+
+        if(val?.length > 1) setPersonQuery(val)
+    }
+
+    const handlePersonSelect = (e, newValue) => {
+        if(newValue)
+            setSelectedPerson(persons.find(person => person.name === newValue))
+    }
+
+    const generatePersonsOptions = () => persons.map(p => p.label = p.name)
 
     return (
         <Container sx={{marginTop: "16px"}} maxWidth="xl">
@@ -99,6 +123,16 @@ function App() {
                 label="Rating" items={certifications}
                 target="certification"
                 value={selectedCertification.certification}/>
+            <Autocomplete
+                disablePortal
+                fullWidth
+                id="search-person"
+                options={generatePersonsOptions()}
+                onInputChange={handleQueryChange}
+                onChange={ handlePersonSelect }
+                sx={{ width: 300 }}
+                renderInput={(params) => <TextField {...params} label="Search for by person" />}
+            />
             <Stack spacing={2} direction="row" sx={{mb: 1}} alignItems="center">
                 {minYear}
                 <Slider
@@ -116,7 +150,7 @@ function App() {
                 <Alert sx={{marginBottom: "32px"}}
                        icon={<SettingsSuggestTwoToneIcon fontSize="inherit"/>}>{alertMessage}</Alert>
             )}
-            <Grid container spacing={{xs: 2, md: 3}} columns={{xs: 2, sm: 8, md: 20}}>
+            <Grid item container spacing={{xs: 2, md: 3}} columns={{xs: 2, sm: 8, md: 20}}>
                 {movies?.map(movie =>
                     <MovieCard
                         setDisplayMessage={setDisplayMessage}
