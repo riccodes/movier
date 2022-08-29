@@ -162,6 +162,7 @@ function App() {
             <Grid item container spacing={{xs: 2, md: 3}} columns={{xs: 2, sm: 8, md: 20}}>
                 {movies?.map(movie =>
                     <MovieCard
+                        key={movie.id}
                         setDisplayMessage={setDisplayMessage}
                         setMovies={setMovies}
                         setTrailerOPen={setTrailerOpen}
