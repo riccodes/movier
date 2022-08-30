@@ -1,5 +1,6 @@
 import React from "react";
 import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
+import {getRandom} from "../util";
 
 const Selector = ({handleSelection, label, items, target, value}) => (
     <FormControl fullWidth>
@@ -11,7 +12,8 @@ const Selector = ({handleSelection, label, items, target, value}) => (
             label={`${label} selection`}
             onChange={handleSelection}
         >
-            {items.map(item => <MenuItem key={item.id} value={item[target]}>{item[target]}</MenuItem>)}
+            {items.map(item =>
+                <MenuItem key={`${getRandom()}-${item.id}`} value={item[target]}>{item[target]}</MenuItem>)}
         </Select>
     </FormControl>
 )
