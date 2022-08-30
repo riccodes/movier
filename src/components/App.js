@@ -43,7 +43,7 @@ function App() {
     const [trailer, setTrailer] = useState({})
 
     // TODO-FIX finish watch list
-    const watchList = useWatchList()
+    // const watchList = useWatchList()
 
     useEffect(() => {
         setIsMessageDisplay(false)
