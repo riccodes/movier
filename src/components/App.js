@@ -1,4 +1,4 @@
-import './App.css';
+import './css/App.css';
 import {useEffect, useState} from "react";
 import {
     Alert,
@@ -18,6 +18,7 @@ import tmdb from "themoviedb-javascript-library";
 import Selector from "./Selector";
 import {currentYear, generatePersonsOptions, handleError, handleSuccess, jsonify, minYear, sorts} from "../util";
 import Trailer from "./Trailer";
+import {useWatchList} from "../context/WatchListContext";
 
 function App() {
 
@@ -40,6 +41,9 @@ function App() {
     const [isMessageDisplay, setIsMessageDisplay] = useState()
     const [trailerOpen, setTrailerOpen] = useState(false)
     const [trailer, setTrailer] = useState({})
+
+    // TODO-FIX finish watch list
+    const watchList = useWatchList()
 
     useEffect(() => {
         setIsMessageDisplay(false)
