@@ -7,7 +7,7 @@ import {
     FormControl,
     Grid,
     Rating,
-    Slider,
+    Slider, Snackbar,
     Stack,
     TextField,
     Typography
@@ -18,7 +18,7 @@ import tmdb from "themoviedb-javascript-library";
 import Selector from "./Selector";
 import {currentYear, generatePersonsOptions, handleError, handleSuccess, jsonify, minYear, sorts} from "../util";
 import Trailer from "./Trailer";
-import {useWatchList} from "../context/WatchListContext";
+import {WatchListProvider} from "../context/WatchListContext";
 
 function App() {
 
@@ -36,14 +36,13 @@ function App() {
     const [selectedPerson, setSelectedPerson] = useState({id: ""})
     const [selectedSort, setSelectedSort] = useState(sorts.find(sort => sort.key === "pop.desc"))
     const [selectedCertification, setSelectedCertification] = useState({certification: ""})
+    const [snackbarMessage, setSnackbarMessage] = useState("")
+    const [snackbarOpen, setSnackbarOpen] = useState()
     const [year, setYear] = useState("")
     const [alertMessage, setAlertMessage] = useState()
     const [isMessageDisplay, setIsMessageDisplay] = useState()
     const [trailerOpen, setTrailerOpen] = useState(false)
     const [trailer, setTrailer] = useState({})
-
-    // TODO-FIX finish watch list
-    // const watchList = useWatchList()
 
     useEffect(() => {
         setIsMessageDisplay(false)
@@ -95,9 +94,21 @@ function App() {
     const handleRatingSelect = e => {
         if (e) setSelectedRating(e.target.value)
     }
+    const setSnackbar = (isOpen, message) => {
+        setSnackbarOpen(isOpen)
+        setSnackbarMessage(message)
+    }
 
     return (
         <Container sx={{marginTop: "16px"}} maxWidth="xl">
+            <Snackbar
+                open={snackbarOpen}
+                onClose={()=> setSnackbar(false, "")}
+            >
+                <Alert severity="success">
+                    {snackbarMessage}
+                </Alert>
+            </Snackbar>
             <Trailer open={trailerOpen} setTrailerOpen={setTrailerOpen} trailer={trailer}/>
             <Typography sx={{marginBottom: "16px"}} variant="h3">
                 MovieR <Typography variant="overline">by riccodes</Typography>
@@ -164,14 +175,17 @@ function App() {
                        icon={<SettingsSuggestTwoToneIcon fontSize="inherit"/>}>{alertMessage}</Alert>
             )}
             <Grid item container spacing={{xs: 2, md: 3}} columns={{xs: 2, sm: 8, md: 20}}>
-                {movies?.map(movie =>
-                    <MovieCard
-                        key={movie.id}
-                        setDisplayMessage={setDisplayMessage}
-                        setMovies={setMovies}
-                        setTrailerOPen={setTrailerOpen}
-                        setTrailer={setTrailer}
-                        movie={movie}/>)}
+                <WatchListProvider>
+                    {movies?.map(movie =>
+                        <MovieCard
+                            key={movie.id}
+                            setDisplayMessage={setDisplayMessage}
+                            setMovies={setMovies}
+                            setSnackbar={setSnackbar}
+                            setTrailerOPen={setTrailerOpen}
+                            setTrailer={setTrailer}
+                            movie={movie}/>)}
+                </WatchListProvider>
             </Grid>
         </Container>
     )

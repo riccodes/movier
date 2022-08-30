@@ -1,13 +1,28 @@
 import React, {useEffect, useState} from "react";
-import {Button, Card, CardActions, CardContent, CardMedia, Chip, Grid, Stack, Typography} from "@mui/material";
+import {
+    Card,
+    CardActions,
+    CardContent,
+    CardMedia,
+    Chip,
+    Grid,
+    IconButton,
+    Stack,
+    Typography
+} from "@mui/material";
+import GradeTwoToneIcon from '@mui/icons-material/GradeTwoTone';
 import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
+import SettingsSuggestTwoToneIcon from '@mui/icons-material/SettingsSuggestTwoTone';
+import OndemandVideoTwoToneIcon from '@mui/icons-material/OndemandVideoTwoTone';
 import {getWatchProviders} from "../api/api";
 import tmdb from "themoviedb-javascript-library";
 import {getYear, handleError, handleSuccess, jsonify} from "../util";
 import WatchProvider from "./WatchProvider";
+import {useWatchList} from "../context/WatchListContext";
 
-const MovieCard = ({movie, setDisplayMessage, setMovies, setTrailer, setTrailerOPen}) => {
+const MovieCard = ({movie, setDisplayMessage, setMovies, setSnackbar, setTrailer, setTrailerOPen}) => {
 
+    const watchList = useWatchList()
     const [providers, setProviders] = useState()
     const [trailers, setTrailers] = useState([])
 
@@ -48,6 +63,12 @@ const MovieCard = ({movie, setDisplayMessage, setMovies, setTrailer, setTrailerO
         res => handleSuccess(res, "results", setTrailers),
         handleError
     )
+
+    const saveToWatchList = () => {
+        const {dispatch} = watchList
+        dispatch({data: movie, type: "save"})
+        setSnackbar(true, `${movie.title} saved to watch list`)
+    }
 
     const renderProviders = () => {
         if (providers) {
@@ -94,8 +115,15 @@ const MovieCard = ({movie, setDisplayMessage, setMovies, setTrailer, setTrailerO
                 </CardContent>
                 {renderProviders()}
                 <CardActions>
-                    <Button onClick={getRecommendations} size="small">Recommendations</Button>
-                    <Button onClick={getTrailers} size="small">Trailer</Button>
+                    <IconButton onClick={saveToWatchList} aria-label="save to watch list">
+                        <GradeTwoToneIcon />
+                    </IconButton>
+                    <IconButton onClick={getRecommendations} aria-label="get recommendations">
+                        <SettingsSuggestTwoToneIcon />
+                    </IconButton>
+                    <IconButton onClick={getTrailers} aria-label="watch trailer">
+                        <OndemandVideoTwoToneIcon />
+                    </IconButton>
                 </CardActions>
             </Card>
         </Grid>
