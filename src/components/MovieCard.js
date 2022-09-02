@@ -55,7 +55,7 @@ const MovieCard = ({movie, movies, setDisplayMessage, setMovies, setSnackbar, se
         }
 
         else
-            alert('no recommendations found')
+            setSnackbar(true, "No recommendations found")
     }
 
     const getRecommendations = () => tmdb.movies.getRecommendations(
