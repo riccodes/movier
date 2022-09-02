@@ -3,11 +3,13 @@ import {useEffect, useState} from "react";
 import {
     Alert,
     Autocomplete,
+    Button,
     Container,
     FormControl,
     Grid,
     Rating,
-    Slider, Snackbar,
+    Slider,
+    Snackbar,
     Stack,
     TextField,
     Typography
@@ -18,7 +20,7 @@ import tmdb from "themoviedb-javascript-library";
 import Selector from "./Selector";
 import {currentYear, generatePersonsOptions, handleError, handleSuccess, jsonify, minYear, sorts} from "../util";
 import Trailer from "./Trailer";
-import {WatchListProvider} from "../context/WatchListContext";
+import {useWatchList} from "../context/WatchListContext";
 
 function App() {
 
@@ -43,12 +45,14 @@ function App() {
     const [isMessageDisplay, setIsMessageDisplay] = useState()
     const [trailerOpen, setTrailerOpen] = useState(false)
     const [trailer, setTrailer] = useState({})
+    const watchList = useWatchList()
 
     useEffect(() => {
         setIsMessageDisplay(false)
         setAlertMessage(null)
 
         tmdb.discover.getMovies({
+                language: "en-US",
                 certification_country: "US",
                 watch_region: "US",
                 with_genres: selectedGenre.id,
@@ -98,6 +102,10 @@ function App() {
         setSnackbarOpen(isOpen)
         setSnackbarMessage(message)
     }
+    const showWatchList = () => {
+        const {state} = watchList
+        setMovies(state.movieList)
+    }
 
     return (
         <Container sx={{marginTop: "16px"}} maxWidth="xl">
@@ -135,23 +143,30 @@ function App() {
                     target="certification"
                     value={selectedCertification.certification}/>
             </Stack>
-            <FormControl fullWidth>
-                <Autocomplete
-                    fullWidth
-                    sx={{marginTop: "16px"}}
-                    disablePortal
-                    id="search-person"
-                    options={generatePersonsOptions(persons)}
-                    onInputChange={handleQueryChange}
-                    onChange={handlePersonSelect}
-                    renderInput={(params) => <TextField {...params} label="Search for by person"/>}
-                />
-            </FormControl>
+            <Stack
+                sx={{marginTop: "16px", marginBottom: "8px"}}
+                direction={{xs: 'column', sm: 'row'}}
+                spacing={{xs: 0, sm: 2, md: 4}}
+                alignItems="center">
+                <FormControl sx={{width: "90%"}}>
+                    <Autocomplete
+                        disablePortal
+                        id="search-person"
+                        options={generatePersonsOptions(persons)}
+                        onInputChange={handleQueryChange}
+                        onChange={handlePersonSelect}
+                        renderInput={(params) => <TextField {...params} label="Search for by person"/>}
+                    />
+                </FormControl>
+                <Button variant="outlined" onClick={showWatchList}>View Watch List</Button>
+            </Stack>
             <Stack direction={{xs: 'column', sm: 'row'}}
                    spacing={{xs: 1, sm: 2, md: 4}}
                    sx={{marginBottom: "32px"}}
                    alignItems="center">
+
                 {minYear}
+
                 <Slider
                     aria-label="Set year"
                     defaultValue={0}
@@ -160,7 +175,9 @@ function App() {
                     step={1}
                     min={minYear}
                     max={currentYear}/>
+
                 {currentYear}
+
                 <Stack alignItems="center">
                     <Typography variant="subtitle1">Minimum Rating</Typography>
                     <Rating
@@ -171,11 +188,14 @@ function App() {
                 </Stack>
             </Stack>
             {isMessageDisplay && (
-                <Alert sx={{marginBottom: "32px"}}
-                       icon={<SettingsSuggestTwoToneIcon fontSize="inherit"/>}>{alertMessage}</Alert>
+                <Alert
+                    sx={{marginBottom: "32px"}}
+                    icon={<SettingsSuggestTwoToneIcon fontSize="inherit"/>}
+                >
+                    {alertMessage}
+                </Alert>
             )}
             <Grid item container spacing={{xs: 2, md: 3}} columns={{xs: 2, sm: 8, md: 20}}>
-                <WatchListProvider>
                     {movies?.map(movie =>
                         <MovieCard
                             key={movie.id}
@@ -184,8 +204,9 @@ function App() {
                             setSnackbar={setSnackbar}
                             setTrailerOPen={setTrailerOpen}
                             setTrailer={setTrailer}
-                            movie={movie}/>)}
-                </WatchListProvider>
+                            movie={movie}
+                            movies={movies}
+                        />)}
             </Grid>
         </Container>
     )

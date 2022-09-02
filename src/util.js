@@ -14,6 +14,10 @@ export const generatePersonsOptions = persons => persons.map(person => person.la
 export const getYear = date => (date ? date.slice(0, 4) : "")
 export const getRandom = () => Math.floor(Math.random() * 100000)
 export const handleSuccess = (response, target, handleResponse, action) => {
-    handleResponse(jsonify(response)[target])
-    if(action) action()
+    const parsedResponse = jsonify(response)[target]
+
+    handleResponse(parsedResponse)
+
+    if(action)
+        action(parsedResponse)
 }
