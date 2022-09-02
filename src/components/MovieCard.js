@@ -18,7 +18,7 @@ import OndemandVideoTwoToneIcon from '@mui/icons-material/OndemandVideoTwoTone';
 import DeleteForeverTwoToneIcon from '@mui/icons-material/DeleteForeverTwoTone';
 import {getWatchProviders} from "../api/api";
 import tmdb from "themoviedb-javascript-library";
-import {getYear, handleError, handleSuccess, jsonify} from "../util";
+import {getYear, handleError, handleSuccess} from "../util";
 import WatchProvider from "./WatchProvider";
 import {useWatchList} from "../context/WatchListContext";
 
@@ -47,16 +47,20 @@ const MovieCard = ({movie, movies, setDisplayMessage, setMovies, setSnackbar, se
         }
     }, [trailers, setTrailer, setTrailerOPen])
 
-    const setMessage = response => {
-        if (response.results.length > 0)
+    const handleRecommendations = response => {
+        console.log(response)
+        if (response.length > 0){
+            setMovies(response)
             setDisplayMessage(true, `Recommendations based on ${movie.title}`)
+        }
+
         else
             alert('no recommendations found')
     }
 
     const getRecommendations = () => tmdb.movies.getRecommendations(
         {id: movie.id},
-        (res) => handleSuccess(res, "results", setMovies, () => setMessage(jsonify(res))),
+        (res) => handleSuccess(res, "results", handleRecommendations),
         handleError
     )
 
