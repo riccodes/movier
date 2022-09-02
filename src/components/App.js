@@ -151,7 +151,9 @@ function App() {
                    spacing={{xs: 1, sm: 2, md: 4}}
                    sx={{marginBottom: "32px"}}
                    alignItems="center">
+
                 {minYear}
+
                 <Slider
                     aria-label="Set year"
                     defaultValue={0}
@@ -160,7 +162,9 @@ function App() {
                     step={1}
                     min={minYear}
                     max={currentYear}/>
+
                 {currentYear}
+
                 <Stack alignItems="center">
                     <Typography variant="subtitle1">Minimum Rating</Typography>
                     <Rating
@@ -171,8 +175,12 @@ function App() {
                 </Stack>
             </Stack>
             {isMessageDisplay && (
-                <Alert sx={{marginBottom: "32px"}}
-                       icon={<SettingsSuggestTwoToneIcon fontSize="inherit"/>}>{alertMessage}</Alert>
+                <Alert
+                    sx={{marginBottom: "32px"}}
+                    icon={<SettingsSuggestTwoToneIcon fontSize="inherit"/>}
+                >
+                    {alertMessage}
+                </Alert>
             )}
             <Grid item container spacing={{xs: 2, md: 3}} columns={{xs: 2, sm: 8, md: 20}}>
                 <WatchListProvider>

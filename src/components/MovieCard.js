@@ -8,6 +8,7 @@ import {
     Grid,
     IconButton,
     Stack,
+    Tooltip,
     Typography
 } from "@mui/material";
 import GradeTwoToneIcon from '@mui/icons-material/GradeTwoTone';
@@ -36,7 +37,7 @@ const MovieCard = ({movie, setDisplayMessage, setMovies, setSnackbar, setTrailer
         if (trailers.length > 0) {
             const trailer = trailers.filter(video => video.type === "Trailer")
 
-            if(trailer.length > 0)
+            if (trailer.length > 0)
                 setTrailer(trailer[0])
             else
                 setTrailer(trailers[0])
@@ -58,11 +59,19 @@ const MovieCard = ({movie, setDisplayMessage, setMovies, setSnackbar, setTrailer
         handleError
     )
 
-    const getTrailers = () => tmdb.movies.getVideos(
-        {id: movie.id},
-        res => handleSuccess(res, "results", setTrailers),
-        handleError
-    )
+    const getTrailers = () => {
+        const handleNoTrailers = response => {
+            if (!response || response?.length === 0) {
+                setSnackbar(true, `No trailers found for ${movie.title}`)
+            }
+        }
+
+        return tmdb.movies.getVideos(
+            {id: movie.id},
+            res => handleSuccess(res, "results", setTrailers, handleNoTrailers),
+            handleError
+        )
+    }
 
     const saveToWatchList = () => {
         const {dispatch} = watchList
@@ -115,15 +124,21 @@ const MovieCard = ({movie, setDisplayMessage, setMovies, setSnackbar, setTrailer
                 </CardContent>
                 {renderProviders()}
                 <CardActions>
-                    <IconButton onClick={saveToWatchList} aria-label="save to watch list">
-                        <GradeTwoToneIcon />
-                    </IconButton>
-                    <IconButton onClick={getRecommendations} aria-label="get recommendations">
-                        <SettingsSuggestTwoToneIcon />
-                    </IconButton>
-                    <IconButton onClick={getTrailers} aria-label="watch trailer">
-                        <OndemandVideoTwoToneIcon />
-                    </IconButton>
+                    <Tooltip title="Save to watch list" placement="top">
+                        <IconButton onClick={saveToWatchList} aria-label="save to watch list">
+                            <GradeTwoToneIcon/>
+                        </IconButton>
+                    </Tooltip>
+                    <Tooltip title="Get Recommendations" placement="top">
+                        <IconButton onClick={getRecommendations} aria-label="get recommendations">
+                            <SettingsSuggestTwoToneIcon/>
+                        </IconButton>
+                    </Tooltip>
+                    <Tooltip title="Watch trailer" placement="top">
+                        <IconButton onClick={getTrailers} aria-label="watch trailer">
+                            <OndemandVideoTwoToneIcon/>
+                        </IconButton>
+                    </Tooltip>
                 </CardActions>
             </Card>
         </Grid>
