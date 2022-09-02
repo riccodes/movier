@@ -15,13 +15,14 @@ import GradeTwoToneIcon from '@mui/icons-material/GradeTwoTone';
 import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
 import SettingsSuggestTwoToneIcon from '@mui/icons-material/SettingsSuggestTwoTone';
 import OndemandVideoTwoToneIcon from '@mui/icons-material/OndemandVideoTwoTone';
+import DeleteForeverTwoToneIcon from '@mui/icons-material/DeleteForeverTwoTone';
 import {getWatchProviders} from "../api/api";
 import tmdb from "themoviedb-javascript-library";
 import {getYear, handleError, handleSuccess, jsonify} from "../util";
 import WatchProvider from "./WatchProvider";
 import {useWatchList} from "../context/WatchListContext";
 
-const MovieCard = ({movie, setDisplayMessage, setMovies, setSnackbar, setTrailer, setTrailerOPen}) => {
+const MovieCard = ({movie, movies, setDisplayMessage, setMovies, setSnackbar, setTrailer, setTrailerOPen}) => {
 
     const watchList = useWatchList()
     const [providers, setProviders] = useState()
@@ -79,6 +80,11 @@ const MovieCard = ({movie, setDisplayMessage, setMovies, setSnackbar, setTrailer
         setSnackbar(true, `${movie.title} saved to watch list`)
     }
 
+    const remove = () => {
+        const newMovies = movies.filter(m => m.id !== movie.id)
+        setMovies(newMovies)
+    }
+
     const renderProviders = () => {
         if (providers) {
             return (
@@ -124,6 +130,11 @@ const MovieCard = ({movie, setDisplayMessage, setMovies, setSnackbar, setTrailer
                 </CardContent>
                 {renderProviders()}
                 <CardActions>
+                    <Tooltip title="Remove" placement="top">
+                        <IconButton onClick={remove} aria-label="removed">
+                            <DeleteForeverTwoToneIcon/>
+                        </IconButton>
+                    </Tooltip>
                     <Tooltip title="Save to watch list" placement="top">
                         <IconButton onClick={saveToWatchList} aria-label="save to watch list">
                             <GradeTwoToneIcon/>

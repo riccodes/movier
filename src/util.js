@@ -15,6 +15,9 @@ export const getYear = date => (date ? date.slice(0, 4) : "")
 export const getRandom = () => Math.floor(Math.random() * 100000)
 export const handleSuccess = (response, target, handleResponse, action) => {
     const parsedResponse = jsonify(response)[target]
+
     handleResponse(parsedResponse)
-    if(action) action(parsedResponse)
+
+    if(action)
+        action(parsedResponse)
 }
