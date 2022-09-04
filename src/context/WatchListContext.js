@@ -2,12 +2,13 @@ import * as React from 'react'
 
 const WatchListContext = React.createContext()
 
+//TODO-ADD: persist watchlist across sessions
 function watchListReducer(state, action) {
     switch (action.type) {
         case 'save': {
             return {movieList: [...state.movieList, action.data]}
         }
-        //TODO-FIX test this functionad
+        //TODO-FIX test this function
         case 'delete': {
             return {movieList: state.movieList.filter(m => m.id !== action.data.id)}
         }
