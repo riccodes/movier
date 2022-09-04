@@ -121,6 +121,7 @@ const MovieCard = ({movie, movies, setDisplayMessage, setMovies, setSnackbar, se
                         <Typography gutterBottom variant="subtitle1">
                             {movie.title} ({getYear(movie.release_date)})
                         </Typography>
+                        {/*TODO-FIX: Round this value to 1 decimal*/}
                         <Chip
                             color="info"
                             label={movie.vote_average}
@@ -134,22 +135,23 @@ const MovieCard = ({movie, movies, setDisplayMessage, setMovies, setSnackbar, se
                 </CardContent>
                 {renderProviders()}
                 <CardActions>
-                    <Tooltip title="Remove" placement="top">
+                    <Tooltip disableFocusListener title="Remove" placement="top">
                         <IconButton onClick={remove} aria-label="removed">
                             <DeleteForeverTwoToneIcon/>
                         </IconButton>
                     </Tooltip>
-                    <Tooltip title="Save to watch list" placement="top">
+                    <Tooltip disableFocusListener title="Save to watch list" placement="top">
                         <IconButton onClick={saveToWatchList} aria-label="save to watch list">
                             <GradeTwoToneIcon/>
                         </IconButton>
                     </Tooltip>
-                    <Tooltip title="Get Recommendations" placement="top">
+                    <Tooltip disableFocusListener title="Get Recommendations" placement="top">
                         <IconButton onClick={getRecommendations} aria-label="get recommendations">
                             <SettingsSuggestTwoToneIcon/>
                         </IconButton>
                     </Tooltip>
-                    <Tooltip title="Watch trailer" placement="top">
+                    {/*TODO-ADD show this button only when trailer available */}
+                    <Tooltip disableFocusListener title="Watch trailer" placement="top">
                         <IconButton onClick={getTrailers} aria-label="watch trailer">
                             <OndemandVideoTwoToneIcon/>
                         </IconButton>
