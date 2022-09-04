@@ -14,6 +14,7 @@ import {
     TextField,
     Typography
 } from "@mui/material";
+import GradeTwoToneIcon from '@mui/icons-material/GradeTwoTone';
 import SettingsSuggestTwoToneIcon from '@mui/icons-material/SettingsSuggestTwoTone';
 import MovieCard from "./MovieCard";
 import tmdb from "themoviedb-javascript-library";
@@ -111,16 +112,20 @@ function App() {
         <Container sx={{marginTop: "16px"}} maxWidth="xl">
             <Snackbar
                 open={snackbarOpen}
-                onClose={()=> setSnackbar(false, "")}
+                onClose={() => setSnackbar(false, "")}
             >
                 <Alert severity="success">
                     {snackbarMessage}
                 </Alert>
             </Snackbar>
             <Trailer open={trailerOpen} setTrailerOpen={setTrailerOpen} trailer={trailer}/>
-            <Typography sx={{marginBottom: "16px"}} variant="h3">
-                MovieR <Typography variant="overline">by riccodes</Typography>
-            </Typography>
+            <Button
+                fullWidth
+                startIcon={<GradeTwoToneIcon/>}
+                variant="outlined"
+                onClick={showWatchList}>
+                View Watch List
+            </Button>
             <Stack
                 direction={{xs: 'column', sm: 'row'}}
                 spacing={{xs: 0, sm: 2, md: 4}}
@@ -144,21 +149,20 @@ function App() {
                     value={selectedCertification.certification}/>
             </Stack>
             <Stack
-                sx={{marginTop: "16px", marginBottom: "8px"}}
+                sx={{marginBottom: "8px"}}
                 direction={{xs: 'column', sm: 'row'}}
                 spacing={{xs: 0, sm: 2, md: 4}}
                 alignItems="center">
-                <FormControl sx={{width: "90%"}}>
+                <FormControl fullWidth>
                     <Autocomplete
                         disablePortal
                         id="search-person"
                         options={generatePersonsOptions(persons)}
                         onInputChange={handleQueryChange}
                         onChange={handlePersonSelect}
-                        renderInput={(params) => <TextField {...params} label="Search for by person"/>}
+                        renderInput={(params) => <TextField {...params} label="Search by person"/>}
                     />
                 </FormControl>
-                <Button variant="outlined" onClick={showWatchList}>View Watch List</Button>
             </Stack>
             <Stack direction={{xs: 'column', sm: 'row'}}
                    spacing={{xs: 1, sm: 2, md: 4}}
