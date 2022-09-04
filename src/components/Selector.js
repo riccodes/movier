@@ -3,9 +3,10 @@ import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
 import {getRandom} from "../util";
 
 const Selector = ({handleSelection, label, items, target, value}) => (
-    <FormControl fullWidth>
+    <FormControl margin="dense" fullWidth>
         <InputLabel id="select-label">{label}</InputLabel>
         <Select
+            sx={{marginBottom:"8px"}}
             labelId="select-label"
             id="select"
             value={value}
