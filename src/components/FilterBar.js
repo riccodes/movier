@@ -48,7 +48,7 @@ const FilterBar = ({
 
     useEffect(() => {
         tmdb.genres.getMovieList({}, res => handleSuccess(res, "genres", setGenres), handleError)
-        tmdb.certifications.getMovieList((response) => setCertifications(jsonify(response).certifications.US), handleError)
+        tmdb.certifications.getMovieList(res => setCertifications(jsonify(res).certifications.US), handleError)
     }, [])
 
     const handleYearSelect = e => setYear(e.target.value)
