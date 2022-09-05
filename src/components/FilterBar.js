@@ -23,6 +23,7 @@ import tmdb from "themoviedb-javascript-library";
 const FilterBar = ({
                        selectedCertification,
                        selectedGenre,
+                       selectedRating,
                        selectedSort,
                        setSelectedCertification,
                        setSelectedGenre,
@@ -30,7 +31,8 @@ const FilterBar = ({
                        setSelectedPerson,
                        setSelectedRating,
                        setSelectedSort,
-                       setYear
+                       setYear,
+                       year
                    }) => {
 
     const watchList = useWatchList()
@@ -72,6 +74,13 @@ const FilterBar = ({
     const handleRatingSelect = e => {
         if (e) setSelectedRating(e.target.value)
     }
+    const clearFilters = () => {
+        setSelectedCertification("")
+        setSelectedGenre("")
+        setSelectedRating(0)
+        setSelectedSort(sorts.find(sort => sort.key === "pop.desc"))
+        setYear("")
+    }
 
     return (
         <Accordion defaultExpanded sx={{marginBottom: "16px"}} elevation={3}>
@@ -80,12 +89,11 @@ const FilterBar = ({
                 aria-controls="panel1a-content"
                 id="panel1a-header"
             >
-                <FilterAltTwoToneIcon color="action"/>
-                <Typography>
-                    Filters
-                </Typography>
+                <FilterAltTwoToneIcon/>
+                <Typography>Filters</Typography>
             </AccordionSummary>
             <AccordionDetails>
+                <Button fullWidth onClick={clearFilters}>Clear</Button>
                 <Stack
                     direction={{xs: 'column', sm: 'row'}}
                     spacing={{xs: 0, sm: 2, md: 4}}
@@ -132,6 +140,7 @@ const FilterBar = ({
                     {minYear}
 
                     <Slider
+                        value={year}
                         aria-label="Set year"
                         defaultValue={0}
                         valueLabelDisplay="on"
@@ -147,8 +156,8 @@ const FilterBar = ({
                         <Rating
                             onClick={handleRatingSelect}
                             name="rating-selector"
-                            defaultValue={0}
-                            max={10}/>
+                            max={10}
+                            value={selectedRating}/>
                     </Stack>
                 </Stack>
                 <Button

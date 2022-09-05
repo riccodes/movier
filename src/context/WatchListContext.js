@@ -8,7 +8,6 @@ function watchListReducer(state, action) {
         case 'save': {
             return {movieList: [...state.movieList, action.data]}
         }
-        //TODO-FIX test this function
         case 'delete': {
             return {movieList: state.movieList.filter(m => m.id !== action.data.id)}
         }

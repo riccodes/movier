@@ -6,11 +6,11 @@ const Selector = ({handleSelection, label, items, target, value}) => (
     <FormControl margin="dense" fullWidth>
         <InputLabel id="select-label">{label}</InputLabel>
         <Select
-            sx={{marginBottom:"8px"}}
+            sx={{ marginBottom:"8px" }}
             labelId="select-label"
             id="select"
-            value={value}
-            label={`${label} selection`}
+            value={ value }
+            label={ `${label} selection` }
             onChange={handleSelection}
         >
             {items.map(item =>

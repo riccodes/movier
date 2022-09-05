@@ -48,7 +48,7 @@ const MovieCard = ({movie, movies, setDisplayMessage, setMovies, setSnackbar, se
     }, [trailers, setTrailer, setTrailerOPen])
 
     const handleRecommendations = response => {
-        console.log(response)
+
         if (response.length > 0){
             setMovies(response)
             setDisplayMessage(true, `Recommendations based on ${movie.title}`)
@@ -103,6 +103,8 @@ const MovieCard = ({movie, movies, setDisplayMessage, setMovies, setSnackbar, se
         return <div/>
     }
 
+    const formatAverage = () => Math.round(parseFloat(movie.vote_average) * 10) / 10
+
     return (
         <Grid item xs={2} sm={4} md={4}>
             <Card variant="elevation" sx={{margin: "8px"}}>
@@ -120,10 +122,9 @@ const MovieCard = ({movie, movies, setDisplayMessage, setMovies, setSnackbar, se
                         <Typography gutterBottom variant="subtitle1">
                             {movie.title} ({getYear(movie.release_date)})
                         </Typography>
-                        {/*TODO-FIX: Round this value to 1 decimal*/}
                         <Chip
                             color="info"
-                            label={movie.vote_average}
+                            label={formatAverage()}
                             icon={<StarRateRoundedIcon/>}/>
                     </Stack>
                 </CardContent>
@@ -144,12 +145,12 @@ const MovieCard = ({movie, movies, setDisplayMessage, setMovies, setSnackbar, se
                             <GradeTwoToneIcon/>
                         </IconButton>
                     </Tooltip>
+                    {/*TODO-ADD show this button only when trailer available */}
                     <Tooltip disableFocusListener title="Get Recommendations" placement="top">
                         <IconButton onClick={getRecommendations} aria-label="get recommendations">
                             <SettingsSuggestTwoToneIcon/>
                         </IconButton>
                     </Tooltip>
-                    {/*TODO-ADD show this button only when trailer available */}
                     <Tooltip disableFocusListener title="Watch trailer" placement="top">
                         <IconButton onClick={getTrailers} aria-label="watch trailer">
                             <OndemandVideoTwoToneIcon/>

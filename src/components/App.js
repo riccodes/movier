@@ -70,6 +70,7 @@ function App() {
             <FilterBar
                 selectedCertification={selectedCertification}
                 selectedGenre={selectedGenre}
+                selectedRating={selectedRating}
                 selectedSort={selectedSort}
                 setMovies={setMovies}
                 setSelectedCertification={setSelectedCertification}
@@ -78,6 +79,7 @@ function App() {
                 setSelectedRating={setSelectedRating}
                 setSelectedSort={setSelectedSort}
                 setYear={setYear}
+                year={year}
             />
             {isMessageDisplay && (
                 <Alert sx={{marginBottom: "32px"}} icon={<SettingsSuggestTwoToneIcon fontSize="inherit"/>}>
