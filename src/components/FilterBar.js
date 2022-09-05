@@ -51,7 +51,7 @@ const FilterBar = ({
         tmdb.certifications.getMovieList((response) => setCertifications(jsonify(response).certifications.US), handleError)
     }, [])
 
-    const handleYearSelect = newValue => setYear(newValue)
+    const handleYearSelect = e => setYear(e.target.value)
     const handleGenreSelect = e => {
         const genre = genres.find(genre => genre.name === e.target.value)
         setSelectedGenre(genre)
@@ -144,7 +144,7 @@ const FilterBar = ({
                         aria-label="Set year"
                         defaultValue={0}
                         valueLabelDisplay="on"
-                        onChangeCommitted={(_, newValue) => handleYearSelect(newValue)}
+                        onChange={handleYearSelect}
                         step={1}
                         min={minYear}
                         max={currentYear}/>
