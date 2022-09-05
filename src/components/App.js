@@ -1,6 +1,7 @@
 import './css/App.css';
 import {useEffect, useState} from "react";
 import {
+    Accordion, AccordionDetails, AccordionSummary,
     Alert,
     Autocomplete,
     Button,
@@ -16,6 +17,7 @@ import {
 } from "@mui/material";
 import GradeTwoToneIcon from '@mui/icons-material/GradeTwoTone';
 import SettingsSuggestTwoToneIcon from '@mui/icons-material/SettingsSuggestTwoTone';
+import ExpandMoreTwoToneIcon from '@mui/icons-material/ExpandMoreTwoTone';
 import MovieCard from "./MovieCard";
 import tmdb from "themoviedb-javascript-library";
 import Selector from "./Selector";
@@ -119,6 +121,18 @@ function App() {
                 </Alert>
             </Snackbar>
             <Trailer open={trailerOpen} setTrailerOpen={setTrailerOpen} trailer={trailer}/>
+            <Accordion>
+                <AccordionSummary
+                    expandIcon={<ExpandMoreTwoToneIcon />}
+                    aria-controls="panel1a-content"
+                    id="panel1a-header"
+                >
+                    <Typography>Hide</Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+
+                </AccordionDetails>
+            </Accordion>
             <Button
                 fullWidth
                 startIcon={<GradeTwoToneIcon/>}
