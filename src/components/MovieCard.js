@@ -96,7 +96,6 @@ const MovieCard = ({movie, movies, setDisplayMessage, setMovies, setSnackbar, se
                     <WatchProvider provs={providers["free"]} label="Free"/>
                     <WatchProvider provs={providers["flatrate"]} label="Streaming"/>
                     <WatchProvider provs={providers["rent"]} label="Rent"/>
-                    <WatchProvider provs={providers?.buy} label="Buy"/>
                 </CardContent>
             )
         }

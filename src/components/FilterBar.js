@@ -74,7 +74,7 @@ const FilterBar = ({
     }
 
     return (
-        <Accordion defaultExpanded square sx={{marginBottom: "16px"}} elevation={6}>
+        <Accordion defaultExpanded sx={{marginBottom: "16px"}} elevation={3}>
             <AccordionSummary
                 expandIcon={<ExpandMoreTwoToneIcon/>}
                 aria-controls="panel1a-content"
