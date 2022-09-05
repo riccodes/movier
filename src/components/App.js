@@ -121,90 +121,89 @@ function App() {
                 </Alert>
             </Snackbar>
             <Trailer open={trailerOpen} setTrailerOpen={setTrailerOpen} trailer={trailer}/>
-            <Accordion>
+            <Accordion defaultExpanded square sx={{marginBottom: "16px"}} elevation={6}>
                 <AccordionSummary
                     expandIcon={<ExpandMoreTwoToneIcon />}
                     aria-controls="panel1a-content"
                     id="panel1a-header"
                 >
-                    <Typography>Hide</Typography>
+                    <Typography>Filters</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
+                    <Button
+                        fullWidth
+                        startIcon={<GradeTwoToneIcon/>}
+                        variant="outlined"
+                        onClick={showWatchList}>
+                        View Watch List
+                    </Button>
+                    <Stack
+                        direction={{xs: 'column', sm: 'row'}}
+                        spacing={{xs: 0, sm: 2, md: 4}}
+                        alignItems="center">
+                        <Selector
+                            handleSelection={handleGenreSelect}
+                            label="Genres"
+                            items={genres}
+                            target="name"
+                            value={selectedGenre.name}/>
+                        <Selector
+                            handleSelection={handleSortSelect}
+                            label="Sort By"
+                            items={sorts}
+                            target="name"
+                            value={selectedSort.name}/>
+                        <Selector
+                            handleSelection={handleCertificationSelect}
+                            label="Rating" items={certifications}
+                            target="certification"
+                            value={selectedCertification.certification}/>
+                    </Stack>
+                    <Stack
+                        sx={{marginBottom: "8px"}}
+                        direction={{xs: 'column', sm: 'row'}}
+                        spacing={{xs: 0, sm: 2, md: 4}}
+                        alignItems="center">
+                        <FormControl fullWidth>
+                            <Autocomplete
+                                disablePortal
+                                id="search-person"
+                                options={generatePersonsOptions(persons)}
+                                onInputChange={handleQueryChange}
+                                onChange={handlePersonSelect}
+                                renderInput={(params) => <TextField {...params} label="Search by person"/>}
+                            />
+                        </FormControl>
+                    </Stack>
+                    <Stack direction={{xs: 'column', sm: 'row'}}
+                           spacing={{xs: 1, sm: 2, md: 4}}
+                           sx={{marginBottom: "32px"}}
+                           alignItems="center">
 
+                        {minYear}
+
+                        <Slider
+                            aria-label="Set year"
+                            defaultValue={0}
+                            valueLabelDisplay="on"
+                            onChangeCommitted={(_, newValue) => handleYearSelect(newValue)}
+                            step={1}
+                            min={minYear}
+                            max={currentYear}/>
+
+                        {currentYear}
+
+                        <Stack alignItems="center">
+                            <Typography variant="subtitle1">Minimum Rating</Typography>
+                            <Rating
+                                onClick={handleRatingSelect}
+                                name="rating-selector"
+                                defaultValue={0}
+                                max={10}/>
+                        </Stack>
+                    </Stack>
                 </AccordionDetails>
             </Accordion>
-            <Button
-                fullWidth
-                startIcon={<GradeTwoToneIcon/>}
-                variant="outlined"
-                onClick={showWatchList}>
-                View Watch List
-            </Button>
-            <Stack
-                direction={{xs: 'column', sm: 'row'}}
-                spacing={{xs: 0, sm: 2, md: 4}}
-                alignItems="center">
-                <Selector
-                    handleSelection={handleGenreSelect}
-                    label="Genres"
-                    items={genres}
-                    target="name"
-                    value={selectedGenre.name}/>
-                <Selector
-                    handleSelection={handleSortSelect}
-                    label="Sort By"
-                    items={sorts}
-                    target="name"
-                    value={selectedSort.name}/>
-                <Selector
-                    handleSelection={handleCertificationSelect}
-                    label="Rating" items={certifications}
-                    target="certification"
-                    value={selectedCertification.certification}/>
-            </Stack>
-            <Stack
-                sx={{marginBottom: "8px"}}
-                direction={{xs: 'column', sm: 'row'}}
-                spacing={{xs: 0, sm: 2, md: 4}}
-                alignItems="center">
-                <FormControl fullWidth>
-                    <Autocomplete
-                        disablePortal
-                        id="search-person"
-                        options={generatePersonsOptions(persons)}
-                        onInputChange={handleQueryChange}
-                        onChange={handlePersonSelect}
-                        renderInput={(params) => <TextField {...params} label="Search by person"/>}
-                    />
-                </FormControl>
-            </Stack>
-            <Stack direction={{xs: 'column', sm: 'row'}}
-                   spacing={{xs: 1, sm: 2, md: 4}}
-                   sx={{marginBottom: "32px"}}
-                   alignItems="center">
-
-                {minYear}
-
-                <Slider
-                    aria-label="Set year"
-                    defaultValue={0}
-                    valueLabelDisplay="on"
-                    onChangeCommitted={(_, newValue) => handleYearSelect(newValue)}
-                    step={1}
-                    min={minYear}
-                    max={currentYear}/>
-
-                {currentYear}
-
-                <Stack alignItems="center">
-                    <Typography variant="subtitle1">Minimum Rating</Typography>
-                    <Rating
-                        onClick={handleRatingSelect}
-                        name="rating-selector"
-                        defaultValue={0}
-                        max={10}/>
-                </Stack>
-            </Stack>
             {isMessageDisplay && (
                 <Alert
                     sx={{marginBottom: "32px"}}
@@ -213,7 +212,7 @@ function App() {
                     {alertMessage}
                 </Alert>
             )}
-            <Grid item container spacing={{xs: 2, md: 3}} columns={{xs: 2, sm: 8, md: 20}}>
+            <Grid container maxWidth="xl"  columns={{xs: 2, sm: 8, md: 20}}>
                     {movies?.map(movie =>
                         <MovieCard
                             key={movie.id}
