@@ -23,8 +23,10 @@ import tmdb from "themoviedb-javascript-library";
 const FilterBar = ({
                        selectedCertification,
                        selectedGenre,
+                       selectedPerson,
                        selectedRating,
                        selectedSort,
+                       setDisplayMessage,
                        setSelectedCertification,
                        setSelectedGenre,
                        setMovies,
@@ -59,13 +61,11 @@ const FilterBar = ({
     const handleSortSelect = e => setSelectedSort(sorts.find(sort => sort.name === e.target.value))
     const handleCertificationSelect = e => setSelectedCertification(certifications.find(cert => cert.certification === e.target.value))
     const showWatchList = () => {
-        const {state} = watchList
-        setMovies(state.movieList)
+        setDisplayMessage(false, "")
+        setMovies(watchList.state.movieList)
     }
-    const handleQueryChange = e => {
-        const val = e.target.value
-
-        if (val?.length > 1) setPersonQuery(val)
+    const handleQueryChange = (e, newValue) => {
+        if (newValue?.length > 2) setPersonQuery(newValue)
     }
     const handlePersonSelect = (e, newValue) => {
         if (newValue)
@@ -75,6 +75,7 @@ const FilterBar = ({
         if (e) setSelectedRating(e.target.value)
     }
     const clearFilters = () => {
+        setSelectedPerson("")
         setSelectedCertification("")
         setSelectedGenre("")
         setSelectedRating(0)
@@ -128,6 +129,7 @@ const FilterBar = ({
                             options={generatePersonsOptions(persons)}
                             onInputChange={handleQueryChange}
                             onChange={handlePersonSelect}
+                            value={selectedPerson.name}
                             renderInput={(params) => <TextField {...params} label="Search by person"/>}
                         />
                     </FormControl>

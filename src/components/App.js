@@ -17,7 +17,7 @@ function App() {
     const [movies, setMovies] = useState([])
     const [selectedGenre, setSelectedGenre] = useState({name: ""})
     const [selectedRating, setSelectedRating] = useState(0)
-    const [selectedPerson, setSelectedPerson] = useState({id: ""})
+    const [selectedPerson, setSelectedPerson] = useState({id: "", name:""})
     const [selectedSort, setSelectedSort] = useState(sorts.find(sort => sort.key === "pop.desc"))
     const [selectedCertification, setSelectedCertification] = useState({certification: ""})
     const [snackbarMessage, setSnackbarMessage] = useState("")
@@ -70,8 +70,10 @@ function App() {
             <FilterBar
                 selectedCertification={selectedCertification}
                 selectedGenre={selectedGenre}
+                selectedPerson={selectedPerson}
                 selectedRating={selectedRating}
                 selectedSort={selectedSort}
+                setDisplayMessage={setDisplayMessage}
                 setMovies={setMovies}
                 setSelectedCertification={setSelectedCertification}
                 setSelectedGenre={setSelectedGenre}
