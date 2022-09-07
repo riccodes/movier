@@ -40,7 +40,10 @@ const FilterBar = ({
 
     const watchList = useWatchList()
 
+    const MINIMUM_RATING = "Minimum Rating"
+
     const [persons, setPersons] = useState([])
+    const [ratingLabel, setRatingLabel] = useState("Minimum Rating")
     const [personQuery, setPersonQuery] = useState()
     const [genres, setGenres] = useState([])
     const [certifications, setCertifications] = useState([])
@@ -73,13 +76,19 @@ const FilterBar = ({
             setSelectedPerson(persons.find(person => person.name === newValue))
     }
     const handleRatingSelect = e => {
-        if (e) setSelectedRating(e.target.value)
+        if (e) {
+            const newRating = e?.target?.value
+
+            setSelectedRating(newRating)
+            setRatingLabel(`${MINIMUM_RATING}: ${newRating}`)
+        }
     }
     const clearFilters = () => {
         setSelectedPerson("")
         setSelectedCertification("")
         setSelectedGenre("")
         setSelectedRating(0)
+        setRatingLabel(MINIMUM_RATING)
         setSelectedSort(sorts.find(sort => sort.key === "pop.desc"))
         setYear("")
     }
@@ -170,7 +179,7 @@ const FilterBar = ({
                     {currentYear}
 
                     <Stack alignItems="center">
-                        <Typography variant="subtitle1">Minimum Rating</Typography>
+                        <Typography variant="subtitle1">{ratingLabel}</Typography>
                         <Rating
                             onClick={handleRatingSelect}
                             name="rating-selector"
