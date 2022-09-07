@@ -14,6 +14,7 @@ import {
 } from "@mui/material";
 import ExpandMoreTwoToneIcon from "@mui/icons-material/ExpandMoreTwoTone";
 import FilterAltTwoToneIcon from '@mui/icons-material/FilterAltTwoTone';
+import BackspaceTwoToneIcon from '@mui/icons-material/BackspaceTwoTone';
 import Selector from "./Selector";
 import {currentYear, generatePersonsOptions, handleError, handleSuccess, jsonify, minYear, sorts} from "../util";
 import GradeTwoToneIcon from "@mui/icons-material/GradeTwoTone";
@@ -94,7 +95,13 @@ const FilterBar = ({
                 <Typography>Filters</Typography>
             </AccordionSummary>
             <AccordionDetails>
-                <Button fullWidth onClick={clearFilters}>Clear</Button>
+                <Button
+                    fullWidth
+                    startIcon={ <BackspaceTwoToneIcon/> }
+                    onClick={ clearFilters }
+                    variant="outlined">
+                    Clear All Fields
+                </Button>
                 <Stack
                     direction={{xs: 'column', sm: 'row'}}
                     spacing={{xs: 0, sm: 2, md: 4}}

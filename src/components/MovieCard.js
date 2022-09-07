@@ -26,26 +26,33 @@ const MovieCard = ({movie, movies, setDisplayMessage, setMovies, setSnackbar, se
 
     const watchList = useWatchList()
     const [providers, setProviders] = useState()
-    const [trailers, setTrailers] = useState([])
+    const [isTrailerButtonDisplay, setIsTrailerButtonDisplay] = useState(true)
+    const [currentTrailer, setCurrentTrailer] = useState({})
+
+    const parseTrailerResponse = trailers => {
+        if (trailers.length > 0) {
+            const trailerArray = trailers.filter(video => video.type === "Trailer")
+
+            if (trailerArray.length > 0)
+                setCurrentTrailer(trailerArray[0])
+            else
+                setCurrentTrailer(trailers[0])
+        } else {
+            setIsTrailerButtonDisplay(false)
+        }
+    }
 
     useEffect(() => {
+        tmdb.movies.getVideos(
+            {id: movie.id},
+            res => handleSuccess(res, "results", parseTrailerResponse),
+            handleError
+        )
+
         getWatchProviders(movie.id).then(providers => {
             setProviders(providers.data.results["US"])
         })
     }, [movie.id])
-
-    useEffect(() => {
-        if (trailers.length > 0) {
-            const trailer = trailers.filter(video => video.type === "Trailer")
-
-            if (trailer.length > 0)
-                setTrailer(trailer[0])
-            else
-                setTrailer(trailers[0])
-
-            setTrailerOPen(true)
-        }
-    }, [trailers, setTrailer, setTrailerOPen])
 
     const handleRecommendations = response => {
 
@@ -57,26 +64,16 @@ const MovieCard = ({movie, movies, setDisplayMessage, setMovies, setSnackbar, se
         else
             setSnackbar(true, "No recommendations found")
     }
+    const handleTrailerClick = () => {
+        setTrailer(currentTrailer)
+        setTrailerOPen(true)
+     }
 
     const getRecommendations = () => tmdb.movies.getRecommendations(
         {id: movie.id},
         (res) => handleSuccess(res, "results", handleRecommendations),
         handleError
     )
-
-    const getTrailers = () => {
-        const handleNoTrailers = response => {
-            if (!response || response?.length === 0) {
-                setSnackbar(true, `No trailers found for ${movie.title}`)
-            }
-        }
-
-        return tmdb.movies.getVideos(
-            {id: movie.id},
-            res => handleSuccess(res, "results", setTrailers, handleNoTrailers),
-            handleError
-        )
-    }
 
     const saveToWatchList = () => {
         const {dispatch} = watchList
@@ -122,6 +119,7 @@ const MovieCard = ({movie, movies, setDisplayMessage, setMovies, setSnackbar, se
                         <Typography gutterBottom variant="subtitle1">
                             {movie.title} ({getYear(movie.release_date)})
                         </Typography>
+                        {/*TODO-FIX: Round this value to 1 decimal*/}
                         <Chip
                             color="info"
                             label={formatAverage()}
@@ -151,11 +149,13 @@ const MovieCard = ({movie, movies, setDisplayMessage, setMovies, setSnackbar, se
                             <SettingsSuggestTwoToneIcon/>
                         </IconButton>
                     </Tooltip>
-                    <Tooltip disableFocusListener title="Watch trailer" placement="top">
-                        <IconButton onClick={getTrailers} aria-label="watch trailer">
-                            <OndemandVideoTwoToneIcon/>
-                        </IconButton>
-                    </Tooltip>
+                    { isTrailerButtonDisplay &&
+                        (<Tooltip disableFocusListener title="Watch trailer" placement="top">
+                            <IconButton hidden={true} onClick={handleTrailerClick} aria-label="watch trailer">
+                                <OndemandVideoTwoToneIcon/>
+                            </IconButton>
+                        </Tooltip>)
+                    }
                 </CardActions>
             </Card>
         </Grid>
