@@ -97,6 +97,15 @@ const FilterBar = ({
             <AccordionDetails>
                 <Button
                     fullWidth
+                    sx={{marginBottom: "2px"}}
+                    startIcon={<GradeTwoToneIcon/>}
+                    variant="outlined"
+                    onClick={showWatchList}>
+                    View Watch List
+                </Button>
+                <Button
+                    fullWidth
+                    sx={{marginBottom: "8px", marginTop: "2px"}}
                     startIcon={ <BackspaceTwoToneIcon/> }
                     onClick={ clearFilters }
                     variant="outlined">
@@ -169,13 +178,6 @@ const FilterBar = ({
                             value={selectedRating}/>
                     </Stack>
                 </Stack>
-                <Button
-                    fullWidth
-                    startIcon={<GradeTwoToneIcon/>}
-                    variant="outlined"
-                    onClick={showWatchList}>
-                    View Watch List
-                </Button>
             </AccordionDetails>
         </Accordion>
     )
