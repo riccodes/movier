@@ -21,6 +21,8 @@ import tmdb from "themoviedb-javascript-library";
 import {getYear, handleError, handleSuccess} from "../util";
 import WatchProvider from "./WatchProvider";
 import {useWatchList} from "../context/WatchListContext";
+import {API, graphqlOperation} from "aws-amplify";
+import {createMovie} from "../graphql/mutations";
 
 const MovieCard = ({movie, movies, setDisplayMessage, setMovies, setSnackbar, setTrailer, setTrailerOPen}) => {
 
@@ -76,9 +78,24 @@ const MovieCard = ({movie, movies, setDisplayMessage, setMovies, setSnackbar, se
     )
 
     const saveToWatchList = () => {
+        // add movie to state
         const {dispatch} = watchList
         dispatch({data: movie, type: "save"})
-        setSnackbar(true, `${movie.title} saved to watch list`)
+
+
+        const saveMovie = async () => {
+            try{
+                const watchList = await API.graphql(graphqlOperation(createMovie, {input: movie}))
+                return watchList.data.listMovies.items
+            } catch (e){
+                console.error(e)
+            }
+        }
+
+        //save move to db
+        saveMovie().then(()=> {
+            setSnackbar(true, `${movie.title} saved to watch list`)
+        })
     }
 
     const remove = () => {
