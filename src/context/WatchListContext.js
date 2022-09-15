@@ -11,7 +11,7 @@ const WatchListContext = React.createContext()
 
 //TODO-ADD: persist watchlist across sessions
 function watchListReducer(state = [], action) {
-    console.log(action)
+
     switch (action.type) {
         case 'retrieve': {
             return {movieList: action.data}
