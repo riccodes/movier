@@ -28,9 +28,6 @@ const MovieCard = ({movie, movies, setDisplayMessage, setMovies, setSnackbar, se
 
     const watchList = useWatchList()
     const [providers, setProviders] = useState()
-    //TODO-FIX perhaps add to Context
-    // set default to false
-    const [isDbChange, setIsDbChange] = useState(true)
     const [isTrailerButtonDisplay, setIsTrailerButtonDisplay] = useState(true)
     const [currentTrailer, setCurrentTrailer] = useState({})
 
@@ -85,7 +82,6 @@ const MovieCard = ({movie, movies, setDisplayMessage, setMovies, setSnackbar, se
         const {dispatch} = watchList
         dispatch({data: movie, type: "save"})
 
-
         const saveMovie = async () => {
             try{
                 await API.graphql(graphqlOperation(createMovie, {input: movie}))
@@ -104,7 +100,6 @@ const MovieCard = ({movie, movies, setDisplayMessage, setMovies, setSnackbar, se
         const newMovies = movies.filter(m => m.id !== movie.id)
         setMovies(newMovies)
 
-        if(isDbChange){
             const removeMovie = async () => {
                 try{
                     await API.graphql(graphqlOperation(deleteMovie, {input: {id: movie.id}}))
@@ -117,7 +112,7 @@ const MovieCard = ({movie, movies, setDisplayMessage, setMovies, setSnackbar, se
             removeMovie().then(()=> {
                 setSnackbar(true, `${movie.title} deleted`)
             })
-        }
+
     }
 
     const renderProviders = () => {

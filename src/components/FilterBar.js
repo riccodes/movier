@@ -39,6 +39,8 @@ const FilterBar = ({
                    }) => {
 
     const watchList = useWatchList()
+    const {state} = watchList
+    const movieList = state.movieList
 
     const MINIMUM_RATING = "Minimum Rating"
 
@@ -65,8 +67,8 @@ const FilterBar = ({
     const handleSortSelect = e => setSelectedSort(sorts.find(sort => sort.name === e.target.value))
     const handleCertificationSelect = e => setSelectedCertification(certifications.find(cert => cert.certification === e.target.value))
     const showWatchList = () => {
-        setDisplayMessage(false, "")
-        setMovies(watchList.state.movieList)
+        setDisplayMessage(true, `Watch List  [${movieList.length}]`)
+        setMovies(movieList)
     }
     const handleQueryChange = (e, newValue) => {
         if (newValue?.length > 2) setPersonQuery(newValue)
