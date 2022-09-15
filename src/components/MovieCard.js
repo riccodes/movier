@@ -105,7 +105,7 @@ const MovieCard = ({movie, movies, setDisplayMessage, setMovies, setSnackbar, se
         setMovies(newMovies)
 
         if(isDbChange){
-            const deleteMovie = async () => {
+            const removeMovie = async () => {
                 try{
                     await API.graphql(graphqlOperation(deleteMovie, {input: {id: movie.id}}))
                 } catch (e){
@@ -114,7 +114,7 @@ const MovieCard = ({movie, movies, setDisplayMessage, setMovies, setSnackbar, se
             }
 
             //save move to db
-            deleteMovie().then(()=> {
+            removeMovie().then(()=> {
                 setSnackbar(true, `${movie.title} deleted`)
             })
         }
