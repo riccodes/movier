@@ -22,12 +22,14 @@ import {getYear, handleError, handleSuccess} from "../util";
 import WatchProvider from "./WatchProvider";
 import {useWatchList} from "../context/WatchListContext";
 import {API, graphqlOperation} from "aws-amplify";
-import {createMovie} from "../graphql/mutations";
+import {createMovie, deleteMovie} from "../graphql/mutations";
 
 const MovieCard = ({movie, movies, setDisplayMessage, setMovies, setSnackbar, setTrailer, setTrailerOPen}) => {
 
     const watchList = useWatchList()
     const [providers, setProviders] = useState()
+    //TODO-FIX perhaps add to Context
+    const [isDbChange, setIsDbChange] = useState(false)
     const [isTrailerButtonDisplay, setIsTrailerButtonDisplay] = useState(true)
     const [currentTrailer, setCurrentTrailer] = useState({})
 
@@ -85,8 +87,7 @@ const MovieCard = ({movie, movies, setDisplayMessage, setMovies, setSnackbar, se
 
         const saveMovie = async () => {
             try{
-                const watchList = await API.graphql(graphqlOperation(createMovie, {input: movie}))
-                return watchList.data.listMovies.items
+                await API.graphql(graphqlOperation(createMovie, {input: movie}))
             } catch (e){
                 console.error(e)
             }
@@ -101,6 +102,21 @@ const MovieCard = ({movie, movies, setDisplayMessage, setMovies, setSnackbar, se
     const remove = () => {
         const newMovies = movies.filter(m => m.id !== movie.id)
         setMovies(newMovies)
+
+        if(isDbChange){
+            const saveMovie = async () => {
+                try{
+                    await API.graphql(graphqlOperation(deleteMovie, {input: {id: movie.id}}))
+                } catch (e){
+                    console.error(e)
+                }
+            }
+
+            //save move to db
+            saveMovie().then(()=> {
+                setSnackbar(true, `${movie.title} saved to watch list`)
+            })
+        }
     }
 
     const renderProviders = () => {
