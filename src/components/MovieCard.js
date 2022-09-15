@@ -29,7 +29,8 @@ const MovieCard = ({movie, movies, setDisplayMessage, setMovies, setSnackbar, se
     const watchList = useWatchList()
     const [providers, setProviders] = useState()
     //TODO-FIX perhaps add to Context
-    const [isDbChange, setIsDbChange] = useState(false)
+    // set default to false
+    const [isDbChange, setIsDbChange] = useState(true)
     const [isTrailerButtonDisplay, setIsTrailerButtonDisplay] = useState(true)
     const [currentTrailer, setCurrentTrailer] = useState({})
 
