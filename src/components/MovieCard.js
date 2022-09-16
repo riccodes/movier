@@ -51,9 +51,11 @@ const MovieCard = ({movie, movies, setDisplayMessage, setMovies, setSnackbar, se
             handleError
         )
 
+
         getWatchProviders(movie.id).then(providers => {
             setProviders(providers.data.results["US"])
         })
+
     }, [movie.id])
 
     const handleRecommendations = response => {

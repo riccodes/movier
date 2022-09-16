@@ -1,23 +1,23 @@
 import './css/App.css';
 import {useEffect, useState} from "react";
-import {Alert, Container, Grid, Snackbar} from "@mui/material";
-import SettingsSuggestTwoToneIcon from '@mui/icons-material/SettingsSuggestTwoTone';
-import MovieCard from "./MovieCard";
+import {Alert, Container, Snackbar} from "@mui/material";
 import tmdb from "themoviedb-javascript-library";
 import {handleError, handleSuccess, sorts} from "../util";
 import Trailer from "./Trailer";
-import FilterBar from "./FilterBar";
+import {api_key, images_host, tmdb_host} from "../api/api";
+import {Navigate, Route, Routes} from "react-router-dom";
+import Search from "../routes/Search";
 
 function App() {
 
-    tmdb.common.api_key = "28fa7353824f928bc291c6978cfb86c6";
-    tmdb.common.base_uri = "https://api.themoviedb.org/3/";
-    tmdb.common.images_uri = "https://image.tmdb.org/t/p/";
+    tmdb.common.api_key = api_key;
+    tmdb.common.base_uri = tmdb_host;
+    tmdb.common.images_uri = images_host;
 
     const [movies, setMovies] = useState([])
     const [selectedGenre, setSelectedGenre] = useState({name: ""})
     const [selectedRating, setSelectedRating] = useState(0)
-    const [selectedPerson, setSelectedPerson] = useState({id: "", name:""})
+    const [selectedPerson, setSelectedPerson] = useState({id: "", name: ""})
     const [selectedSort, setSelectedSort] = useState(sorts.find(sort => sort.key === "pop.desc"))
     const [selectedCertification, setSelectedCertification] = useState({certification: ""})
     const [snackbarMessage, setSnackbarMessage] = useState("")
@@ -67,40 +67,33 @@ function App() {
                 </Alert>
             </Snackbar>
             <Trailer open={trailerOpen} setTrailerOpen={setTrailerOpen} trailer={trailer}/>
-            <FilterBar
-                selectedCertification={selectedCertification}
-                selectedGenre={selectedGenre}
-                selectedPerson={selectedPerson}
-                selectedRating={selectedRating}
-                selectedSort={selectedSort}
-                setDisplayMessage={setDisplayMessage}
-                setMovies={setMovies}
-                setSelectedCertification={setSelectedCertification}
-                setSelectedGenre={setSelectedGenre}
-                setSelectedPerson={setSelectedPerson}
-                setSelectedRating={setSelectedRating}
-                setSelectedSort={setSelectedSort}
-                setYear={setYear}
-                year={year}
-            />
-            {isMessageDisplay && (
-                <Alert sx={{marginBottom: "32px"}} icon={<SettingsSuggestTwoToneIcon fontSize="inherit"/>}>
-                    {alertMessage}
-                </Alert>
-            )}
-            <Grid container maxWidth="xl" columns={{xs: 2, sm: 8, md: 20}} >
-                    {movies?.map(movie =>
-                        <MovieCard
-                            key={movie.id}
-                            setDisplayMessage={setDisplayMessage}
-                            setMovies={setMovies}
-                            setSnackbar={setSnackbar}
-                            setTrailerOPen={setTrailerOpen}
-                            setTrailer={setTrailer}
-                            movie={movie}
-                            movies={movies}
-                        />)}
-            </Grid>
+            <Routes>
+                <Route path="/" element={<Navigate to="/search" />} />
+                <Route path="/search" element={
+                    <Search
+                        isMessageDisplay={isMessageDisplay}
+                        alertMessage={alertMessage}
+                        movies={movies}
+                        selectedGenre={selectedGenre}
+                        selectedPerson={selectedPerson}
+                        selectedCertification={selectedCertification}
+                        selectedRating={selectedRating}
+                        selectedSort={selectedSort}
+                        setSelectedSort={setSelectedSort}
+                        setYear={setYear}
+                        setSelectedRating={setSelectedRating}
+                        setMovies={setMovies}
+                        setSnackbar={setSnackbar}
+                        setSelectedGenre={setSelectedGenre}
+                        setSelectedPerson={setSelectedPerson}
+                        setTrailerOpen={setTrailerOpen}
+                        setTrailer={setTrailer}
+                        setSelectedCertification={setSelectedCertification}
+                        setDisplayMessage={setDisplayMessage}
+                        year={year}
+                    />
+                }/>
+            </Routes>
         </Container>
     )
 }

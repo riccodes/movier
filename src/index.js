@@ -4,12 +4,15 @@ import './index.css';
 import App from './components/App';
 import reportWebVitals from './reportWebVitals';
 import {WatchListProvider} from "./context/WatchListContext";
+import {BrowserRouter} from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
       <WatchListProvider>
-          <App />
+          <BrowserRouter>
+              <App/>
+          </BrowserRouter>
       </WatchListProvider>
   </React.StrictMode>
 );
