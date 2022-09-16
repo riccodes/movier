@@ -19,17 +19,24 @@ import DeleteForeverTwoToneIcon from '@mui/icons-material/DeleteForeverTwoTone';
 import {getWatchProviders} from "../api/api";
 import tmdb from "themoviedb-javascript-library";
 import {getYear, handleError, handleSuccess} from "../util";
-import WatchProvider from "./WatchProvider";
+import WatchProvs from "./WatchProvs";
 import {useWatchList} from "../context/WatchListContext";
 import {API, graphqlOperation} from "aws-amplify";
 import {createMovie, deleteMovie} from "../graphql/mutations";
+import {CHANGE_TRAILER, SET_DISPLAY, useCommon} from "../context/CommonContext";
 
-const MovieCard = ({movie, movies, setDisplayMessage, setMovies, setSnackbar, setTrailer, setTrailerOPen}) => {
+const MovieCard = ({ movie, movies, setMovies }) => {
 
     const watchList = useWatchList()
     const [providers, setProviders] = useState()
     const [isTrailerButtonDisplay, setIsTrailerButtonDisplay] = useState(true)
     const [currentTrailer, setCurrentTrailer] = useState({})
+
+    const common = useCommon()
+    const {alertState, snackBarState, trailerState} = common
+    const {setSnackBar} = snackBarState
+    const { setTrailerData } = trailerState
+    const { setAlert } = alertState
 
     const parseTrailerResponse = trailers => {
         if (trailers.length > 0) {
@@ -62,16 +69,12 @@ const MovieCard = ({movie, movies, setDisplayMessage, setMovies, setSnackbar, se
 
         if (response.length > 0){
             setMovies(response)
-            setDisplayMessage(true, `Recommendations based on ${movie.title}`)
+            setAlert(true, `Recommendations based on ${movie.title}`)
         }
 
         else
-            setSnackbar(true, "No recommendations found")
+            setSnackBar(true, "No recommendations found")
     }
-    const handleTrailerClick = () => {
-        setTrailer(currentTrailer)
-        setTrailerOPen(true)
-     }
 
     const getRecommendations = () => tmdb.movies.getRecommendations(
         {id: movie.id},
@@ -94,7 +97,7 @@ const MovieCard = ({movie, movies, setDisplayMessage, setMovies, setSnackbar, se
 
         //save move to db
         saveMovie().then(()=> {
-            setSnackbar(true, `${movie.title} saved to watch list`)
+            setSnackBar(true, `${movie.title} saved to watch list`)
         })
     }
 
@@ -112,7 +115,7 @@ const MovieCard = ({movie, movies, setDisplayMessage, setMovies, setSnackbar, se
 
             //save move to db
             removeMovie().then(()=> {
-                setSnackbar(true, `${movie.title} deleted`)
+                setSnackBar(true, `${movie.title} deleted`)
             })
 
     }
@@ -121,14 +124,19 @@ const MovieCard = ({movie, movies, setDisplayMessage, setMovies, setSnackbar, se
         if (providers) {
             return (
                 <CardContent sx={{background: "#efefef"}}>
-                    <WatchProvider provs={providers["free"]} label="Free"/>
-                    <WatchProvider provs={providers["flatrate"]} label="Streaming"/>
-                    <WatchProvider provs={providers["rent"]} label="Rent"/>
+                    <WatchProvs provs={providers["free"]} label="Free"/>
+                    <WatchProvs provs={providers["flatrate"]} label="Streaming"/>
+                    <WatchProvs provs={providers["rent"]} label="Rent"/>
                 </CardContent>
             )
         }
 
         return <div/>
+    }
+
+    const handleTrailerClick = () => {
+        setTrailerData(CHANGE_TRAILER, currentTrailer)
+        setTrailerData(SET_DISPLAY, true)
     }
 
     const formatAverage = () => Math.round(parseFloat(movie.vote_average) * 10) / 10

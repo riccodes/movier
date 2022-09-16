@@ -6,16 +6,19 @@ import reportWebVitals from './reportWebVitals';
 import {WatchListProvider} from "./context/WatchListContext";
 import {BrowserRouter} from "react-router-dom";
 import {FilterProvider} from "./context/FilterContext";
+import {CommonProvider} from "./context/CommonContext";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
         <BrowserRouter>
-            <FilterProvider>
-                <WatchListProvider>
-                    <App/>
-                </WatchListProvider>
-            </FilterProvider>
+            <CommonProvider>
+                <FilterProvider>
+                    <WatchListProvider>
+                        <App/>
+                    </WatchListProvider>
+                </FilterProvider>
+            </CommonProvider>
         </BrowserRouter>
     </React.StrictMode>
 );

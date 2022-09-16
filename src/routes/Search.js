@@ -3,37 +3,27 @@ import FilterBar from "../components/FilterBar";
 import {Alert, Grid} from "@mui/material";
 import SettingsSuggestTwoToneIcon from "@mui/icons-material/SettingsSuggestTwoTone";
 import MovieCard from "../components/MovieCard";
+import {useCommon} from "../context/CommonContext";
 
-export const Search = ({
-                           setDisplayMessage,
-                           setMovies,
-                           isMessageDisplay,
-                           alertMessage,
-                           movies,
-                           setSnackbar,
-                           setTrailerOpen,
-                           setTrailer
-                       }) => {
+export const Search = ({ setMovies, movies }) => {
+
+    const common = useCommon()
+    const {alertState} = common
+    const {alert} = alertState
+
     return (
         <>
-            <FilterBar
-                setDisplayMessage={setDisplayMessage}
-                setMovies={setMovies}
-            />
-            {isMessageDisplay && (
+            <FilterBar setMovies={setMovies} />
+            {alert.isOpen && (
                 <Alert sx={{marginBottom: "32px"}} icon={<SettingsSuggestTwoToneIcon fontSize="inherit"/>}>
-                    {alertMessage}
+                    {alert.message}
                 </Alert>
             )}
             <Grid container maxWidth="xl" columns={{xs: 2, sm: 8, md: 20}}>
                 {movies?.map(movie =>
                     <MovieCard
                         key={movie.id}
-                        setDisplayMessage={setDisplayMessage}
                         setMovies={setMovies}
-                        setSnackbar={setSnackbar}
-                        setTrailerOPen={setTrailerOpen}
-                        setTrailer={setTrailer}
                         movie={movie}
                         movies={movies}
                     />)}

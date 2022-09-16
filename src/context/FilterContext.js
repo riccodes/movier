@@ -93,21 +93,14 @@ function FilterProvider({children}) {
         sortDispatch({type: 'setSort', data: sort})
     }
     const setYear = year => {
-        dispatch({type: 'setYear', data: year})
+        yearDispatch({type: 'setYear', data: year})
     }
     const [certificationState, certificationDispatch] = React.useReducer(certificationReducer, {certification: {certification: ""}, setCertification: setCertification})
     const [genreState, genreDispatch] = React.useReducer(genreReducer, {genre: {name : ""}, setGenre: setGenre})
     const [personState, personDispatch] = React.useReducer(personReducer, {person: {id: "", name: ""}, setPerson: setPerson})
     const [ratingState, ratingDispatch] = React.useReducer(ratingReducer, {rating : "", setRating: setRating})
     const [sortState, sortDispatch] = React.useReducer(sortReducer, {sort: sorts.find(sort => sort.key === "pop.desc"), setSort: setSort})
-    const [yearState, dispatch] = React.useReducer(yearReducer, {year : 0, setYear: setYear})
-
-
-    // const [selectedPerson, setSelectedPerson] = useState({id: "", name: ""})
-    // const [selectedSort, setSelectedSort] = useState(sorts.find(sort => sort.key === "pop.desc"))
-    // const [selectedCertification, setSelectedCertification] = useState({certification: ""})
-
-    // const [selectedGenre, setSelectedGenre] = useState({name: ""})
+    const [yearState, yearDispatch] = React.useReducer(yearReducer, {year : 0, setYear: setYear})
 
     // NOTE: you *might* need to memoize this value
     // Learn more in http://kcd.im/optimize-context

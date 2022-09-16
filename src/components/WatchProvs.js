@@ -1,7 +1,7 @@
 import React from "react";
 import {Box, Typography} from "@mui/material";
 
-const WatchProvider = ({provs, label}) => {
+const WatchProvs = ({provs, label}) => {
     if (provs)
         return (
             <Box sx={{marginBottom: "4px"}}>
@@ -14,4 +14,4 @@ const WatchProvider = ({provs, label}) => {
     else return <div/>
 }
 
-export default WatchProvider
+export default WatchProvs

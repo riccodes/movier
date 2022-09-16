@@ -21,11 +21,9 @@ import GradeTwoToneIcon from "@mui/icons-material/GradeTwoTone";
 import {useWatchList} from "../context/WatchListContext";
 import tmdb from "themoviedb-javascript-library";
 import {useFilters} from "../context/FilterContext";
+import {useCommon} from "../context/CommonContext";
 
-const FilterBar = ({
-                       setDisplayMessage,
-                       setMovies,
-                   }) => {
+const FilterBar = ({ setMovies }) => {
 
     const watchList = useWatchList()
     const {state: watchListState} = watchList
@@ -39,6 +37,10 @@ const FilterBar = ({
     const {rating, setRating} = ratingState
     const {sort, setSort} = sortState
     const {year, setYear} = yearState
+
+    const common = useCommon()
+    const {alertState} = common
+    const {setAlert} = alertState
 
     const MINIMUM_RATING = "Minimum Rating"
 
@@ -65,7 +67,7 @@ const FilterBar = ({
     const handleSortSelect = e => setSort(sorts.find(sort => sort.name === e.target.value))
     const handleCertificationSelect = e => setCertification(certifications.find(cert => cert.certification === e.target.value))
     const showWatchList = () => {
-        setDisplayMessage(true, `Watch List  [${movieList.length}]`)
+        setAlert(true, `Watch List  [${movieList.length}]`)
         setMovies(movieList)
     }
     const handleQueryChange = (e, newValue) => {

@@ -8,6 +8,7 @@ import {api_key, images_host, tmdb_host} from "../api/api";
 import {Navigate, Route, Routes} from "react-router-dom";
 import Search from "../routes/Search";
 import {useFilters} from "../context/FilterContext";
+import {useCommon} from "../context/CommonContext";
 
 function App() {
 
@@ -24,17 +25,16 @@ function App() {
     const {sort} = sortState
     const {year} = yearState
 
+    const common = useCommon()
+    const {alertState, snackBarState} = common
+    const {snackBar, setSnackBar} = snackBarState
+    const {setAlert} = alertState
+
+    //TODO-FIX move to MovieContext
     const [movies, setMovies] = useState([])
-    const [snackbarMessage, setSnackbarMessage] = useState("")
-    const [snackbarOpen, setSnackbarOpen] = useState()
-    const [alertMessage, setAlertMessage] = useState()
-    const [isMessageDisplay, setIsMessageDisplay] = useState()
-    const [trailerOpen, setTrailerOpen] = useState(false)
-    const [trailer, setTrailer] = useState({})
 
     useEffect(() => {
-        setIsMessageDisplay(false)
-        setAlertMessage(null)
+        setAlert(false, null)
 
         tmdb.discover.getMovies({
                 language: "en-US",
@@ -49,43 +49,26 @@ function App() {
             },
             res => handleSuccess(res, "results", setMovies), handleError
         )
-    }, [certification, genre, person, rating, sort, year])
-
-    const setDisplayMessage = (show, message) => {
-        setAlertMessage(message)
-        setIsMessageDisplay(show)
-    }
-    const setSnackbar = (isOpen, message) => {
-        setSnackbarOpen(isOpen)
-        setSnackbarMessage(message)
-    }
+    }, [certification, genre, person, rating, sort, year, setAlert])
 
     return (
         <Container sx={{marginTop: "16px"}} maxWidth="xl">
             <Snackbar
-                open={snackbarOpen}
-                onClose={() => setSnackbar(false, "")}
+                open={snackBar.isOpen}
+                onClose={() => setSnackBar( false, "" )}
             >
                 <Alert severity="success">
-                    {snackbarMessage}
+                    {snackBar.message}
                 </Alert>
             </Snackbar>
-            <Trailer open={trailerOpen} setTrailerOpen={setTrailerOpen} trailer={trailer}/>
+            <Trailer/>
             <Routes>
                 <Route path="/" element={<Navigate to="/search" />} />
                 <Route path="/search" element={
-                    <Search
-                        isMessageDisplay={isMessageDisplay}
-                        alertMessage={alertMessage}
-                        movies={movies}
-                        setMovies={setMovies}
-                        setSnackbar={setSnackbar}
-                        setTrailerOpen={setTrailerOpen}
-                        setTrailer={setTrailer}
-                        setDisplayMessage={setDisplayMessage}
-                    />
+                    <Search movies={movies} setMovies={setMovies}/>
                 }/>
             </Routes>
+            {/*TODO-FIX /watchlist Route */}
         </Container>
     )
 }

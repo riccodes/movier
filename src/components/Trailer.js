@@ -1,13 +1,19 @@
 import React from "react";
 import {Button, Dialog, DialogActions} from "@mui/material";
+import {SET_DISPLAY, useCommon} from "../context/CommonContext";
 
-const Trailer = ({ open, setTrailerOpen, trailer }) => {
+const Trailer = () => {
+
+    const common = useCommon()
+    const {trailerState} = common
+    const {isOpen, trailer, setTrailerData} = trailerState
+
     return(
         <Dialog
             fullWidth
             maxWidth="lg"
-            onClose={()=> setTrailerOpen(false)}
-            open={open}>
+            onClose={()=> setTrailerData(SET_DISPLAY, false)}
+            open={isOpen}>
                 <iframe
                     height="600"
                     src={`https://www.youtube.com/embed/${trailer?.key}`}
@@ -16,7 +22,7 @@ const Trailer = ({ open, setTrailerOpen, trailer }) => {
                     title={trailer.name}
                 />
             <DialogActions>
-                <Button aria-label="Close" onClick={()=> setTrailerOpen(false)}>
+                <Button aria-label="Close" onClick={()=> setTrailerData(SET_DISPLAY, false)}>
                     Close
                 </Button>
             </DialogActions>
