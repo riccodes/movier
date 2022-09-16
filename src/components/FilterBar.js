@@ -20,27 +20,29 @@ import {currentYear, generatePersonsOptions, handleError, handleSuccess, jsonify
 import GradeTwoToneIcon from "@mui/icons-material/GradeTwoTone";
 import {useWatchList} from "../context/WatchListContext";
 import tmdb from "themoviedb-javascript-library";
+import {useFilters} from "../context/FilterContext";
 
 const FilterBar = ({
                        selectedCertification,
                        selectedGenre,
                        selectedPerson,
-                       selectedRating,
                        selectedSort,
                        setDisplayMessage,
                        setSelectedCertification,
                        setSelectedGenre,
                        setMovies,
                        setSelectedPerson,
-                       setSelectedRating,
                        setSelectedSort,
-                       setYear,
-                       year
                    }) => {
 
     const watchList = useWatchList()
-    const {state} = watchList
-    const movieList = state.movieList
+    const {state: watchListState} = watchList
+    const movieList = watchListState.movieList
+
+    const filters = useFilters()
+    const {ratingState, yearState} = filters
+    const {rating, setRating} = ratingState
+    const {year, setYear} = yearState
 
     const MINIMUM_RATING = "Minimum Rating"
 
@@ -81,7 +83,7 @@ const FilterBar = ({
         if (e) {
             const newRating = e?.target?.value
 
-            setSelectedRating(newRating)
+            setRating(newRating)
             setRatingLabel(`${MINIMUM_RATING}: ${newRating}`)
         }
     }
@@ -89,7 +91,7 @@ const FilterBar = ({
         setSelectedPerson("")
         setSelectedCertification("")
         setSelectedGenre("")
-        setSelectedRating(0)
+        setRating(0)
         setRatingLabel(MINIMUM_RATING)
         setSelectedSort(sorts.find(sort => sort.key === "pop.desc"))
         setYear("")
@@ -186,7 +188,7 @@ const FilterBar = ({
                             onClick={handleRatingSelect}
                             name="rating-selector"
                             max={10}
-                            value={selectedRating}/>
+                            value={rating}/>
                     </Stack>
                 </Stack>
             </AccordionDetails>

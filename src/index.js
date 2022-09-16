@@ -5,16 +5,19 @@ import App from './components/App';
 import reportWebVitals from './reportWebVitals';
 import {WatchListProvider} from "./context/WatchListContext";
 import {BrowserRouter} from "react-router-dom";
+import {FilterProvider} from "./context/FilterContext";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-      <WatchListProvider>
-          <BrowserRouter>
-              <App/>
-          </BrowserRouter>
-      </WatchListProvider>
-  </React.StrictMode>
+    <React.StrictMode>
+        <BrowserRouter>
+            <FilterProvider>
+                <WatchListProvider>
+                    <App/>
+                </WatchListProvider>
+            </FilterProvider>
+        </BrowserRouter>
+    </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

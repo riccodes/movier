@@ -9,7 +9,6 @@ Amplify.configure(awsmobile)
 
 const WatchListContext = React.createContext()
 
-//TODO-ADD: persist watchlist across sessions
 function watchListReducer(state = [], action) {
 
     switch (action.type) {

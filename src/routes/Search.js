@@ -8,17 +8,13 @@ export const Search = ({
                            selectedCertification,
                            selectedGenre,
                            selectedPerson,
-                           selectedRating,
                            selectedSort,
                            setDisplayMessage,
                            setMovies,
                            setSelectedCertification,
                            setSelectedGenre,
                            setSelectedPerson,
-                           setSelectedRating,
                            setSelectedSort,
-                           setYear,
-                           year,
                            isMessageDisplay,
                            alertMessage,
                            movies,
@@ -32,17 +28,13 @@ export const Search = ({
                 selectedCertification={selectedCertification}
                 selectedGenre={selectedGenre}
                 selectedPerson={selectedPerson}
-                selectedRating={selectedRating}
                 selectedSort={selectedSort}
                 setDisplayMessage={setDisplayMessage}
                 setMovies={setMovies}
                 setSelectedCertification={setSelectedCertification}
                 setSelectedGenre={setSelectedGenre}
                 setSelectedPerson={setSelectedPerson}
-                setSelectedRating={setSelectedRating}
                 setSelectedSort={setSelectedSort}
-                setYear={setYear}
-                year={year}
             />
             {isMessageDisplay && (
                 <Alert sx={{marginBottom: "32px"}} icon={<SettingsSuggestTwoToneIcon fontSize="inherit"/>}>

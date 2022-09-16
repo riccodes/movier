@@ -7,6 +7,7 @@ import Trailer from "./Trailer";
 import {api_key, images_host, tmdb_host} from "../api/api";
 import {Navigate, Route, Routes} from "react-router-dom";
 import Search from "../routes/Search";
+import {useFilters} from "../context/FilterContext";
 
 function App() {
 
@@ -14,15 +15,18 @@ function App() {
     tmdb.common.base_uri = tmdb_host;
     tmdb.common.images_uri = images_host;
 
+    const filters = useFilters()
+    const {ratingState, yearState} = filters
+    const {rating} = ratingState
+    const {year} = yearState
+
     const [movies, setMovies] = useState([])
     const [selectedGenre, setSelectedGenre] = useState({name: ""})
-    const [selectedRating, setSelectedRating] = useState(0)
     const [selectedPerson, setSelectedPerson] = useState({id: "", name: ""})
     const [selectedSort, setSelectedSort] = useState(sorts.find(sort => sort.key === "pop.desc"))
     const [selectedCertification, setSelectedCertification] = useState({certification: ""})
     const [snackbarMessage, setSnackbarMessage] = useState("")
     const [snackbarOpen, setSnackbarOpen] = useState()
-    const [year, setYear] = useState("")
     const [alertMessage, setAlertMessage] = useState()
     const [isMessageDisplay, setIsMessageDisplay] = useState()
     const [trailerOpen, setTrailerOpen] = useState(false)
@@ -41,11 +45,11 @@ function App() {
                 primary_release_year: year,
                 sort_by: selectedSort.name,
                 "certification.gte": selectedCertification.certification,
-                "vote_average.gte": selectedRating
+                "vote_average.gte": rating
             },
             res => handleSuccess(res, "results", setMovies), handleError
         )
-    }, [selectedCertification, selectedGenre, selectedPerson, selectedRating, selectedSort, year])
+    }, [selectedCertification, selectedGenre, selectedPerson, rating, selectedSort, year])
 
     const setDisplayMessage = (show, message) => {
         setAlertMessage(message)
@@ -77,11 +81,8 @@ function App() {
                         selectedGenre={selectedGenre}
                         selectedPerson={selectedPerson}
                         selectedCertification={selectedCertification}
-                        selectedRating={selectedRating}
                         selectedSort={selectedSort}
                         setSelectedSort={setSelectedSort}
-                        setYear={setYear}
-                        setSelectedRating={setSelectedRating}
                         setMovies={setMovies}
                         setSnackbar={setSnackbar}
                         setSelectedGenre={setSelectedGenre}
@@ -90,7 +91,6 @@ function App() {
                         setTrailer={setTrailer}
                         setSelectedCertification={setSelectedCertification}
                         setDisplayMessage={setDisplayMessage}
-                        year={year}
                     />
                 }/>
             </Routes>
