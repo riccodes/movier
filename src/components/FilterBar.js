@@ -23,16 +23,8 @@ import tmdb from "themoviedb-javascript-library";
 import {useFilters} from "../context/FilterContext";
 
 const FilterBar = ({
-                       selectedCertification,
-                       selectedGenre,
-                       selectedPerson,
-                       selectedSort,
                        setDisplayMessage,
-                       setSelectedCertification,
-                       setSelectedGenre,
                        setMovies,
-                       setSelectedPerson,
-                       setSelectedSort,
                    }) => {
 
     const watchList = useWatchList()
@@ -40,8 +32,12 @@ const FilterBar = ({
     const movieList = watchListState.movieList
 
     const filters = useFilters()
-    const {ratingState, yearState} = filters
+    const {certificationState, genreState, personState, ratingState, sortState, yearState} = filters
+    const {certification, setCertification} = certificationState
+    const {genre, setGenre} = genreState
+    const {person, setPerson} = personState
     const {rating, setRating} = ratingState
+    const {sort, setSort} = sortState
     const {year, setYear} = yearState
 
     const MINIMUM_RATING = "Minimum Rating"
@@ -63,11 +59,11 @@ const FilterBar = ({
 
     const handleYearSelect = e => setYear(e.target.value)
     const handleGenreSelect = e => {
-        const genre = genres.find(genre => genre.name === e.target.value)
-        setSelectedGenre(genre)
+        const g = genres.find(gen => gen.name === e.target.value)
+        setGenre(g)
     }
-    const handleSortSelect = e => setSelectedSort(sorts.find(sort => sort.name === e.target.value))
-    const handleCertificationSelect = e => setSelectedCertification(certifications.find(cert => cert.certification === e.target.value))
+    const handleSortSelect = e => setSort(sorts.find(sort => sort.name === e.target.value))
+    const handleCertificationSelect = e => setCertification(certifications.find(cert => cert.certification === e.target.value))
     const showWatchList = () => {
         setDisplayMessage(true, `Watch List  [${movieList.length}]`)
         setMovies(movieList)
@@ -77,7 +73,7 @@ const FilterBar = ({
     }
     const handlePersonSelect = (e, newValue) => {
         if (newValue)
-            setSelectedPerson(persons.find(person => person.name === newValue))
+            setPerson(persons.find(p => p.name === newValue))
     }
     const handleRatingSelect = e => {
         if (e) {
@@ -88,12 +84,12 @@ const FilterBar = ({
         }
     }
     const clearFilters = () => {
-        setSelectedPerson("")
-        setSelectedCertification("")
-        setSelectedGenre("")
+        setPerson("")
+        setCertification("")
+        setGenre("")
         setRating(0)
         setRatingLabel(MINIMUM_RATING)
-        setSelectedSort(sorts.find(sort => sort.key === "pop.desc"))
+        setSort(sorts.find(sort => sort.key === "pop.desc"))
         setYear("")
     }
 
@@ -133,18 +129,18 @@ const FilterBar = ({
                         label="Genres"
                         items={genres}
                         target="name"
-                        value={selectedGenre.name}/>
+                        value={genre.name}/>
                     <Selector
                         handleSelection={handleSortSelect}
                         label="Sort By"
                         items={sorts}
                         target="name"
-                        value={selectedSort.name}/>
+                        value={sort.name}/>
                     <Selector
                         handleSelection={handleCertificationSelect}
                         label="Rating" items={certifications}
                         target="certification"
-                        value={selectedCertification.certification}/>
+                        value={certification.certification}/>
                 </Stack>
                 <Stack
                     sx={{marginBottom: "8px"}}
@@ -158,7 +154,7 @@ const FilterBar = ({
                             options={generatePersonsOptions(persons)}
                             onInputChange={handleQueryChange}
                             onChange={handlePersonSelect}
-                            value={selectedPerson.name}
+                            value={person.name}
                             renderInput={(params) => <TextField {...params} label="Search by person"/>}
                         />
                     </FormControl>

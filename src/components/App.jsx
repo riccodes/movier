@@ -2,7 +2,7 @@ import './css/App.css';
 import {useEffect, useState} from "react";
 import {Alert, Container, Snackbar} from "@mui/material";
 import tmdb from "themoviedb-javascript-library";
-import {handleError, handleSuccess, sorts} from "../util";
+import {handleError, handleSuccess} from "../util";
 import Trailer from "./Trailer";
 import {api_key, images_host, tmdb_host} from "../api/api";
 import {Navigate, Route, Routes} from "react-router-dom";
@@ -16,15 +16,15 @@ function App() {
     tmdb.common.images_uri = images_host;
 
     const filters = useFilters()
-    const {ratingState, yearState} = filters
+    const {certificationState, genreState, personState, ratingState, sortState, yearState} = filters
+    const {certification} = certificationState
+    const {genre} = genreState
+    const {person} = personState
     const {rating} = ratingState
+    const {sort} = sortState
     const {year} = yearState
 
     const [movies, setMovies] = useState([])
-    const [selectedGenre, setSelectedGenre] = useState({name: ""})
-    const [selectedPerson, setSelectedPerson] = useState({id: "", name: ""})
-    const [selectedSort, setSelectedSort] = useState(sorts.find(sort => sort.key === "pop.desc"))
-    const [selectedCertification, setSelectedCertification] = useState({certification: ""})
     const [snackbarMessage, setSnackbarMessage] = useState("")
     const [snackbarOpen, setSnackbarOpen] = useState()
     const [alertMessage, setAlertMessage] = useState()
@@ -40,16 +40,16 @@ function App() {
                 language: "en-US",
                 certification_country: "US",
                 watch_region: "US",
-                with_genres: selectedGenre.id,
-                with_people: selectedPerson.id,
+                with_genres: genre.id,
+                with_people: person.id,
                 primary_release_year: year,
-                sort_by: selectedSort.name,
-                "certification.gte": selectedCertification.certification,
+                sort_by: sort.name,
+                "certification.gte": certification.certification,
                 "vote_average.gte": rating
             },
             res => handleSuccess(res, "results", setMovies), handleError
         )
-    }, [selectedCertification, selectedGenre, selectedPerson, rating, selectedSort, year])
+    }, [certification, genre, person, rating, sort, year])
 
     const setDisplayMessage = (show, message) => {
         setAlertMessage(message)
@@ -78,18 +78,10 @@ function App() {
                         isMessageDisplay={isMessageDisplay}
                         alertMessage={alertMessage}
                         movies={movies}
-                        selectedGenre={selectedGenre}
-                        selectedPerson={selectedPerson}
-                        selectedCertification={selectedCertification}
-                        selectedSort={selectedSort}
-                        setSelectedSort={setSelectedSort}
                         setMovies={setMovies}
                         setSnackbar={setSnackbar}
-                        setSelectedGenre={setSelectedGenre}
-                        setSelectedPerson={setSelectedPerson}
                         setTrailerOpen={setTrailerOpen}
                         setTrailer={setTrailer}
-                        setSelectedCertification={setSelectedCertification}
                         setDisplayMessage={setDisplayMessage}
                     />
                 }/>

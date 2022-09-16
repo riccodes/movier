@@ -5,16 +5,8 @@ import SettingsSuggestTwoToneIcon from "@mui/icons-material/SettingsSuggestTwoTo
 import MovieCard from "../components/MovieCard";
 
 export const Search = ({
-                           selectedCertification,
-                           selectedGenre,
-                           selectedPerson,
-                           selectedSort,
                            setDisplayMessage,
                            setMovies,
-                           setSelectedCertification,
-                           setSelectedGenre,
-                           setSelectedPerson,
-                           setSelectedSort,
                            isMessageDisplay,
                            alertMessage,
                            movies,
@@ -25,16 +17,8 @@ export const Search = ({
     return (
         <>
             <FilterBar
-                selectedCertification={selectedCertification}
-                selectedGenre={selectedGenre}
-                selectedPerson={selectedPerson}
-                selectedSort={selectedSort}
                 setDisplayMessage={setDisplayMessage}
                 setMovies={setMovies}
-                setSelectedCertification={setSelectedCertification}
-                setSelectedGenre={setSelectedGenre}
-                setSelectedPerson={setSelectedPerson}
-                setSelectedSort={setSelectedSort}
             />
             {isMessageDisplay && (
                 <Alert sx={{marginBottom: "32px"}} icon={<SettingsSuggestTwoToneIcon fontSize="inherit"/>}>
