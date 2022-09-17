@@ -17,15 +17,19 @@ import SettingsSuggestTwoToneIcon from '@mui/icons-material/SettingsSuggestTwoTo
 import OndemandVideoTwoToneIcon from '@mui/icons-material/OndemandVideoTwoTone';
 import DeleteForeverTwoToneIcon from '@mui/icons-material/DeleteForeverTwoTone';
 import {getWatchProviders} from "../api/api";
-import tmdb from "themoviedb-javascript-library";
 import {getYear, handleError, handleSuccess} from "../util";
 import WatchProvs from "./WatchProvs";
 import {useWatchList} from "../context/WatchListContext";
 import {API, graphqlOperation} from "aws-amplify";
 import {createMovie, deleteMovie} from "../graphql/mutations";
 import {CHANGE_TRAILER, SET_DISPLAY, useCommon} from "../context/CommonContext";
+import tmdbApi from "themoviedb-javascript-library";
+import {useTMDB} from "../context/TMDBContext";
 
-const MovieCard = ({ movie, movies, setMovies }) => {
+const MovieCard = ({ movie }) => {
+
+    const tmdb = useTMDB()
+    const {movies, setMovies} = tmdb
 
     const watchList = useWatchList()
     const [providers, setProviders] = useState()
@@ -52,12 +56,11 @@ const MovieCard = ({ movie, movies, setMovies }) => {
     }
 
     useEffect(() => {
-        tmdb.movies.getVideos(
+        tmdbApi.movies.getVideos(
             {id: movie.id},
             res => handleSuccess(res, "results", parseTrailerResponse),
             handleError
         )
-
 
         getWatchProviders(movie.id).then(providers => {
             setProviders(providers.data.results["US"])
@@ -76,7 +79,7 @@ const MovieCard = ({ movie, movies, setMovies }) => {
             setSnackBar(true, "No recommendations found")
     }
 
-    const getRecommendations = () => tmdb.movies.getRecommendations(
+    const getRecommendations = () => tmdbApi.movies.getRecommendations(
         {id: movie.id},
         (res) => handleSuccess(res, "results", handleRecommendations),
         handleError
@@ -101,6 +104,8 @@ const MovieCard = ({ movie, movies, setMovies }) => {
         })
     }
 
+    //TODO-FIX this should only happen in wathclist remove the delete
+        //button when in /search
     const remove = () => {
         const newMovies = movies.filter(m => m.id !== movie.id)
         setMovies(newMovies)
@@ -182,7 +187,6 @@ const MovieCard = ({ movie, movies, setMovies }) => {
                             <GradeTwoToneIcon/>
                         </IconButton>
                     </Tooltip>
-                    {/*TODO-ADD show this button only when trailer available */}
                     <Tooltip disableFocusListener title="Get Recommendations" placement="top">
                         <IconButton onClick={getRecommendations} aria-label="get recommendations">
                             <SettingsSuggestTwoToneIcon/>
