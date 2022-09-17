@@ -17,17 +17,10 @@ import FilterAltTwoToneIcon from '@mui/icons-material/FilterAltTwoTone';
 import BackspaceTwoToneIcon from '@mui/icons-material/BackspaceTwoTone';
 import Selector from "./Selector";
 import {currentYear, generatePersonsOptions, handleError, handleSuccess, jsonify, minYear, sorts} from "../util";
-import GradeTwoToneIcon from "@mui/icons-material/GradeTwoTone";
-import {useWatchList} from "../context/WatchListContext";
 import tmdb from "themoviedb-javascript-library";
 import {useFilters} from "../context/FilterContext";
-import {useCommon} from "../context/CommonContext";
 
-const FilterBar = ({ setMovies }) => {
-
-    const watchList = useWatchList()
-    const {state} = watchList
-    const movieList = state.movieList
+const FilterBar = () => {
 
     const filters = useFilters()
     const {certificationState, genreState, personState, ratingState, sortState, yearState} = filters
@@ -37,10 +30,6 @@ const FilterBar = ({ setMovies }) => {
     const {rating, setRating} = ratingState
     const {sort, setSort} = sortState
     const {year, setYear} = yearState
-
-    const common = useCommon()
-    const {alertState} = common
-    const {setAlert} = alertState
 
     const MINIMUM_RATING = "Minimum Rating"
 
@@ -67,9 +56,7 @@ const FilterBar = ({ setMovies }) => {
     }
     const handleSortSelect = e => setSort(sorts.find(sort => sort.name === e.target.value))
     const handleCertificationSelect = e => setCertification(certifications.find(cert => cert.certification === e.target.value))
-    const showWatchList = () => {
-        setMovies(movieList)
-    }
+
     const handleQueryChange = (e, newValue) => {
         if (newValue?.length > 2) setPersonQuery(newValue)
     }
@@ -108,14 +95,6 @@ const FilterBar = ({ setMovies }) => {
                 <Typography>Filters</Typography>
             </AccordionSummary>
             <AccordionDetails>
-                <Button
-                    fullWidth
-                    sx={{marginBottom: "2px"}}
-                    startIcon={<GradeTwoToneIcon/>}
-                    variant="outlined"
-                    onClick={showWatchList}>
-                    View Watch List
-                </Button>
                 <Button
                     fullWidth
                     sx={{marginBottom: "8px", marginTop: "2px"}}

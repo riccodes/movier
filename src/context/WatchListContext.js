@@ -1,31 +1,13 @@
 import * as React from 'react'
 import {API, graphqlOperation} from "aws-amplify";
 import {listMovies} from "../graphql/queries";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import Amplify from 'aws-amplify'
 import awsmobile from "../aws-exports";
 
 Amplify.configure(awsmobile)
 
 const WatchListContext = React.createContext()
-
-function watchListReducer(state = [], action) {
-
-    switch (action.type) {
-        case 'retrieve': {
-            return {movieList: action.data}
-        }
-        case 'save': {
-            return {movieList: [...state.movieList, action.data]}
-        }
-        case 'delete': {
-            return {movieList: state.movieList.filter(m => m.id !== action.data.id)}
-        }
-        default: {
-            throw new Error(`Unhandled action type: ${action.type}`)
-        }
-    }
-}
 
 const getWatchList = async () => {
     try{
@@ -37,18 +19,15 @@ const getWatchList = async () => {
 }
 
 function WatchListProvider({children}) {
-
-    const [state, dispatch] = React.useReducer(watchListReducer, {movieList: []})
+    const [watchlist, setWatchlist] = useState([])
 
     useEffect(()=>{
-        getWatchList().then(watchList => {
-            dispatch({ type: 'retrieve', data: watchList })
-        })
+        getWatchList().then(data => { setWatchlist(data) })
     }, [])
 
     // NOTE: you *might* need to memoize this value
     // Learn more in http://kcd.im/optimize-context
-    const value = {state, dispatch}
+    const value = {watchlist, setWatchlist}
     return <WatchListContext.Provider value={value}>{children}</WatchListContext.Provider>
 }
 

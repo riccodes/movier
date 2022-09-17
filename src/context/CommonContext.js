@@ -60,6 +60,7 @@ function CommonProvider({children}) {
 
     const [snackBarState, snackBarDispatch] =
         React.useReducer(snackBarReducer, {snackBar: {isOpen: false, message: ""}, setSnackBar})
+    //TODO-FIX refactor to message or something better than alert
     const [alertState, alertDispatch] =
         React.useReducer(alertReducer, {alert: {isOpen: false, message: ""}, setAlert})
     const [trailerState, trailerDispatch] =
