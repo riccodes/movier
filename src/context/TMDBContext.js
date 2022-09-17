@@ -1,15 +1,14 @@
 import * as React from 'react'
+import {useEffect} from "react";
+import tmdb from "themoviedb-javascript-library";
+import {handleError, handleSuccess} from "../util";
 
 const TMDBContext = React.createContext()
 
-//TODO-ADD: persist watchlist across sessions
 function TMDBReducer(state, action) {
     switch (action.type) {
-        case 'save': {
-            return {movieList: [...state.movieList, action.data]}
-        }
-        case 'delete': {
-            return {movieList: state.movieList.filter(m => m.id !== action.data.id)}
+        case 'setMovies': {
+            return {movies: action.data}
         }
         default: {
             throw new Error(`Unhandled action type: ${action.type}`)
@@ -17,10 +16,27 @@ function TMDBReducer(state, action) {
     }
 }
 
+
 function TMDBProvider({children}) {
-    const [state, dispatch] = React.useReducer(TMDBReducer, {movieList: []})
-    // NOTE: you *might* need to memoize this value
-    // Learn more in http://kcd.im/optimize-context
+
+    useEffect(()=>{
+        // setAlert(false, null)
+
+        tmdb.discover.getMovies({
+                language: "en-US",
+                certification_country: "US",
+                watch_region: "US"
+            },
+            res => handleSuccess(res, "results", setMovies), handleError
+        )
+    }, [])
+
+    const setMovies = movies => {
+        dispatch({type: "setMovies", data: movies})
+    }
+
+    const [state, dispatch] = React.useReducer(TMDBReducer, {movies: [], setMovies: setMovies})
+
     const value = {state, dispatch}
     return <TMDBContext.Provider value={value}>{children}</TMDBContext.Provider>
 }

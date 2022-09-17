@@ -26,8 +26,8 @@ import {useCommon} from "../context/CommonContext";
 const FilterBar = ({ setMovies }) => {
 
     const watchList = useWatchList()
-    const {state: watchListState} = watchList
-    const movieList = watchListState.movieList
+    const {state} = watchList
+    const movieList = state.movieList
 
     const filters = useFilters()
     const {certificationState, genreState, personState, ratingState, sortState, yearState} = filters
@@ -59,6 +59,7 @@ const FilterBar = ({ setMovies }) => {
         tmdb.certifications.getMovieList(res => setCertifications(jsonify(res).certifications.US), handleError)
     }, [])
 
+    //TODO-FIX consider moving all filter functions to FilterContext
     const handleYearSelect = e => setYear(e.target.value)
     const handleGenreSelect = e => {
         const g = genres.find(gen => gen.name === e.target.value)
@@ -67,7 +68,6 @@ const FilterBar = ({ setMovies }) => {
     const handleSortSelect = e => setSort(sorts.find(sort => sort.name === e.target.value))
     const handleCertificationSelect = e => setCertification(certifications.find(cert => cert.certification === e.target.value))
     const showWatchList = () => {
-        setAlert(true, `Watch List  [${movieList.length}]`)
         setMovies(movieList)
     }
     const handleQueryChange = (e, newValue) => {
@@ -85,6 +85,8 @@ const FilterBar = ({ setMovies }) => {
             setRatingLabel(`${MINIMUM_RATING}: ${newRating}`)
         }
     }
+
+    //TODO-FIX move to FilterContext
     const clearFilters = () => {
         setPerson("")
         setCertification("")

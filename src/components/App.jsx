@@ -1,20 +1,27 @@
 import './css/App.css';
 import {useEffect, useState} from "react";
-import {Alert, Container, Snackbar} from "@mui/material";
+import {Alert, Container, Snackbar, Stack} from "@mui/material";
 import tmdb from "themoviedb-javascript-library";
 import {handleError, handleSuccess} from "../util";
 import Trailer from "./Trailer";
 import {api_key, images_host, tmdb_host} from "../api/api";
-import {Navigate, Route, Routes} from "react-router-dom";
+import {Link, Navigate, Route, Routes} from "react-router-dom";
 import Search from "../routes/Search";
 import {useFilters} from "../context/FilterContext";
 import {useCommon} from "../context/CommonContext";
+import FilterBar from "./FilterBar";
+import {useWatchList} from "../context/WatchListContext";
+import WatchList from "../routes/WatchList";
 
 function App() {
 
     tmdb.common.api_key = api_key;
     tmdb.common.base_uri = tmdb_host;
     tmdb.common.images_uri = images_host;
+
+    const watchList = useWatchList()
+    const {state} = watchList
+    const movieList = state.movieList
 
     const filters = useFilters()
     const {certificationState, genreState, personState, ratingState, sortState, yearState} = filters
@@ -32,6 +39,10 @@ function App() {
 
     //TODO-FIX move to MovieContext
     const [movies, setMovies] = useState([])
+
+    const showWatchList = () => {
+        setMovies(movieList)
+    }
 
     useEffect(() => {
         setAlert(false, null)
@@ -62,13 +73,24 @@ function App() {
                 </Alert>
             </Snackbar>
             <Trailer/>
-            <Routes>
-                <Route path="/" element={<Navigate to="/search" />} />
-                <Route path="/search" element={
-                    <Search movies={movies} setMovies={setMovies}/>
-                }/>
-            </Routes>
-            {/*TODO-FIX /watchlist Route */}
+
+            {/*<Stack direction="row">*/}
+            {/*    <Link style={{margin: "8px"}} to="/search">Search</Link>*/}
+            {/*    <Link onClick={showWatchList} style={{margin: "8px"}} to="/watchlist">Watch List</Link>*/}
+            {/*</Stack>*/}
+
+            {/*<Routes>*/}
+            {/*    <Route path="/search" element={*/}
+            {/*        <Search movies={movies} setMovies={setMovies}/>*/}
+            {/*    }/>*/}
+            {/*    <Route*/}
+            {/*        path="/watchlist"*/}
+            {/*        element={*/}
+            {/*            <WatchList movies={movies} setMovies={setMovies} />*/}
+            {/*        } />*/}
+            {/*</Routes>*/}
+            {/*/!*TODO-ADD /watchlist Route *!/*/}
+            {/*TODO-ADD /top Route */}
         </Container>
     )
 }
