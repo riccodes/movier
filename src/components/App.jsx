@@ -1,14 +1,15 @@
 import './css/App.css';
 import React, {useEffect} from "react";
-import {Alert, Container, Snackbar, Stack} from "@mui/material";
+import {Alert, Container, Snackbar} from "@mui/material";
 import Trailer from "./Trailer";
 import {useCommon} from "../context/CommonContext";
 import WatchList from "../routes/WatchList";
-import {Link, Navigate, Route, Routes, useLocation} from "react-router-dom";
+import {Navigate, Route, Routes, useLocation} from "react-router-dom";
 import Search from "../routes/Search";
 import SettingsSuggestTwoToneIcon from "@mui/icons-material/SettingsSuggestTwoTone";
 import Recommendations from "../routes/Recommendations";
 import Trending from "../routes/Trending";
+import Nav from "./Nav";
 
 function App() {
 
@@ -48,11 +49,7 @@ function App() {
                 </Alert>
             </Snackbar>
             <Trailer/>
-            <Stack direction="row">
-                <Link style={{margin: "8px"}} to="/search">Search</Link>
-                <Link style={{margin: "8px"}} to="/watchlist">Watchlist</Link>
-                <Link style={{margin: "8px"}} to="/trending">Trending</Link>
-            </Stack>
+            <Nav />
             {alert.isOpen && (
                 <Alert sx={{marginBottom: "32px"}} icon={<SettingsSuggestTwoToneIcon fontSize="inherit"/>}>
                     {alert.message}
