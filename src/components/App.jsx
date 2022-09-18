@@ -6,10 +6,10 @@ import {useCommon} from "../context/CommonContext";
 import WatchList from "../routes/WatchList";
 import {Navigate, Route, Routes, useLocation} from "react-router-dom";
 import Search from "../routes/Search";
-import SettingsSuggestTwoToneIcon from "@mui/icons-material/SettingsSuggestTwoTone";
 import Recommendations from "../routes/Recommendations";
 import Trending from "../routes/Trending";
 import Nav from "./Nav";
+import {recommendationsRoute, searchRoute, trendingRoute, watchlistRoute} from "../routes/routes";
 
 function App() {
 
@@ -22,13 +22,13 @@ function App() {
         const {pathname} = location
 
         switch (pathname){
-            case "/watchlist" :
+            case watchlistRoute :
                 setAlert({isOpen: true, message: "Watchlist"})
                 break
-            case "/recommendations" :
+            case recommendationsRoute :
                 setAlert({isOpen: true, message: `Recommendations based on: ${recommendation}`})
                 break
-            case "/trending" :
+            case trendingRoute :
                 setAlert({isOpen: true, message: "Trending today"})
                 break
             default :
@@ -51,20 +51,18 @@ function App() {
             <Trailer/>
             <Nav />
             {alert.isOpen && (
-                <Alert sx={{marginBottom: "32px"}} icon={<SettingsSuggestTwoToneIcon fontSize="inherit"/>}>
+                <Alert sx={{marginBottom: "32px"}} icon={alert.icon}>
                     {alert.message}
                 </Alert>
             )}
 
             <Routes>
-                <Route path="/" element={<Navigate to="/search" />} />
-                <Route path="/search" element={ <Search /> }/>
-                <Route path="/watchlist" element={ <WatchList /> } />
-                <Route path="/recommendations" element={ <Recommendations /> } />
-                <Route path="/trending" element={ <Trending /> } />
+                <Route path="/" element={<Navigate to={searchRoute} />} />
+                <Route path={searchRoute} element={ <Search /> }/>
+                <Route path={watchlistRoute} element={ <WatchList /> } />
+                <Route path={recommendationsRoute} element={ <Recommendations /> } />
+                <Route path={trendingRoute} element={ <Trending /> } />
             </Routes>
-
-            {/*TODO-ADD /top Route */}
         </Container>
     )
 }
