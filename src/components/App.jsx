@@ -28,15 +28,12 @@ function App() {
             case recommendationsRoute :
                 setAlert({isOpen: true, message: `Recommendations based on: ${recommendation}`})
                 break
-            case trendingRoute :
-                setAlert({isOpen: true, message: "Trending today"})
-                break
             default :
                 setAlert({isOpen: false, message: ""})
         }
 
 
-    }, [location])
+    }, [location, setAlert])
 
     return (
         <Container sx={{marginTop: "16px"}} maxWidth="xl">

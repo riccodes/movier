@@ -36,21 +36,21 @@ const Nav = () => {
     return (
         <Stack direction="row">
             <Button
-                sx={{marginBottom: "4px"}}
+                sx={{marginBottom: "8px"}}
                 variant={variants.find(v => v.route === searchRoute).variant}
                 startIcon={<ManageSearchRoundedIcon/>}
                 onClick={() => navigate(searchRoute)}>
                 Search
             </Button>
             <Button
-                sx={{marginBottom: "4px"}}
+                sx={{marginBottom: "8px"}}
                 variant={variants.find(v => v.route === watchlistRoute).variant}
                 startIcon={<SubscriptionsRoundedIcon/>}
                 onClick={() => navigate(watchlistRoute)}>
                 Watchlist
             </Button>
             <Button
-                sx={{marginBottom: "4px"}}
+                sx={{marginBottom: "8px"}}
                 variant={variants.find(v => v.route === trendingRoute).variant}
                 startIcon={<WhatshotRoundedIcon/>}
                 onClick={() => navigate(trendingRoute)}>
