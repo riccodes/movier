@@ -24,17 +24,23 @@ import {createMovie, deleteMovie} from "../graphql/mutations";
 import {CHANGE_TRAILER, SET_DISPLAY, useCommon} from "../context/CommonContext";
 import tmdbApi from "themoviedb-javascript-library";
 import {useWatchList} from "../context/WatchListContext";
+import {useLocation, useNavigate} from "react-router-dom";
+import {useTMDB} from "../context/TMDBContext";
 
 const MovieCard = ({movie}) => {
+
+    const location = useLocation()
+    const navigate = useNavigate()
 
     const list = useWatchList()
     const {watchlist, setWatchlist} = list
 
+    const tmdb = useTMDB()
+    const {setMovies} = tmdb
+
     const common = useCommon()
-    const {alertState, snackBarState, trailerState} = common
-    const {setSnackBar} = snackBarState
+    const {setRecommendation, setSnackBar, trailerState} = common
     const {setTrailerData} = trailerState
-    const {setAlert} = alertState
 
     const [providers, setProviders] = useState()
     const [isTrailerButtonDisplay, setIsTrailerButtonDisplay] = useState(true)
@@ -67,10 +73,10 @@ const MovieCard = ({movie}) => {
     }, [movie.id])
 
     const handleRecommendations = response => {
-
         if (response.length > 0) {
-            setWatchlist(response)
-            setAlert(true, `Recommendations based on ${movie.title}`)
+            setRecommendation(movie.title)
+            setMovies(response)
+            navigate("/recommendations")
         } else
             setSnackBar(true, "No recommendations found")
     }
@@ -82,7 +88,6 @@ const MovieCard = ({movie}) => {
     )
 
     const saveToWatchList = () => {
-
         const saveMovie = async () => {
             try {
                 await API.graphql(graphqlOperation(createMovie, {input: movie}))
@@ -161,14 +166,14 @@ const MovieCard = ({movie}) => {
                 </CardContent>
                 {renderProviders()}
                 <CardActions>
-                    {window.location.pathname === "/watchlist" &&
+                    {location.pathname === "/watchlist" &&
                         <Tooltip disableFocusListener title="Remove" placement="top">
                             <IconButton color="error" onClick={remove} aria-label="removed">
                                 <DeleteForeverTwoToneIcon/>
                             </IconButton>
                         </Tooltip>
                     }
-                    {window.location.pathname !== "/watchlist" &&
+                    {location.pathname !== "/watchlist" &&
                         <Tooltip disableFocusListener title="Save to watch list" placement="top">
                             <IconButton color="primary" onClick={saveToWatchList} aria-label="save to watch list">
                                 <GradeTwoToneIcon/>
