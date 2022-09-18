@@ -4,7 +4,7 @@ import {Alert, Container, Snackbar, Stack} from "@mui/material";
 import Trailer from "./Trailer";
 import {useCommon} from "../context/CommonContext";
 import WatchList from "../routes/WatchList";
-import {Link, Route, Routes, useLocation} from "react-router-dom";
+import {Link, Navigate, Route, Routes, useLocation} from "react-router-dom";
 import Search from "../routes/Search";
 import SettingsSuggestTwoToneIcon from "@mui/icons-material/SettingsSuggestTwoTone";
 import Recommendations from "../routes/Recommendations";
@@ -60,6 +60,7 @@ function App() {
             )}
 
             <Routes>
+                <Route path="/" element={<Navigate to="/search" />} />
                 <Route path="/search" element={ <Search /> }/>
                 <Route path="/watchlist" element={ <WatchList /> } />
                 <Route path="/recommendations" element={ <Recommendations /> } />

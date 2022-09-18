@@ -26,6 +26,7 @@ import tmdbApi from "themoviedb-javascript-library";
 import {useWatchList} from "../context/WatchListContext";
 import {useLocation, useNavigate} from "react-router-dom";
 import {useTMDB} from "../context/TMDBContext";
+import {sanitizeResults} from "../util/utils";
 
 const MovieCard = ({movie}) => {
 
@@ -75,7 +76,7 @@ const MovieCard = ({movie}) => {
     const handleRecommendations = response => {
         if (response.length > 0) {
             setRecommendation(movie.title)
-            setMovies(response)
+            setMovies(sanitizeResults(response))
             navigate("/recommendations")
         } else
             setSnackBar({isOpen: true, message: "No recommendations found"})

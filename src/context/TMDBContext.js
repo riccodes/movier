@@ -4,6 +4,7 @@ import tmdb from "themoviedb-javascript-library";
 import {handleError, handleSuccess} from "../util";
 import {api_key, getTrending, images_host, tmdb_host} from "../api/api";
 import {useFilters} from "./FilterContext";
+import {sanitizeResults} from "../util/utils";
 
 tmdb.common.api_key = api_key;
 tmdb.common.base_uri = tmdb_host;
@@ -27,13 +28,7 @@ function TMDBProvider({children}) {
 
     useEffect(()=> {
         getTrending("movie","day").then(response => {
-            const results = response.data.results
-            const cleanResults = results.map(result => {
-                delete result.media_type
-                return result
-            })
-
-            setTrending(cleanResults)
+            setTrending(sanitizeResults(response.data.results))
         })
     }, [])
 
@@ -50,7 +45,7 @@ function TMDBProvider({children}) {
                 "certification.gte": certification.certification,
                 "vote_average.gte": rating
             },
-            res => handleSuccess(res, "results", setMovies),
+            res => handleSuccess(res, "results", (results) => setMovies(sanitizeResults(results))),
             handleError
         )
 
