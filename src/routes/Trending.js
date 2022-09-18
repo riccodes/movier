@@ -1,23 +1,26 @@
 import React, {useState} from "react";
-import {Chip, Grid} from "@mui/material";
+import {Chip, Grid, Typography} from "@mui/material";
 import MovieCard from "../components/MovieCard";
 import {useTMDB} from "../context/TMDBContext";
 
 const Trending = () => {
 
+    const activeChip = {color:"primary", variant: "filled"}
+    const inactiveChip = {color:"default", variant: "outlined"}
+
     const tmdb = useTMDB()
     const {trending, setTrendingTimeWindow} = tmdb
-    const [dailyChip, setDailyChip] = useState({color:"primary", variant: "outlined"})
-    const [weeklyChip, setWeeklyChip] = useState({color:"default", variant: "filled"})
+    const [dailyChip, setDailyChip] = useState(activeChip)
+    const [weeklyChip, setWeeklyChip] = useState(inactiveChip)
 
     const handleChipState = label => {
 
         if(label === "day"){
-            setDailyChip({color:"primary", variant: "filled"})
-            setWeeklyChip({color:"default", variant: "outlined"})
+            setDailyChip(activeChip)
+            setWeeklyChip(inactiveChip)
         } else if(label === "week"){
-            setDailyChip({color:"default", variant: "outlined"})
-            setWeeklyChip({color:"primary", variant: "filled"})
+            setDailyChip(inactiveChip)
+            setWeeklyChip(activeChip)
         }
 
         setTrendingTimeWindow(label)
@@ -25,6 +28,7 @@ const Trending = () => {
 
     return (
         <>
+            <Typography variant="caption">Trends: </Typography>
             <Chip
                 size="small"
                 color={dailyChip.color}

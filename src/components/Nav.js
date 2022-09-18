@@ -10,7 +10,7 @@ const Nav = () => {
     const navigateTo = useNavigate()
 
     const navVariants = [
-        {route: searchRoute, variant: "text"},
+        {route: searchRoute, variant: "contained"},
         {route: watchlistRoute, variant: "text"},
         {route: trendingRoute, variant: "text"}
     ]
