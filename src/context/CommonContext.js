@@ -27,7 +27,7 @@ function CommonProvider({children}) {
     }
 
     const [snackBar, setSnackBar] = useState({isOpen: false, message: ""})
-    //TODO-FIX make icon dynamic
+    //fixme make icon dynamic
     const [alert, setAlert] = useState({isOpen: false, message: "", icon: null })
     const [recommendation, setRecommendation] = useState()
 

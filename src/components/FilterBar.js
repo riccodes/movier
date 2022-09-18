@@ -48,7 +48,7 @@ const FilterBar = () => {
         tmdb.certifications.getMovieList(res => setCertifications(jsonify(res).certifications.US), handleError)
     }, [])
 
-    //TODO-FIX consider moving all filter functions to FilterContext
+    //fixme consider moving all filter functions to FilterContext
     const handleYearSelect = e => setYear(e.target.value)
     const handleGenreSelect = e => {
         const g = genres.find(gen => gen.name === e.target.value)
@@ -73,7 +73,7 @@ const FilterBar = () => {
         }
     }
 
-    //TODO-FIX move to FilterContext
+    //fixme move to FilterContext
     const clearFilters = () => {
         setPerson("")
         setCertification("")

@@ -3,6 +3,7 @@ import {sorts} from "../util";
 
 const FilterContext = React.createContext()
 
+//fixme remove all these reducers
 function certificationReducer(state, action) {
 
     switch (action.type) {
