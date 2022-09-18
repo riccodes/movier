@@ -8,6 +8,7 @@ import {Link, Route, Routes, useLocation} from "react-router-dom";
 import Search from "../routes/Search";
 import SettingsSuggestTwoToneIcon from "@mui/icons-material/SettingsSuggestTwoTone";
 import Recommendations from "../routes/Recommendations";
+import Trending from "../routes/Trending";
 
 function App() {
 
@@ -26,6 +27,9 @@ function App() {
             case "/recommendations" :
                 setAlert({isOpen: true, message: `Recommendations based on: ${recommendation}`})
                 break
+            case "/trending" :
+                setAlert({isOpen: true, message: "Trending today"})
+                break
             default :
                 setAlert({isOpen: false, message: ""})
         }
@@ -37,7 +41,7 @@ function App() {
         <Container sx={{marginTop: "16px"}} maxWidth="xl">
             <Snackbar
                 open={snackBar.isOpen}
-                onClose={() => setSnackBar(false, "")}
+                onClose={() => setSnackBar({isOpen: false, message: ""})}
             >
                 <Alert severity="success">
                     {snackBar.message}
@@ -47,6 +51,7 @@ function App() {
             <Stack direction="row">
                 <Link style={{margin: "8px"}} to="/search">Search</Link>
                 <Link style={{margin: "8px"}} to="/watchlist">Watchlist</Link>
+                <Link style={{margin: "8px"}} to="/trending">Trending</Link>
             </Stack>
             {alert.isOpen && (
                 <Alert sx={{marginBottom: "32px"}} icon={<SettingsSuggestTwoToneIcon fontSize="inherit"/>}>
@@ -57,7 +62,8 @@ function App() {
             <Routes>
                 <Route path="/search" element={ <Search /> }/>
                 <Route path="/watchlist" element={ <WatchList /> } />
-                <Route path="/Recommendations" element={ <Recommendations /> } />
+                <Route path="/recommendations" element={ <Recommendations /> } />
+                <Route path="/trending" element={ <Trending /> } />
             </Routes>
 
             {/*TODO-ADD /top Route */}

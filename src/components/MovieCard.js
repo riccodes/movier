@@ -78,7 +78,7 @@ const MovieCard = ({movie}) => {
             setMovies(response)
             navigate("/recommendations")
         } else
-            setSnackBar(true, "No recommendations found")
+            setSnackBar({isOpen: true, message: "No recommendations found"})
     }
 
     const getRecommendations = () => tmdbApi.movies.getRecommendations(
@@ -98,7 +98,7 @@ const MovieCard = ({movie}) => {
         }
 
         saveMovie().then(() => {
-            setSnackBar(true, `${movie.title} saved to watch list`)
+            setSnackBar({isOpen: true, message: `${movie.title} saved to watch list`})
         })
     }
 
@@ -112,7 +112,7 @@ const MovieCard = ({movie}) => {
             }
         }
 
-        removeMovie().then(() => { setSnackBar(true, `${movie.title} deleted`) })
+        removeMovie().then(() => { setSnackBar({isOpen: true, message:`${movie.title} deleted`}) })
     }
 
     const renderProviders = () => {

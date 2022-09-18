@@ -6,7 +6,7 @@ export const CHANGE_TRAILER = 'changeTrailer';
 export const SET_DISPLAY = 'setDisplay';
 
 function trailerReducer(state, action) {
-    console.log(state)
+
     switch (action.type) {
         case CHANGE_TRAILER: {
             return {...state,  trailer: action.data }
