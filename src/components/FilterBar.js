@@ -55,9 +55,10 @@ const FilterBar = () => {
     const [genres, setGenres] = useState([])
     const [certifications, setCertifications] = useState([])
 
-    const handleMovieResults = results =>{
+    const handleMovieResults = results => {
+        const newResults = results.map(r => r.original_title)
+        setMovieResults(newResults)
         setMovies(sanitizeResults(results))
-        setMovieResults(results)
     }
 
     useEffect(() => {

@@ -11,7 +11,7 @@ export const currentYear = new Date().getFullYear()
 export const jsonify = string => JSON.parse(string)
 export const handleError = error => { console.error(error) }
 export const generatePersonsOptions = persons => persons.map(person => person.label = person.name)
-export const generateMoviesOptions = movies => movies.map(movie => movie.label = movie.original_title)
+export const generateMoviesOptions = results => results.map(result => ({ label: result }))
 export const getYear = date => (date ? date.slice(0, 4) : "")
 export const getRandom = () => Math.floor(Math.random() * 100000)
 export const handleSuccess = (response, target, handleResponse, action) => {
