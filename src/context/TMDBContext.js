@@ -27,13 +27,14 @@ function TMDBProvider({children}) {
     const [trending, setTrending] = useState([])
     const [trendingTimeWindow, setTrendingTimeWindow] = useState("day")
 
-    useEffect(()=> {
+    useEffect(() => {
         getTrending("movie", trendingTimeWindow).then(response => {
             setTrending(sanitizeResults(response.data.results))
         })
     }, [trendingTimeWindow])
 
-    useEffect(()=> {
+
+    useEffect(() => {
         tmdb.discover.getMovies(
             {
                 language: "en-US",

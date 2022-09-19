@@ -16,11 +16,25 @@ import ExpandMoreTwoToneIcon from "@mui/icons-material/ExpandMoreTwoTone";
 import FilterAltTwoToneIcon from '@mui/icons-material/FilterAltTwoTone';
 import BackspaceTwoToneIcon from '@mui/icons-material/BackspaceTwoTone';
 import Selector from "./Selector";
-import {currentYear, generatePersonsOptions, handleError, handleSuccess, jsonify, minYear, sorts} from "../util";
-import tmdb from "themoviedb-javascript-library";
+import {
+    currentYear,
+    generateMoviesOptions,
+    generatePersonsOptions,
+    handleError,
+    handleSuccess,
+    jsonify,
+    minYear,
+    sorts
+} from "../util";
+import tmdbApi from "themoviedb-javascript-library";
 import {useFilters} from "../context/FilterContext";
+import {sanitizeResults} from "../util/utils";
+import {useTMDB} from "../context/TMDBContext";
 
 const FilterBar = () => {
+
+    const tmdb = useTMDB()
+    const {setMovies} = tmdb
 
     const filters = useFilters()
     const {certificationState, genreState, personState, ratingState, sortState, yearState} = filters
@@ -34,18 +48,29 @@ const FilterBar = () => {
     const MINIMUM_RATING = "Minimum Rating"
 
     const [persons, setPersons] = useState([])
+    const [movieResults, setMovieResults] = useState([])
     const [ratingLabel, setRatingLabel] = useState("Minimum Rating")
     const [personQuery, setPersonQuery] = useState()
+    const [movieQuery, setMovieQuery] = useState("")
     const [genres, setGenres] = useState([])
     const [certifications, setCertifications] = useState([])
 
+    const handleMovieResults = results =>{
+        setMovies(sanitizeResults(results))
+        setMovieResults(results)
+    }
+
     useEffect(() => {
-        tmdb.search.getPerson({query: personQuery}, res => handleSuccess(res, "results", setPersons), handleError)
+        tmdbApi.search.getMovie({query: movieQuery}, res => handleSuccess(res, "results", handleMovieResults), handleError)
+    }, [movieQuery])
+
+    useEffect(() => {
+        tmdbApi.search.getPerson({query: personQuery}, res => handleSuccess(res, "results", setPersons), handleError)
     }, [personQuery])
 
     useEffect(() => {
-        tmdb.genres.getMovieList({}, res => handleSuccess(res, "genres", setGenres), handleError)
-        tmdb.certifications.getMovieList(res => setCertifications(jsonify(res).certifications.US), handleError)
+        tmdbApi.genres.getMovieList({}, res => handleSuccess(res, "genres", setGenres), handleError)
+        tmdbApi.certifications.getMovieList(res => setCertifications(jsonify(res).certifications.US), handleError)
     }, [])
 
     //fixme consider moving all filter functions to FilterContext
@@ -57,13 +82,17 @@ const FilterBar = () => {
     const handleSortSelect = e => setSort(sorts.find(sort => sort.name === e.target.value))
     const handleCertificationSelect = e => setCertification(certifications.find(cert => cert.certification === e.target.value))
 
-    const handleQueryChange = (e, newValue) => {
+    const handlePersonQueryChange = (e, newValue) => {
         if (newValue?.length > 2) setPersonQuery(newValue)
+    }
+    const handleMovieQueryChange = (e, newValue) => {
+        if (newValue?.length > 2) setMovieQuery(newValue)
     }
     const handlePersonSelect = (e, newValue) => {
         if (newValue)
             setPerson(persons.find(p => p.name === newValue))
     }
+
     const handleRatingSelect = e => {
         if (e) {
             const newRating = e?.target?.value
@@ -82,6 +111,7 @@ const FilterBar = () => {
         setRatingLabel(MINIMUM_RATING)
         setSort(sorts.find(sort => sort.key === "pop.desc"))
         setYear("")
+        setMovieQuery("")
     }
 
     return (
@@ -135,10 +165,27 @@ const FilterBar = () => {
                             disablePortal
                             id="search-person"
                             options={generatePersonsOptions(persons)}
-                            onInputChange={handleQueryChange}
+                            onInputChange={handlePersonQueryChange}
                             onChange={handlePersonSelect}
                             value={person.name}
                             renderInput={(params) => <TextField {...params} label="Search by person"/>}
+                        />
+                    </FormControl>
+                </Stack>
+                <Stack
+                    sx={{marginBottom: "8px"}}
+                    direction={{xs: 'column', sm: 'row'}}
+                    spacing={{xs: 0, sm: 2, md: 4}}
+                    alignItems="center">
+                    <FormControl fullWidth>
+                        <Autocomplete
+                            disablePortal
+                            id="search-movie"
+                            options={generateMoviesOptions(movieResults)}
+                            onInputChange={handleMovieQueryChange}
+                            onChange={handleMovieQueryChange}
+                            value={movieQuery}
+                            renderInput={(params) => <TextField {...params} label="Search by Movie Title"/>}
                         />
                     </FormControl>
                 </Stack>
