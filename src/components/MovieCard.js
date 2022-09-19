@@ -137,12 +137,18 @@ const MovieCard = ({movie}) => {
 
     const formatAverage = () => Math.round(parseFloat(movie.vote_average) * 10) / 10
 
+    const determineImage = () => {
+        if(movie.backdrop_path) return movie.backdrop_path
+
+        else return movie.poster_path
+    }
+
     return (
         <Grid item xs={2} sm={4} md={4}>
             <Card variant="elevation" sx={{margin: "8px"}}>
                 <CardMedia
                     component="img"
-                    src={`https://image.tmdb.org/t/p/w300/${movie.poster_path}`}
+                    src={`https://image.tmdb.org/t/p/w300/${determineImage()}`}
                     alt={movie.title}/>
                 <CardContent>
                     <Stack
