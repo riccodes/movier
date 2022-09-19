@@ -145,7 +145,7 @@ const MovieCard = ({movie}) => {
 
     return (
         <Grid item xs={2} sm={4} md={4}>
-            <Card variant="elevation" sx={{margin: "8px"}}>
+            <Card raised sx={{margin: "8px"}}>
                 <CardMedia
                     component="img"
                     src={`https://image.tmdb.org/t/p/w300/${determineImage()}`}
@@ -175,26 +175,26 @@ const MovieCard = ({movie}) => {
                 <CardActions>
                     {location.pathname === "/watchlist" &&
                         <Tooltip disableFocusListener title="Remove" placement="top">
-                            <IconButton color="error" onClick={remove} aria-label="removed">
+                            <IconButton size="large" color="error" onClick={remove} aria-label="removed">
                                 <DeleteForeverTwoToneIcon/>
                             </IconButton>
                         </Tooltip>
                     }
                     {location.pathname !== "/watchlist" &&
                         <Tooltip disableFocusListener title="Save to watch list" placement="top">
-                            <IconButton color="primary" onClick={saveToWatchList} aria-label="save to watch list">
+                            <IconButton size="large" color="primary" onClick={saveToWatchList} aria-label="save to watch list">
                                 <GradeTwoToneIcon/>
                             </IconButton>
                         </Tooltip>
                     }
                     <Tooltip disableFocusListener title="Get Recommendations" placement="top">
-                        <IconButton onClick={getRecommendations} aria-label="get recommendations">
+                        <IconButton size="large" onClick={getRecommendations} aria-label="get recommendations">
                             <SettingsSuggestTwoToneIcon/>
                         </IconButton>
                     </Tooltip>
                     {isTrailerButtonDisplay &&
                         <Tooltip disableFocusListener title="Watch trailer" placement="top">
-                            <IconButton hidden={true} onClick={handleTrailerClick} aria-label="watch trailer">
+                            <IconButton size="large" hidden={true} onClick={handleTrailerClick} aria-label="watch trailer">
                                 <OndemandVideoTwoToneIcon/>
                             </IconButton>
                         </Tooltip>
