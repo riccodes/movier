@@ -136,6 +136,7 @@ const FilterBar = () => {
                     sx={{marginBottom: "8px", marginTop: "2px"}}
                     startIcon={ <BackspaceTwoToneIcon/> }
                     onClick={ clearFilters }
+                    color="warning"
                     variant="outlined">
                     Clear All Fields
                 </Button>
@@ -162,17 +163,17 @@ const FilterBar = () => {
                         value={certification.certification}/>
                     <IconSelector
                         handleSelection={handleWatchProviderSelect}
-                        label="Watch" items={watchProviderList}
+                        label="Watch On" items={watchProviderList}
                         target="provider_name"
                         value={watchProvider.provider_name}/>
                 </Stack>
                 <Stack
-                    sx={{marginBottom: "8px"}}
                     direction={{xs: 'column', sm: 'row'}}
                     spacing={{xs: 0, sm: 2, md: 4}}
                     alignItems="center">
                     <FormControl fullWidth>
                         <Autocomplete
+                            sx={{marginBottom: "8px"}}
                             disablePortal
                             id="search-person"
                             options={generatePersonsOptions(persons)}
@@ -182,16 +183,11 @@ const FilterBar = () => {
                             renderInput={(params) => <TextField {...params} label="Search by person"/>}
                         />
                     </FormControl>
-                </Stack>
-                <Stack
-                    sx={{marginBottom: "8px"}}
-                    direction={{xs: 'column', sm: 'row'}}
-                    spacing={{xs: 0, sm: 2, md: 4}}
-                    alignItems="center">
                     <FormControl fullWidth>
                         <Autocomplete
                             disablePortal
                             id="search-movie"
+                            sx={{marginBottom: "8px"}}
                             options={generateMoviesOptions(movieResults)}
                             onInputChange={handleMovieQueryChange}
                             onChange={handleMovieQueryChange}
