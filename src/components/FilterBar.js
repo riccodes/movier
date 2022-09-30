@@ -30,6 +30,8 @@ import tmdbApi from "themoviedb-javascript-library";
 import {useFilters} from "../context/FilterContext";
 import {sanitizeResults} from "../util/utils";
 import {useTMDB} from "../context/TMDBContext";
+import {watchProviderList} from "../util/Constants";
+import IconSelector from "./IconSelector";
 
 const FilterBar = () => {
 
@@ -37,6 +39,7 @@ const FilterBar = () => {
     const {setMovies} = tmdb
 
     const filters = useFilters()
+    const {watchProvider, setWatchProvider} = filters
     const {certificationState, genreState, personState, ratingState, sortState, yearState} = filters
     const {certification, setCertification} = certificationState
     const {genre, setGenre} = genreState
@@ -81,6 +84,7 @@ const FilterBar = () => {
         setGenre(g)
     }
     const handleSortSelect = e => setSort(sorts.find(sort => sort.name === e.target.value))
+    const handleWatchProviderSelect = e => setWatchProvider(watchProviderList.find(prov => prov.provider_name === e.target.value))
     const handleCertificationSelect = e => setCertification(certifications.find(cert => cert.certification === e.target.value))
 
     const handlePersonQueryChange = (e, newValue) => {
@@ -113,6 +117,7 @@ const FilterBar = () => {
         setSort(sorts.find(sort => sort.key === "pop.desc"))
         setYear("")
         setMovieQuery("")
+        setWatchProvider({provider_name: ""})
     }
 
     return (
@@ -155,6 +160,11 @@ const FilterBar = () => {
                         label="Rating" items={certifications}
                         target="certification"
                         value={certification.certification}/>
+                    <IconSelector
+                        handleSelection={handleWatchProviderSelect}
+                        label="Watch" items={watchProviderList}
+                        target="provider_name"
+                        value={watchProvider.provider_name}/>
                 </Stack>
                 <Stack
                     sx={{marginBottom: "8px"}}

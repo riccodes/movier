@@ -15,6 +15,7 @@ const TMDBContext = React.createContext()
 function TMDBProvider({children}) {
 
     const filters = useFilters()
+    const {watchProvider} = filters
     const {certificationState, genreState, personState, ratingState, sortState, yearState} = filters
     const {certification} = certificationState
     const {genre} = genreState
@@ -45,13 +46,14 @@ function TMDBProvider({children}) {
                 primary_release_year: year,
                 sort_by: sort.name,
                 "certification.gte": certification.certification,
-                "vote_average.gte": rating
+                "vote_average.gte": rating,
+                "with_watch_providers": watchProvider.provider_id
             },
             res => handleSuccess(res, "results", (results) => setMovies(sanitizeResults(results))),
             handleError
         )
 
-    }, [certification, genre, person, rating, sort, year])
+    }, [certification, genre, person, rating, sort, year, watchProvider])
 
     const value = {movies, setMovies, trending, setTrending, setTrendingTimeWindow}
     return <TMDBContext.Provider value={value}>{children}</TMDBContext.Provider>

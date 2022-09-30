@@ -1,5 +1,6 @@
 import * as React from 'react'
 import {sorts} from "../util";
+import {useState} from "react";
 
 const FilterContext = React.createContext()
 
@@ -103,9 +104,12 @@ function FilterProvider({children}) {
     const [sortState, sortDispatch] = React.useReducer(sortReducer, {sort: sorts.find(sort => sort.key === "pop.desc"), setSort: setSort})
     const [yearState, yearDispatch] = React.useReducer(yearReducer, {year : 0, setYear: setYear})
 
+    //fixme CHANGE ALL ATTRIBUTES TO THIS FORMAT
+    const [watchProvider, setWatchProvider] = useState({provider_name: ""})
+
     // NOTE: you *might* need to memoize this value
     // Learn more in http://kcd.im/optimize-context
-    const value = {certificationState, genreState, personState, ratingState, sortState, yearState}
+    const value = {certificationState, genreState, personState, ratingState, sortState, yearState, watchProvider, setWatchProvider}
     return <FilterContext.Provider value={value}>{children}</FilterContext.Provider>
 }
 
