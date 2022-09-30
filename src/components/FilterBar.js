@@ -158,7 +158,7 @@ const FilterBar = () => {
                         value={sort.name}/>
                     <Selector
                         handleSelection={handleCertificationSelect}
-                        label="Rating" items={certifications}
+                        label="Certifications" items={certifications}
                         target="certification"
                         value={certification.certification}/>
                     <IconSelector
