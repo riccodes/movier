@@ -30,7 +30,6 @@ import tmdbApi from "themoviedb-javascript-library";
 import {useFilters} from "../context/FilterContext";
 import {sanitizeResults} from "../util/utils";
 import {useTMDB} from "../context/TMDBContext";
-import {watchProviderList} from "../util/Constants";
 import IconSelector from "./IconSelector";
 
 const FilterBar = () => {
@@ -39,7 +38,7 @@ const FilterBar = () => {
     const {setMovies} = tmdb
 
     const filters = useFilters()
-    const {watchProvider, setWatchProvider} = filters
+    const {watchProvider, setWatchProvider, watchProviderList} = filters
     const {certificationState, genreState, personState, ratingState, sortState, yearState} = filters
     const {certification, setCertification} = certificationState
     const {genre, setGenre} = genreState
