@@ -22,9 +22,6 @@ function App() {
         const {pathname} = location
 
         switch (pathname){
-            case watchlistRoute :
-                setAlert({isOpen: true, message: "Watchlist"})
-                break
             case recommendationsRoute :
                 setAlert({isOpen: true, message: `Recommendations based on: ${recommendation}`})
                 break
@@ -48,7 +45,7 @@ function App() {
             <Trailer/>
             <Nav />
             {alert.isOpen && (
-                <Alert sx={{marginBottom: "32px"}} icon={alert.icon}>
+                <Alert severity="info" sx={{marginBottom: "32px"}} icon={alert.icon}>
                     {alert.message}
                 </Alert>
             )}

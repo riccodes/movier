@@ -6,7 +6,7 @@ import {useTMDB} from "../context/TMDBContext";
 const Trending = () => {
 
     const activeChip = {color:"primary", variant: "filled"}
-    const inactiveChip = {color:"default", variant: "outlined"}
+    const inactiveChip = {color:"secondary", variant: "outlined"}
 
     const tmdb = useTMDB()
     const {trending, setTrendingTimeWindow} = tmdb

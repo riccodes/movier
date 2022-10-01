@@ -10,9 +10,9 @@ const Nav = () => {
     const navigateTo = useNavigate()
 
     const navVariants = [
-        {route: searchRoute, variant: "contained"},
-        {route: watchlistRoute, variant: "text"},
-        {route: trendingRoute, variant: "text"}
+        {route: searchRoute, variant: "contained", color: "primary"},
+        {route: watchlistRoute, variant: "text", color: "secondary"},
+        {route: trendingRoute, variant: "text", color: "secondary"}
     ]
 
     const [variants, setVariants] = useState(navVariants)
@@ -22,8 +22,10 @@ const Nav = () => {
         const newVariants = variants.map(v => {
             if (v.route === route){
                 v.variant = "contained"
+                v.color = "primary"
             } else {
                 v.variant = "text"
+                v.color = "secondary"
             }
 
             return v
@@ -38,6 +40,7 @@ const Nav = () => {
             <Button
                 sx={{marginBottom: "8px"}}
                 variant={variants.find(v => v.route === searchRoute).variant}
+                color={variants.find(v => v.route === searchRoute).color}
                 startIcon={<ManageSearchRoundedIcon/>}
                 onClick={() => navigate(searchRoute)}>
                 Search
@@ -45,6 +48,7 @@ const Nav = () => {
             <Button
                 sx={{marginBottom: "8px"}}
                 variant={variants.find(v => v.route === trendingRoute).variant}
+                color={variants.find(v => v.route === trendingRoute).color}
                 startIcon={<WhatshotRoundedIcon/>}
                 onClick={() => navigate(trendingRoute)}>
                 Trending
@@ -52,6 +56,7 @@ const Nav = () => {
             <Button
                 sx={{marginBottom: "8px"}}
                 variant={variants.find(v => v.route === watchlistRoute).variant}
+                color={variants.find(v => v.route === watchlistRoute).color}
                 startIcon={<SubscriptionsRoundedIcon/>}
                 onClick={() => navigate(watchlistRoute)}>
                 Watchlist

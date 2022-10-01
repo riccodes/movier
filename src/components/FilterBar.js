@@ -31,6 +31,7 @@ import {useFilters} from "../context/FilterContext";
 import {sanitizeResults} from "../util/utils";
 import {useTMDB} from "../context/TMDBContext";
 import IconSelector from "./IconSelector";
+import {info} from "../theme/theme";
 
 const FilterBar = () => {
 
@@ -135,8 +136,8 @@ const FilterBar = () => {
                     sx={{marginBottom: "8px", marginTop: "2px"}}
                     startIcon={ <BackspaceTwoToneIcon/> }
                     onClick={ clearFilters }
-                    color="warning"
-                    variant="outlined">
+                    color="secondary"
+                    variant="contained">
                     Clear All Fields
                 </Button>
                 <Stack
@@ -217,6 +218,7 @@ const FilterBar = () => {
                     <Stack alignItems="center">
                         <Typography variant="subtitle1">{ratingLabel}</Typography>
                         <Rating
+                            sx={{color: info}}
                             onClick={handleRatingSelect}
                             name="rating-selector"
                             max={10}

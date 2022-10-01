@@ -11,7 +11,7 @@ import {
     Tooltip,
     Typography
 } from "@mui/material";
-import GradeTwoToneIcon from '@mui/icons-material/GradeTwoTone';
+import SubscriptionsRoundedIcon from '@mui/icons-material/SubscriptionsRounded';
 import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
 import SettingsSuggestTwoToneIcon from '@mui/icons-material/SettingsSuggestTwoTone';
 import OndemandVideoTwoToneIcon from '@mui/icons-material/OndemandVideoTwoTone';
@@ -82,6 +82,7 @@ const MovieCard = ({movie}) => {
             setSnackBar({isOpen: true, message: "No recommendations found"})
     }
 
+    //fixme this should set routes to /recommendations and clear nav buttons
     const getRecommendations = () => tmdbApi.movies.getRecommendations(
         {id: movie.id},
         (res) => handleSuccess(res, "results", handleRecommendations),
@@ -183,18 +184,18 @@ const MovieCard = ({movie}) => {
                     {location.pathname !== "/watchlist" &&
                         <Tooltip disableFocusListener title="Save to watch list" placement="top">
                             <IconButton size="large" color="primary" onClick={saveToWatchList} aria-label="save to watch list">
-                                <GradeTwoToneIcon/>
+                                <SubscriptionsRoundedIcon/>
                             </IconButton>
                         </Tooltip>
                     }
                     <Tooltip disableFocusListener title="Get Recommendations" placement="top">
-                        <IconButton size="large" onClick={getRecommendations} aria-label="get recommendations">
+                        <IconButton color="secondary" size="large" onClick={getRecommendations} aria-label="get recommendations">
                             <SettingsSuggestTwoToneIcon/>
                         </IconButton>
                     </Tooltip>
                     {isTrailerButtonDisplay &&
                         <Tooltip disableFocusListener title="Watch trailer" placement="top">
-                            <IconButton size="large" hidden={true} onClick={handleTrailerClick} aria-label="watch trailer">
+                            <IconButton color="secondary" size="large" hidden={true} onClick={handleTrailerClick} aria-label="watch trailer">
                                 <OndemandVideoTwoToneIcon/>
                             </IconButton>
                         </Tooltip>
