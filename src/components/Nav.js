@@ -1,6 +1,13 @@
 import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {Button, FormControl, InputLabel, MenuItem, Select, Stack} from "@mui/material";
+import {
+    Button,
+    FormControl,
+    InputLabel,
+    MenuItem,
+    Select,
+    Stack
+} from "@mui/material";
 import ManageSearchRoundedIcon from '@mui/icons-material/ManageSearchRounded';
 import SubscriptionsRoundedIcon from '@mui/icons-material/SubscriptionsRounded';
 import WhatshotRoundedIcon from '@mui/icons-material/WhatshotRounded';
@@ -42,28 +49,30 @@ const Nav = ({ setPalette }) => {
             spacing={{xs: 1, sm: 2, md: 3}}
             sx={{marginBottom: "8px"}}
             direction={{xs: 'column', sm: 'row'}} >
-            <Button
-                variant={variants.find(v => v.route === searchRoute).variant}
-                color={variants.find(v => v.route === searchRoute).color}
-                startIcon={<ManageSearchRoundedIcon/>}
-                onClick={() => navigate(searchRoute)}>
+            <Stack direction="row" sx={{marginBottom: "8px"}}>
+                <Button
+                    variant={variants.find(v => v.route === searchRoute).variant}
+                    color={variants.find(v => v.route === searchRoute).color}
+                    startIcon={<ManageSearchRoundedIcon/>}
+                    onClick={() => navigate(searchRoute)}>
                     Search
-            </Button>
-            <Button
-                variant={variants.find(v => v.route === trendingRoute).variant}
-                color={variants.find(v => v.route === trendingRoute).color}
-                startIcon={<WhatshotRoundedIcon/>}
-                onClick={() => navigate(trendingRoute)}>
+                </Button>
+                <Button
+                    variant={variants.find(v => v.route === trendingRoute).variant}
+                    color={variants.find(v => v.route === trendingRoute).color}
+                    startIcon={<WhatshotRoundedIcon/>}
+                    onClick={() => navigate(trendingRoute)}>
                     Trending
-            </Button>
-            <Button
-                variant={variants.find(v => v.route === watchlistRoute).variant}
-                color={variants.find(v => v.route === watchlistRoute).color}
-                startIcon={<SubscriptionsRoundedIcon/>}
-                onClick={() => navigate(watchlistRoute)}>
-                Watchlist
-            </Button>
-            <FormControl sx={{ m: 1, minWidth: 120 }} >
+                </Button>
+                <Button
+                    variant={variants.find(v => v.route === watchlistRoute).variant}
+                    color={variants.find(v => v.route === watchlistRoute).color}
+                    startIcon={<SubscriptionsRoundedIcon/>}
+                    onClick={() => navigate(watchlistRoute)}>
+                    Watchlist
+                </Button>
+            </Stack>
+            <FormControl sx={{m: 1, minWidth: 120}}>
                 <InputLabel id="select-label">Themes</InputLabel>
                 <Select
                     size="small"
