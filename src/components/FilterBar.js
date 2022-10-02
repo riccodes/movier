@@ -31,7 +31,6 @@ import {useFilters} from "../context/FilterContext";
 import {sanitizeResults} from "../util/utils";
 import {useTMDB} from "../context/TMDBContext";
 import IconSelector from "./IconSelector";
-import {info} from "../theme/theme";
 
 const FilterBar = () => {
 
@@ -218,7 +217,6 @@ const FilterBar = () => {
                     <Stack alignItems="center">
                         <Typography variant="subtitle1">{ratingLabel}</Typography>
                         <Rating
-                            sx={{color: info}}
                             onClick={handleRatingSelect}
                             name="rating-selector"
                             max={10}

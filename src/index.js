@@ -8,8 +8,6 @@ import {FilterProvider} from "./context/FilterContext";
 import {CommonProvider} from "./context/CommonContext";
 import {TMDBProvider} from "./context/TMDBContext";
 import {BrowserRouter} from "react-router-dom";
-import {ThemeProvider} from "@mui/material";
-import {theme} from "./theme/theme";
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <BrowserRouter>
@@ -17,9 +15,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
             <FilterProvider>
                 <WatchListProvider>
                     <TMDBProvider>
-                        <ThemeProvider theme={theme}>
                             <App/>
-                        </ThemeProvider>
                     </TMDBProvider>
                 </WatchListProvider>
             </FilterProvider>

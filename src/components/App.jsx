@@ -1,6 +1,6 @@
 import './css/App.css';
-import React, {useEffect} from "react";
-import {Alert, Container, Snackbar} from "@mui/material";
+import React, {useEffect, useState} from "react";
+import {Alert, Container, Snackbar, ThemeProvider} from "@mui/material";
 import Trailer from "./Trailer";
 import {useCommon} from "../context/CommonContext";
 import WatchList from "../routes/WatchList";
@@ -10,8 +10,13 @@ import Recommendations from "../routes/Recommendations";
 import Trending from "../routes/Trending";
 import Nav from "./Nav";
 import {recommendationsRoute, searchRoute, trendingRoute, watchlistRoute} from "../routes/routes";
+import {mintCoffee} from "../theme/palettes";
+import {getTheme} from "../theme/theme";
 
 function App() {
+
+    const [palette, setPalette] = useState(mintCoffee)
+    const theme = getTheme(palette)
 
     const common = useCommon()
     const {alert, recommendation, setAlert, snackBar, setSnackBar} = common
@@ -30,34 +35,36 @@ function App() {
         }
 
 
-    }, [location, setAlert])
+    }, [location, setAlert, recommendation])
 
     return (
-        <Container sx={{marginTop: "16px"}} maxWidth="xl">
-            <Snackbar
-                open={snackBar.isOpen}
-                onClose={() => setSnackBar({isOpen: false, message: ""})}
-            >
-                <Alert severity="success">
-                    {snackBar.message}
-                </Alert>
-            </Snackbar>
-            <Trailer/>
-            <Nav />
-            {alert.isOpen && (
-                <Alert severity="info" sx={{marginBottom: "32px"}} icon={alert.icon}>
-                    {alert.message}
-                </Alert>
-            )}
+        <ThemeProvider theme={theme}>
+            <Container sx={{marginTop: "16px"}} maxWidth="xl">
+                <Snackbar
+                    open={snackBar.isOpen}
+                    onClose={() => setSnackBar({isOpen: false, message: ""})}
+                >
+                    <Alert severity="success">
+                        {snackBar.message}
+                    </Alert>
+                </Snackbar>
+                <Trailer/>
+                <Nav setPalette={setPalette} />
+                {alert.isOpen && (
+                    <Alert severity="info" sx={{marginBottom: "32px"}} icon={alert.icon}>
+                        {alert.message}
+                    </Alert>
+                )}
 
-            <Routes>
-                <Route path="/" element={<Navigate to={searchRoute} />} />
-                <Route path={searchRoute} element={ <Search /> }/>
-                <Route path={watchlistRoute} element={ <WatchList /> } />
-                <Route path={recommendationsRoute} element={ <Recommendations /> } />
-                <Route path={trendingRoute} element={ <Trending /> } />
-            </Routes>
-        </Container>
+                <Routes>
+                    <Route path="/" element={<Navigate to={searchRoute}/>}/>
+                    <Route path={searchRoute} element={<Search/>}/>
+                    <Route path={watchlistRoute} element={<WatchList/>}/>
+                    <Route path={recommendationsRoute} element={<Recommendations/>}/>
+                    <Route path={trendingRoute} element={<Trending/>}/>
+                </Routes>
+            </Container>
+        </ThemeProvider>
     )
 }
 

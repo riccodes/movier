@@ -1,35 +1,41 @@
-import {createTheme} from "@mui/material";
-import {mintCoffee} from "./palettes";
+import {createTheme, experimental_sx as sx} from "@mui/material";
 
-export const {info} = mintCoffee
-const {hover, primary, secondary, error} = mintCoffee
-
-export const theme = createTheme({
+export const getTheme = palette => createTheme({
     palette: {
+        // mode: 'dark',
         primary: {
-            main: primary,
+            main: palette.primary,
             contrastText: "#ffffff"
         },
         secondary: {
-            main: secondary
+            main: palette.secondary
         },
         success : {
-            main : primary
+            main : palette.primary
         },
         info: {
-            main: info,
-            contrastText: secondary
+            main: palette.info,
+            contrastText: palette.secondary
         },
         error:{
-            main: error
+            main: palette.error
         },
         action : {
-            active: primary,
-            hover,
+            active: palette.primary,
+            hover: palette.hover,
         },
         text : {
             primary: "#333333",
             secondary: "#666666"
         },
+    },
+    components: {
+        MuiRating: {
+            styleOverrides: {
+                root: sx({
+                    color: palette.secondary
+                })
+            }
+        }
     }
 });

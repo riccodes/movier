@@ -120,7 +120,7 @@ const MovieCard = ({movie}) => {
     const renderProviders = () => {
         if (providers) {
             return (
-                <CardContent sx={{background: "#efefef"}}>
+                <CardContent >
                     <WatchProvs provs={providers["free"]} label="Free"/>
                     <WatchProvs provs={providers["flatrate"]} label="Streaming"/>
                     <WatchProvs provs={providers["rent"]} label="Rent"/>
