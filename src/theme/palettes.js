@@ -15,7 +15,7 @@ export const getPalette = id => {
         case "scholar": return scholar
         case "bloodOrange": return bloodOrange
 
-        default: return mintCoffee
+        default: return candy
     }
 }
 

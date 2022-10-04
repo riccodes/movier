@@ -12,14 +12,18 @@ import ManageSearchRoundedIcon from '@mui/icons-material/ManageSearchRounded';
 import SubscriptionsRoundedIcon from '@mui/icons-material/SubscriptionsRounded';
 import WhatshotRoundedIcon from '@mui/icons-material/WhatshotRounded';
 import {recommendationsRoute, searchRoute, trendingRoute, watchlistRoute} from "../routes/routes";
-import {getPalette, themeList} from "../theme/palettes";
+import { themeList} from "../theme/palettes";
 import {getRandom} from "../util";
 import {useCommon} from "../context/CommonContext";
 
-const Nav = ({ setPalette }) => {
+const Nav = ({ cookies }) => {
     const navigateTo = useNavigate()
     const location = useLocation()
     const common = useCommon()
+
+    const savePalette = e => {
+        cookies.set('theme', e.target.value, {path: '/'});
+    }
 
     const clearVariants = [
         {route: searchRoute, variant: "text", color: "secondary"},
@@ -113,7 +117,7 @@ const Nav = ({ setPalette }) => {
                     id="theme"
                     label="Themes"
                     defaultValue="candy"
-                    onChange={(e) => setPalette(getPalette(e.target.value))}
+                    onChange={savePalette}
                 >
                     {themeList.map(item =>
                         <MenuItem key={`${getRandom()}-${item.id}`} value={item.id}>{item.name}</MenuItem>)}

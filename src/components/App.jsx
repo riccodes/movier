@@ -1,5 +1,5 @@
 import './css/App.css';
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Alert, Container, Snackbar, ThemeProvider} from "@mui/material";
 import Trailer from "./Trailer";
 import {useCommon} from "../context/CommonContext";
@@ -10,13 +10,23 @@ import Recommendations from "../routes/Recommendations";
 import Trending from "../routes/Trending";
 import Nav from "./Nav";
 import {recommendationsRoute, searchRoute, trendingRoute, watchlistRoute} from "../routes/routes";
-import {candy} from "../theme/palettes";
 import {getTheme} from "../theme/theme";
+import Cookies from 'universal-cookie';
+import {getPalette} from "../theme/palettes";
 
 function App() {
 
-    //todo store theme in cookie
-    const [palette, setPalette] = useState(candy)
+    const cookies = new Cookies();
+    const [palette, setPalette] = useState()
+
+    useEffect(()=> {
+        if(cookies.get("theme") !== null) {
+            setPalette(getPalette(cookies.get('theme')))
+        }
+    }, [ palette ])
+
+    cookies.addChangeListener(cookie => { setPalette(getPalette(cookie.value)) })
+
     const theme = getTheme(palette)
 
     const common = useCommon()
@@ -34,7 +44,7 @@ function App() {
                     </Alert>
                 </Snackbar>
                 <Trailer/>
-                <Nav setPalette={setPalette} />
+                <Nav cookies={cookies} />
                 {alert.isOpen && (
                     <Alert severity="info" sx={{marginBottom: "32px"}} icon={alert.icon}>
                         {alert.message}
