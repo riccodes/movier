@@ -70,7 +70,7 @@ const Nav = ({ setPalette }) => {
                 setVariants(clearVariants)
         }
 
-    }, [location, common])
+    }, [location])
 
     return (
         <Stack
