@@ -86,7 +86,6 @@ const MovieCard = ({movie}) => {
             setSnackBar({isOpen: true, message: "No recommendations found"})
     }
 
-    //fixme this should set routes to /recommendations and clear nav buttons
     const getRecommendations = () => tmdbApi.movies.getRecommendations(
         {id: movie.id},
         (res) => handleSuccess(res, "results", handleRecommendations),
@@ -137,10 +136,13 @@ const MovieCard = ({movie}) => {
     return (
         <Grid item xs={2} sm={4} md={4}>
             <Card raised sx={{margin: "8px"}}>
-                <CardMedia
-                    component="img"
-                    src={`https://image.tmdb.org/t/p/w300/${determineImage()}`}
-                    alt={movie.title}/>
+                {/*todo set default image if no backdrop available*/}
+                {movie.backdrop_path &&
+                    <CardMedia
+                        component="img"
+                        src={`https://image.tmdb.org/t/p/w300/${determineImage()}`}
+                        alt={movie.title}/>
+                }
                 <CardContent>
                     <Stack
                         direction="row"
@@ -158,20 +160,22 @@ const MovieCard = ({movie}) => {
                     </Stack>
                 </CardContent>
                 {/*todo set global toggle for overview and providers*/}
-                <Accordion defaultExpanded elevation={0}>
-                    <AccordionSummary
-                        expandIcon={<ExpandMoreTwoToneIcon/>}
-                        aria-controls="panel1a-content"
-                        id="panel1a-header"
-                    >
-                        <Typography variant="body1">Overview</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                        <Typography variant="caption" color="text.secondary">
-                            {movie.overview}
-                        </Typography>
-                    </AccordionDetails>
-                </Accordion>
+                {movie.overview.length > 0 &&
+                    <Accordion defaultExpanded elevation={0}>
+                        <AccordionSummary
+                            expandIcon={<ExpandMoreTwoToneIcon/>}
+                            aria-controls="panel1a-content"
+                            id="panel1a-header"
+                        >
+                            <Typography variant="body1">Overview</Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <Typography variant="caption" color="text.secondary">
+                                {movie.overview}
+                            </Typography>
+                        </AccordionDetails>
+                    </Accordion>
+                }
                 <Providers providers={providers}/>
                 {/*fixme refactor this component*/}
                 <CardActions>

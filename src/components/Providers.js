@@ -1,5 +1,5 @@
 import React from "react";
-import {Accordion, AccordionDetails, AccordionSummary, CardContent, Typography} from "@mui/material";
+import {Accordion, AccordionDetails, AccordionSummary, Typography} from "@mui/material";
 import ExpandMoreTwoToneIcon from "@mui/icons-material/ExpandMoreTwoTone";
 import WatchProvs from "./WatchProvs";
 
@@ -19,6 +19,7 @@ const Providers = ({providers}) => {
                             aria-controls="panel1a-content"
                             id="panel1a-header"
                         >
+                            {/*todo show provider icons*/}
                             <Typography variant="caption">Where to watch [{totalProviders}]</Typography>
                         </AccordionSummary>
                         <AccordionDetails>
