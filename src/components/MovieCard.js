@@ -1,5 +1,8 @@
 import React, {useEffect, useState} from "react";
 import {
+    Accordion,
+    AccordionDetails,
+    AccordionSummary,
     Card,
     CardActions,
     CardContent,
@@ -27,6 +30,7 @@ import {useWatchList} from "../context/WatchListContext";
 import {useLocation, useNavigate} from "react-router-dom";
 import {useTMDB} from "../context/TMDBContext";
 import {sanitizeResults} from "../util/utils";
+import ExpandMoreTwoToneIcon from "@mui/icons-material/ExpandMoreTwoTone";
 
 const MovieCard = ({movie}) => {
 
@@ -119,13 +123,32 @@ const MovieCard = ({movie}) => {
 
     const renderProviders = () => {
         if (providers) {
-            return (
-                <CardContent >
-                    <WatchProvs provs={providers["free"]} label="Free"/>
-                    <WatchProvs provs={providers["flatrate"]} label="Streaming"/>
-                    <WatchProvs provs={providers["rent"]} label="Rent"/>
-                </CardContent>
-            )
+
+            let totalProviders = 0
+            if (providers["rent"]) totalProviders += providers["rent"].length
+            if (providers["free"]) totalProviders += providers["free"].length
+            if (providers["flatrate"]) totalProviders += providers["flatrate"].length
+
+            if(totalProviders > 0){
+                return (
+                    <CardContent>
+                        <Accordion variant="outlined" elevation={0}>
+                            <AccordionSummary
+                                expandIcon={<ExpandMoreTwoToneIcon/>}
+                                aria-controls="panel1a-content"
+                                id="panel1a-header"
+                            >
+                                <Typography variant="caption">Where to watch [{totalProviders}]</Typography>
+                            </AccordionSummary>
+                            <AccordionDetails>
+                                <WatchProvs provs={providers["free"]} label="Free"/>
+                                <WatchProvs provs={providers["flatrate"]} label="Streaming"/>
+                                <WatchProvs provs={providers["rent"]} label="Rent"/>
+                            </AccordionDetails>
+                        </Accordion>
+                    </CardContent>
+                )
+            }
         }
 
         return <div/>
@@ -168,9 +191,20 @@ const MovieCard = ({movie}) => {
                     </Stack>
                 </CardContent>
                 <CardContent>
-                    <Typography variant="caption" color="text.secondary">
-                        {movie.overview}
-                    </Typography>
+                    <Accordion defaultExpanded elevation={0}>
+                        <AccordionSummary
+                            expandIcon={<ExpandMoreTwoToneIcon/>}
+                            aria-controls="panel1a-content"
+                            id="panel1a-header"
+                        >
+                            <Typography variant="body1">Overview</Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <Typography variant="caption" color="text.secondary">
+                                {movie.overview}
+                            </Typography>
+                        </AccordionDetails>
+                    </Accordion>
                 </CardContent>
                 {renderProviders()}
                 <CardActions>
