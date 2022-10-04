@@ -79,6 +79,7 @@ const Nav = ({ setPalette }) => {
             direction={{xs: 'column', sm: 'row'}} >
             <Stack direction="row" sx={{marginBottom: "8px"}}>
                 <Button
+                    size="small"
                     variant={variants.find(v => v.route === searchRoute).variant}
                     color={variants.find(v => v.route === searchRoute).color}
                     startIcon={<ManageSearchRoundedIcon/>}
@@ -86,6 +87,7 @@ const Nav = ({ setPalette }) => {
                     Search
                 </Button>
                 <Button
+                    size="small"
                     variant={variants.find(v => v.route === trendingRoute).variant}
                     color={variants.find(v => v.route === trendingRoute).color}
                     startIcon={<WhatshotRoundedIcon/>}
@@ -93,6 +95,7 @@ const Nav = ({ setPalette }) => {
                     Trending
                 </Button>
                 <Button
+                    size="small"
                     variant={variants.find(v => v.route === watchlistRoute).variant}
                     color={variants.find(v => v.route === watchlistRoute).color}
                     startIcon={<SubscriptionsRoundedIcon/>}
