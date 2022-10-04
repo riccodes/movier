@@ -3,6 +3,7 @@ import {useLocation, useNavigate} from "react-router-dom";
 import {
     Button,
     FormControl,
+    IconButton,
     InputLabel,
     MenuItem,
     Select,
@@ -11,12 +12,14 @@ import {
 import ManageSearchRoundedIcon from '@mui/icons-material/ManageSearchRounded';
 import SubscriptionsRoundedIcon from '@mui/icons-material/SubscriptionsRounded';
 import WhatshotRoundedIcon from '@mui/icons-material/WhatshotRounded';
+import ModeNightRoundedIcon from '@mui/icons-material/ModeNightRounded';
+import Brightness7RoundedIcon from '@mui/icons-material/Brightness7Rounded';
 import {recommendationsRoute, searchRoute, trendingRoute, watchlistRoute} from "../routes/routes";
 import { themeList} from "../theme/palettes";
 import {getRandom} from "../util";
 import {useCommon} from "../context/CommonContext";
 
-const Nav = ({ cookies }) => {
+const Nav = ({ cookies, themeMode, setThemeMode }) => {
     const navigateTo = useNavigate()
     const location = useLocation()
     const common = useCommon()
@@ -24,6 +27,13 @@ const Nav = ({ cookies }) => {
     const savePalette = e => {
         cookies.set('theme', e.target.value, {path: '/'});
     }
+
+    const setTheme = () => {
+        const mode = themeMode === "light" ? "dark" : "light"
+        setThemeMode(mode)
+    }
+
+    const getTheme = () => cookies.get("theme") !== null ? cookies.get("theme") : "candy"
 
     const clearVariants = [
         {route: searchRoute, variant: "text", color: "secondary"},
@@ -48,8 +58,6 @@ const Nav = ({ cookies }) => {
 
         setVariants(newVariants)
     }
-
-    const getTheme = () => cookies.get("theme") !== null ? cookies.get("theme") : "candy"
 
     useEffect(()=> {
         const {pathname} = location
@@ -125,6 +133,9 @@ const Nav = ({ cookies }) => {
                         <MenuItem key={`${getRandom()}-${item.id}`} value={item.id}>{item.name}</MenuItem>)}
                 </Select>
             </FormControl>
+            <IconButton sx={{ ml: 1 }} onClick={setTheme} color="inherit">
+                {themeMode === 'dark' ? <Brightness7RoundedIcon /> : <ModeNightRoundedIcon />}
+            </IconButton>
         </Stack>
     )
 }

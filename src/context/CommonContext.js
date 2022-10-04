@@ -34,8 +34,6 @@ function CommonProvider({children}) {
     const [trailerState, trailerDispatch] =
         React.useReducer(trailerReducer, {isOpen: false, trailer: {name: "", key: ""} , setTrailerData})
 
-    // NOTE: you *might* need to memoize this value
-    // Learn more in http://kcd.im/optimize-context
     const value = {alert, setAlert, snackBar, setSnackBar, recommendation, setRecommendation, trailerState}
     return <CommonContext.Provider value={value}>{children}</CommonContext.Provider>
 }

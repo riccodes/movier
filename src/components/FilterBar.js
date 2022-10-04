@@ -39,9 +39,7 @@ const FilterBar = () => {
 
     const filters = useFilters()
     const {watchProvider, setWatchProvider, watchProviderList} = filters
-    const {certificationState, genreState, personState, ratingState, sortState, yearState} = filters
-    const {certification, setCertification} = certificationState
-    const {genre, setGenre} = genreState
+    const { genre, setGenre, certification, setCertification, personState, ratingState, sortState, yearState} = filters
     const {person, setPerson} = personState
     const {rating, setRating} = ratingState
     const {sort, setSort} = sortState

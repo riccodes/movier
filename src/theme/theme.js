@@ -1,11 +1,12 @@
 import {createTheme, experimental_sx as sx} from "@mui/material";
 
-export const getTheme = palette => createTheme({
+//fixme make this not garbage
+export const getTheme = (palette, mode="light") => createTheme({
     palette: {
-        // mode: 'dark',
+        mode,
         primary: {
             main: palette.primary,
-            contrastText: "#ffffff"
+            // contrastText: "#ffffff"
         },
         secondary: {
             main: palette.secondary
@@ -15,19 +16,19 @@ export const getTheme = palette => createTheme({
         },
         info: {
             main: palette.info,
-            contrastText: palette.secondary
+            // contrastText: palette.secondary
         },
         error:{
             main: palette.error
         },
-        action : {
-            active: palette.primary,
-            hover: palette.hover,
-        },
-        text : {
-            primary: "#333333",
-            secondary: "#666666"
-        },
+        // action : {
+        //     active: palette.primary,
+        //     hover: palette.hover,
+        // },
+        // text : {
+        //     primary: "#333333",
+        //     secondary: "#666666"
+        // },
     },
     components: {
         MuiRating: {

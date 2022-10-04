@@ -58,29 +58,6 @@ const watchProviderList = [
 ]
 
 //fixme remove all these reducers
-function certificationReducer(state, action) {
-
-    switch (action.type) {
-        case 'setCert': {
-            return {...state, certification: action.data}
-        }
-        default: {
-            throw new Error(`Unhandled action type: ${action.type}`)
-        }
-    }
-}
-
-function genreReducer(state, action) {
-
-    switch (action.type) {
-        case 'setGenre': {
-            return {...state, genre:action.data}
-        }
-        default: {
-            throw new Error(`Unhandled action type: ${action.type}`)
-        }
-    }
-}
 
 function personReducer (state, action) {
 
@@ -132,12 +109,6 @@ function yearReducer(state, action) {
 
 function FilterProvider({children}) {
 
-    const setCertification = cert => {
-        certificationDispatch({type: 'setCert', data: cert})
-    }
-    const setGenre = genre => {
-        genreDispatch({type: 'setGenre', data: genre})
-    }
     const setPerson = person => {
         personDispatch({type: 'setPerson', data: person})
     }
@@ -150,19 +121,26 @@ function FilterProvider({children}) {
     const setYear = year => {
         yearDispatch({type: 'setYear', data: year})
     }
-    const [certificationState, certificationDispatch] = React.useReducer(certificationReducer, {certification: {certification: ""}, setCertification: setCertification})
-    const [genreState, genreDispatch] = React.useReducer(genreReducer, {genre: {name : ""}, setGenre: setGenre})
+
     const [personState, personDispatch] = React.useReducer(personReducer, {person: {id: "", name: ""}, setPerson: setPerson})
     const [ratingState, ratingDispatch] = React.useReducer(ratingReducer, {rating : "", setRating: setRating})
     const [sortState, sortDispatch] = React.useReducer(sortReducer, {sort: sorts.find(sort => sort.key === "pop.desc"), setSort: setSort})
     const [yearState, yearDispatch] = React.useReducer(yearReducer, {year : 0, setYear: setYear})
 
-    //fixme CHANGE ALL ATTRIBUTES TO THIS FORMAT
+    const [genre, setGenre] = useState({genre: {name : ""}})
     const [watchProvider, setWatchProvider] = useState({provider_name: ""})
+    const [certification, setCertification] = useState({certification: {certification: ""}})
 
     // NOTE: you *might* need to memoize this value
     // Learn more in http://kcd.im/optimize-context
-    const value = {certificationState, genreState, personState, ratingState, sortState, yearState, watchProvider, setWatchProvider, watchProviderList}
+    const value = {
+        certification,
+        setCertification,
+        genre,
+        setGenre,
+        personState, ratingState, sortState, yearState, watchProvider, setWatchProvider,
+        watchProviderList
+    }
     return <FilterContext.Provider value={value}>{children}</FilterContext.Provider>
 }
 
