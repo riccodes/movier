@@ -12,12 +12,12 @@ import Nav from "./Nav";
 import {recommendationsRoute, searchRoute, trendingRoute, watchlistRoute} from "../routes/routes";
 import {getTheme} from "../theme/theme";
 import Cookies from 'universal-cookie';
-import {getPalette} from "../theme/palettes";
+import {candy, getPalette} from "../theme/palettes";
 
 function App() {
 
     const cookies = new Cookies();
-    const [palette, setPalette] = useState()
+    const [palette, setPalette] = useState(candy)
 
     useEffect(()=> {
         if(cookies.get("theme") !== null) {

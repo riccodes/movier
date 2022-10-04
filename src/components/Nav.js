@@ -49,6 +49,8 @@ const Nav = ({ cookies }) => {
         setVariants(newVariants)
     }
 
+    const getTheme = () => cookies.get("theme") !== null ? cookies.get("theme") : "candy"
+
     useEffect(()=> {
         const {pathname} = location
         const {setAlert, recommendation} = common
@@ -116,7 +118,7 @@ const Nav = ({ cookies }) => {
                     labelId="select-theme"
                     id="theme"
                     label="Themes"
-                    defaultValue="candy"
+                    defaultValue={getTheme}
                     onChange={savePalette}
                 >
                     {themeList.map(item =>
