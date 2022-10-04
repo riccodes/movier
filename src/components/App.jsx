@@ -21,21 +21,21 @@ function App() {
     const common = useCommon()
     const {alert, recommendation, setAlert, snackBar, setSnackBar} = common
 
-    // const location = useLocation()
+    const location = useLocation()
 
-    // useEffect(()=> {
-    //     const {pathname} = location
-    //
-    //     switch (pathname){
-    //         case recommendationsRoute :
-    //             setAlert({isOpen: true, message: `Recommendations based on: ${recommendation}`})
-    //             break
-    //         default :
-    //             setAlert({isOpen: false, message: ""})
-    //     }
-    //
-    //
-    // }, [location, setAlert, recommendation])
+    useEffect(()=> {
+        const {pathname} = location
+
+        switch (pathname){
+            case recommendationsRoute :
+                setAlert({isOpen: true, message: `Recommendations based on: ${recommendation}`})
+                break
+            default :
+                setAlert({isOpen: false, message: ""})
+        }
+
+
+    }, [location, setAlert, recommendation])
 
     return (
         <ThemeProvider theme={theme}>
