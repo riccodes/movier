@@ -161,7 +161,7 @@ const MovieCard = ({movie}) => {
                 </CardContent>
                 {/*todo set global toggle for overview and providers*/}
                 {movie.overview.length > 0 &&
-                    <Accordion defaultExpanded elevation={0}>
+                    <Accordion elevation={0}>
                         <AccordionSummary
                             expandIcon={<ExpandMoreTwoToneIcon/>}
                             aria-controls="panel1a-content"
