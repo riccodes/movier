@@ -57,7 +57,7 @@ function App() {
                 )}
 
                 <Routes>
-                    <Route path="/" element={<Navigate to={searchRoute}/>}/>
+                    {/*<Route path="/" element={<Navigate to={searchRoute}/>}/>*/}
                     <Route path={searchRoute} element={<Search/>}/>
                     <Route path={watchlistRoute} element={<WatchList/>}/>
                     <Route path={recommendationsRoute} element={<Recommendations/>}/>

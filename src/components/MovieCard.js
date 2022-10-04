@@ -21,7 +21,6 @@ import OndemandVideoTwoToneIcon from '@mui/icons-material/OndemandVideoTwoTone';
 import DeleteForeverTwoToneIcon from '@mui/icons-material/DeleteForeverTwoTone';
 import {getWatchProviders} from "../api/api";
 import {getYear, handleError, handleSuccess} from "../util";
-import WatchProvs from "./WatchProvs";
 import {API, graphqlOperation} from "aws-amplify";
 import {createMovie, deleteMovie} from "../graphql/mutations";
 import {CHANGE_TRAILER, SET_DISPLAY, useCommon} from "../context/CommonContext";
@@ -31,6 +30,7 @@ import {useLocation, useNavigate} from "react-router-dom";
 import {useTMDB} from "../context/TMDBContext";
 import {sanitizeResults} from "../util/utils";
 import ExpandMoreTwoToneIcon from "@mui/icons-material/ExpandMoreTwoTone";
+import Providers from "./Providers";
 
 const MovieCard = ({movie}) => {
 
@@ -121,39 +121,6 @@ const MovieCard = ({movie}) => {
         removeMovie().then(() => { setSnackBar({isOpen: true, message:`${movie.title} deleted`}) })
     }
 
-    const renderProviders = () => {
-        if (providers) {
-
-            let totalProviders = 0
-            if (providers["rent"]) totalProviders += providers["rent"].length
-            if (providers["free"]) totalProviders += providers["free"].length
-            if (providers["flatrate"]) totalProviders += providers["flatrate"].length
-
-            if(totalProviders > 0){
-                return (
-                    <CardContent>
-                        <Accordion variant="outlined" elevation={0}>
-                            <AccordionSummary
-                                expandIcon={<ExpandMoreTwoToneIcon/>}
-                                aria-controls="panel1a-content"
-                                id="panel1a-header"
-                            >
-                                <Typography variant="caption">Where to watch [{totalProviders}]</Typography>
-                            </AccordionSummary>
-                            <AccordionDetails>
-                                <WatchProvs provs={providers["free"]} label="Free"/>
-                                <WatchProvs provs={providers["flatrate"]} label="Streaming"/>
-                                <WatchProvs provs={providers["rent"]} label="Rent"/>
-                            </AccordionDetails>
-                        </Accordion>
-                    </CardContent>
-                )
-            }
-        }
-
-        return <div/>
-    }
-
     const handleTrailerClick = () => {
         setTrailerData(CHANGE_TRAILER, currentTrailer)
         setTrailerData(SET_DISPLAY, true)
@@ -190,23 +157,21 @@ const MovieCard = ({movie}) => {
                             icon={<StarRateRoundedIcon/>}/>
                     </Stack>
                 </CardContent>
-                <CardContent>
-                    <Accordion defaultExpanded elevation={0}>
-                        <AccordionSummary
-                            expandIcon={<ExpandMoreTwoToneIcon/>}
-                            aria-controls="panel1a-content"
-                            id="panel1a-header"
-                        >
-                            <Typography variant="body1">Overview</Typography>
-                        </AccordionSummary>
-                        <AccordionDetails>
-                            <Typography variant="caption" color="text.secondary">
-                                {movie.overview}
-                            </Typography>
-                        </AccordionDetails>
-                    </Accordion>
-                </CardContent>
-                {renderProviders()}
+                <Accordion defaultExpanded elevation={0}>
+                    <AccordionSummary
+                        expandIcon={<ExpandMoreTwoToneIcon/>}
+                        aria-controls="panel1a-content"
+                        id="panel1a-header"
+                    >
+                        <Typography variant="body1">Overview</Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                        <Typography variant="caption" color="text.secondary">
+                            {movie.overview}
+                        </Typography>
+                    </AccordionDetails>
+                </Accordion>
+                <Providers providers={providers}/>
                 <CardActions>
                     {location.pathname === "/watchlist" &&
                         <Tooltip disableFocusListener title="Remove" placement="top">
