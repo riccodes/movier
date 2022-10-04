@@ -21,21 +21,21 @@ function App() {
     const common = useCommon()
     const {alert, recommendation, setAlert, snackBar, setSnackBar} = common
 
-    const location = useLocation()
+    // const location = useLocation()
 
-    useEffect(()=> {
-        const {pathname} = location
-
-        switch (pathname){
-            case recommendationsRoute :
-                setAlert({isOpen: true, message: `Recommendations based on: ${recommendation}`})
-                break
-            default :
-                setAlert({isOpen: false, message: ""})
-        }
-
-
-    }, [location, setAlert, recommendation])
+    // useEffect(()=> {
+    //     const {pathname} = location
+    //
+    //     switch (pathname){
+    //         case recommendationsRoute :
+    //             setAlert({isOpen: true, message: `Recommendations based on: ${recommendation}`})
+    //             break
+    //         default :
+    //             setAlert({isOpen: false, message: ""})
+    //     }
+    //
+    //
+    // }, [location, setAlert, recommendation])
 
     return (
         <ThemeProvider theme={theme}>
@@ -57,8 +57,8 @@ function App() {
                 )}
 
                 <Routes>
-                    {/*<Route path="/" element={<Navigate to={searchRoute}/>}/>*/}
-                    <Route path={searchRoute} element={<Search/>}/>
+                    <Route path="/" element={<Navigate to={searchRoute}/>}/>
+                    <Route index path={searchRoute} element={<Search/>}/>
                     <Route path={watchlistRoute} element={<WatchList/>}/>
                     <Route path={recommendationsRoute} element={<Recommendations/>}/>
                     <Route path={trendingRoute} element={<Trending/>}/>

@@ -13,8 +13,7 @@ const Providers = ({providers}) => {
 
         if (totalProviders > 0) {
             return (
-                <CardContent>
-                    <Accordion variant="outlined" elevation={0}>
+                    <Accordion elevation={0}>
                         <AccordionSummary
                             expandIcon={<ExpandMoreTwoToneIcon/>}
                             aria-controls="panel1a-content"
@@ -28,7 +27,6 @@ const Providers = ({providers}) => {
                             <WatchProvs provs={providers["rent"]} label="Rent"/>
                         </AccordionDetails>
                     </Accordion>
-                </CardContent>
             )
         }
     }

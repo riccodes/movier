@@ -157,6 +157,7 @@ const MovieCard = ({movie}) => {
                             icon={<StarRateRoundedIcon/>}/>
                     </Stack>
                 </CardContent>
+                {/*todo set global toggle for overview and providers*/}
                 <Accordion defaultExpanded elevation={0}>
                     <AccordionSummary
                         expandIcon={<ExpandMoreTwoToneIcon/>}
@@ -172,6 +173,7 @@ const MovieCard = ({movie}) => {
                     </AccordionDetails>
                 </Accordion>
                 <Providers providers={providers}/>
+                {/*fixme refactor this component*/}
                 <CardActions>
                     {location.pathname === "/watchlist" &&
                         <Tooltip disableFocusListener title="Remove" placement="top">
