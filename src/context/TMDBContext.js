@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import {useEffect} from "react";
 import tmdb from "themoviedb-javascript-library";
-import {handleError, handleSuccess, jsonify} from "../util";
+import {handleError, handleSuccess} from "../util";
 import {api_key, getTrending, images_host, tmdb_host} from "../api/api";
 import {useFilters} from "./FilterContext";
 import {sanitizeResults} from "../util/utils";

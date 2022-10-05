@@ -1,6 +1,15 @@
 import './css/App.css';
-import React from "react";
-import {Alert, Container, CssBaseline, Snackbar, ThemeProvider} from "@mui/material";
+import React, {useState} from "react";
+import {
+    Alert,
+    BottomNavigation,
+    BottomNavigationAction,
+    Container,
+    CssBaseline,
+    Paper,
+    Snackbar,
+    ThemeProvider
+} from "@mui/material";
 import Trailer from "./Trailer";
 import {useCommon} from "../context/CommonContext";
 import WatchList from "../routes/WatchList";
@@ -11,6 +20,10 @@ import Trending from "../routes/Trending";
 import Share from "../routes/Share";
 import Nav from "./Nav";
 import {recommendationsRoute, searchRoute, shareRoute, trendingRoute, watchlistRoute} from "../routes/routes";
+import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
+import SubscriptionsRoundedIcon from '@mui/icons-material/SubscriptionsRounded';
+import WhatshotRoundedIcon from '@mui/icons-material/WhatshotRounded';
+import MoreVertRoundedIcon from '@mui/icons-material/MoreVertRounded';
 import {useThemeHelper} from "../context/ThemeHelperContext";
 
 function App() {
@@ -20,6 +33,8 @@ function App() {
 
     const common = useCommon()
     const {alert, snackBar, setSnackBar} = common
+
+    const [value, setValue] = useState()
 
     return (
         <ThemeProvider theme={theme}>
@@ -34,7 +49,7 @@ function App() {
                     </Alert>
                 </Snackbar>
                 <Trailer/>
-                <Nav />
+                {/*<Nav />*/}
                 {alert.isOpen && (
                     <Alert severity="info" sx={{marginBottom: "32px"}} icon={alert.icon}>
                         {alert.message}
@@ -49,6 +64,7 @@ function App() {
                     <Route path={trendingRoute} element={<Trending/>}/>
                     <Route path={`${shareRoute}/:movieId`} element={<Share/>}/>
                 </Routes>
+                {/*<BottomNav />*/}
             </Container>
         </ThemeProvider>
     )
