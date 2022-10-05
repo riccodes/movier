@@ -32,13 +32,38 @@ export const getTheme = (palette, mode = "light") => createTheme({
             main: palette.error
         }
     },
-    components: {
-        MuiRating: {
-            styleOverrides: {
-                root: sx({
-                    color: palette.secondary
-                })
+    mode,
+    ...(mode === 'light')
+        ?
+        {
+            components: {
+                MuiRating: {
+                    styleOverrides: {
+                        root: sx({
+                            color: palette.secondary
+                        })
+                    }
+                }
             }
         }
-    }
+        :
+        {
+            components: {
+                MuiRating: {
+                    styleOverrides: {
+                        root: sx({
+                            color: palette.secondary
+                        })
+                    }
+                },
+                MuiAccordion: {
+                    styleOverrides: {
+                        root: sx({
+                            background: "#303030"
+                        })
+                    }
+                }
+            }
+        }
+
 });

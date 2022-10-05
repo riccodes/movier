@@ -19,7 +19,7 @@ const Providers = ({providers}) => {
                             aria-controls="panel1a-content"
                             id="panel1a-header"
                         >
-                            {/*todo show provider icons*/}
+                            {/*todo show "select" provider icons*/}
                             <Typography variant="caption">Where to watch [{totalProviders}]</Typography>
                         </AccordionSummary>
                         <AccordionDetails>

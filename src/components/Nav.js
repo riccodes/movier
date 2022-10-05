@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {useLocation, useNavigate} from "react-router-dom";
-import {Button, IconButton, Stack, Tooltip} from "@mui/material";
+import {Button, ButtonGroup, IconButton, Stack, Tooltip} from "@mui/material";
 import ManageSearchRoundedIcon from '@mui/icons-material/ManageSearchRounded';
 import SubscriptionsRoundedIcon from '@mui/icons-material/SubscriptionsRounded';
 import WhatshotRoundedIcon from '@mui/icons-material/WhatshotRounded';
@@ -76,6 +76,7 @@ const Nav = () => {
             spacing={{xs: 1, sm: 2, md: 3}}
             sx={{marginBottom: "8px"}}
             direction="row" >
+            <ButtonGroup>
                 <Button
                     size="small"
                     variant={variants.find(v => v.route === searchRoute).variant}
@@ -92,14 +93,15 @@ const Nav = () => {
                     onClick={() => navigateTo(trendingRoute)}>
                     Trending
                 </Button>
-            <Button
-                size="small"
-                variant={variants.find(v => v.route === watchlistRoute).variant}
-                color={variants.find(v => v.route === watchlistRoute).color}
-                startIcon={<SubscriptionsRoundedIcon/>}
-                onClick={() => navigateTo(watchlistRoute)}>
-                Watchlist
-            </Button>
+                <Button
+                    size="small"
+                    variant={variants.find(v => v.route === watchlistRoute).variant}
+                    color={variants.find(v => v.route === watchlistRoute).color}
+                    startIcon={<SubscriptionsRoundedIcon/>}
+                    onClick={() => navigateTo(watchlistRoute)}>
+                    Watchlist
+                </Button>
+            </ButtonGroup>
             <Tooltip disableFocusListener title="Menu" placement="top">
                 <IconButton
                     id="menu-button"
