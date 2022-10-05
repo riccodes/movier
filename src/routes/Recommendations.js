@@ -1,20 +1,13 @@
 import React from "react";
-import {Grid} from "@mui/material";
-import MovieCard from "../components/MovieCard";
 import {useTMDB} from "../context/TMDBContext";
+import MovieList from "../components/MovieList";
 
 const Recommendations = () => {
 
     const tmdb = useTMDB()
     const {movies} = tmdb
 
-    return (
-        <>
-            <Grid container maxWidth="xl" columns={{xs: 2, sm: 8, md: 20}}>
-                {movies?.map(movie => <MovieCard key={movie.id} movie={movie}/> )}
-            </Grid>
-        </>
-    )
+    return <MovieList movies={movies}/>
 }
 
 export default Recommendations

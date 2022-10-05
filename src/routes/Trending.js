@@ -1,7 +1,7 @@
 import React, {useState} from "react";
-import {Chip, Grid, Typography} from "@mui/material";
-import MovieCard from "../components/MovieCard";
+import {Chip, Typography} from "@mui/material";
 import {useTMDB} from "../context/TMDBContext";
+import MovieList from "../components/MovieList";
 
 const Trending = () => {
 
@@ -45,9 +45,7 @@ const Trending = () => {
                 label={"Weekly"}
                 onClick={() => { handleChipState("week") }}
             />
-            <Grid container maxWidth="xl" columns={{xs: 2, sm: 8, md: 20}}>
-                {trending?.map(movie => <MovieCard key={movie.id} movie={movie}/> )}
-            </Grid>
+           <MovieList movies={trending} />
         </>
     )
 }

@@ -1,8 +1,7 @@
 import React from "react";
 import FilterBar from "../components/FilterBar";
-import {Grid} from "@mui/material";
-import MovieCard from "../components/MovieCard";
 import {useTMDB} from "../context/TMDBContext";
+import MovieList from "../components/MovieList";
 
 export const Search = () => {
 
@@ -12,9 +11,7 @@ export const Search = () => {
     return (
         <>
             <FilterBar />
-            <Grid container maxWidth="xl" columns={{xs: 2, sm: 8, md: 20}}>
-                {movies?.map(movie => <MovieCard key={movie.id} movie={movie}/> )}
-            </Grid>
+            <MovieList movies={movies}/>
         </>
     )
 }
