@@ -1,12 +1,9 @@
 import './css/App.css';
-import React, {useState} from "react";
+import React from "react";
 import {
     Alert,
-    BottomNavigation,
-    BottomNavigationAction,
     Container,
     CssBaseline,
-    Paper,
     Snackbar,
     ThemeProvider
 } from "@mui/material";
@@ -18,13 +15,9 @@ import Search from "../routes/Search";
 import Recommendations from "../routes/Recommendations";
 import Trending from "../routes/Trending";
 import Share from "../routes/Share";
-import Nav from "./Nav";
 import {recommendationsRoute, searchRoute, shareRoute, trendingRoute, watchlistRoute} from "../routes/routes";
-import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
-import SubscriptionsRoundedIcon from '@mui/icons-material/SubscriptionsRounded';
-import WhatshotRoundedIcon from '@mui/icons-material/WhatshotRounded';
-import MoreVertRoundedIcon from '@mui/icons-material/MoreVertRounded';
 import {useThemeHelper} from "../context/ThemeHelperContext";
+import BottomNav from "./BottomNav";
 
 function App() {
 
@@ -33,8 +26,6 @@ function App() {
 
     const common = useCommon()
     const {alert, snackBar, setSnackBar} = common
-
-    const [value, setValue] = useState()
 
     return (
         <ThemeProvider theme={theme}>
@@ -64,7 +55,7 @@ function App() {
                     <Route path={trendingRoute} element={<Trending/>}/>
                     <Route path={`${shareRoute}/:movieId`} element={<Share/>}/>
                 </Routes>
-                {/*<BottomNav />*/}
+                <BottomNav />
             </Container>
         </ThemeProvider>
     )

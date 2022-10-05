@@ -24,7 +24,7 @@ const Nav = () => {
 
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
-    const handleClick = (event) => {
+    const handleMenuClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
 
@@ -108,7 +108,7 @@ const Nav = () => {
                     aria-controls={open ? 'basic-menu' : undefined}
                     aria-haspopup="true"
                     aria-expanded={open ? 'true' : undefined}
-                    onClick={handleClick}
+                    onClick={handleMenuClick}
                     color="secondary"
                     size="small"
                     hidden={true} aria-label="menu">
