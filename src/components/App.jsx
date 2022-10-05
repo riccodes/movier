@@ -1,5 +1,5 @@
 import './css/App.css';
-import React, {useEffect, useState} from "react";
+import React from "react";
 import {Alert, Container, CssBaseline, Snackbar, ThemeProvider} from "@mui/material";
 import Trailer from "./Trailer";
 import {useCommon} from "../context/CommonContext";
@@ -10,26 +10,12 @@ import Recommendations from "../routes/Recommendations";
 import Trending from "../routes/Trending";
 import Nav from "./Nav";
 import {recommendationsRoute, searchRoute, trendingRoute, watchlistRoute} from "../routes/routes";
-import {getTheme} from "../theme/theme";
-import Cookies from 'universal-cookie';
-import {candy, getPalette} from "../theme/palettes";
+import {useThemeHelper} from "../context/ThemeHelperContext";
 
 function App() {
 
-    const cookies = new Cookies();
-    //fixme consider moving these to a Context
-    const [palette, setPalette] = useState(candy)
-    const [themeMode, setThemeMode] = useState("light")
-
-    useEffect(()=> {
-        if(cookies.get("theme") !== null) {
-            setPalette(getPalette(cookies.get('theme')))
-        }
-    }, [ palette ])
-
-    cookies.addChangeListener(cookie => { setPalette(getPalette(cookie.value)) })
-
-    const theme = getTheme(palette, themeMode)
+    const themeHelper = useThemeHelper()
+    const {theme} = themeHelper
 
     const common = useCommon()
     const {alert, snackBar, setSnackBar} = common
@@ -47,7 +33,7 @@ function App() {
                     </Alert>
                 </Snackbar>
                 <Trailer/>
-                <Nav cookies={cookies} themeMode={themeMode} setThemeMode={setThemeMode} />
+                <Nav />
                 {alert.isOpen && (
                     <Alert severity="info" sx={{marginBottom: "32px"}} icon={alert.icon}>
                         {alert.message}

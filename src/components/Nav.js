@@ -1,39 +1,24 @@
 import React, {useEffect, useState} from "react";
 import {useLocation, useNavigate} from "react-router-dom";
-import {
-    Button,
-    FormControl,
-    IconButton,
-    InputLabel,
-    MenuItem,
-    Select,
-    Stack
-} from "@mui/material";
+import {Button, FormControl, IconButton, InputLabel, MenuItem, Select, Stack} from "@mui/material";
 import ManageSearchRoundedIcon from '@mui/icons-material/ManageSearchRounded';
 import SubscriptionsRoundedIcon from '@mui/icons-material/SubscriptionsRounded';
 import WhatshotRoundedIcon from '@mui/icons-material/WhatshotRounded';
 import ModeNightRoundedIcon from '@mui/icons-material/ModeNightRounded';
 import Brightness7RoundedIcon from '@mui/icons-material/Brightness7Rounded';
 import {recommendationsRoute, searchRoute, trendingRoute, watchlistRoute} from "../routes/routes";
-import { themeList} from "../theme/palettes";
+import {themeList} from "../theme/palettes";
 import {getRandom} from "../util";
 import {useCommon} from "../context/CommonContext";
+import {useThemeHelper} from "../context/ThemeHelperContext";
 
-const Nav = ({ cookies, themeMode, setThemeMode }) => {
+const Nav = () => {
     const navigateTo = useNavigate()
     const location = useLocation()
     const common = useCommon()
 
-    const savePalette = e => {
-        cookies.set('theme', e.target.value, {path: '/'});
-    }
-
-    const setTheme = () => {
-        const mode = themeMode === "light" ? "dark" : "light"
-        setThemeMode(mode)
-    }
-
-    const getTheme = () => cookies.get("theme") !== null ? cookies.get("theme") : "candy"
+    const themeHelper = useThemeHelper()
+    const { themeMode, toggleThemeMode, setThemeOnCookie, palette} = themeHelper
 
     const clearVariants = [
         {route: searchRoute, variant: "text", color: "secondary"},
@@ -85,13 +70,12 @@ const Nav = ({ cookies, themeMode, setThemeMode }) => {
         }
 
     }, [location])
-
+    console.log(palette.name)
     return (
         <Stack
             spacing={{xs: 1, sm: 2, md: 3}}
             sx={{marginBottom: "8px"}}
-            direction={{xs: 'column', sm: 'row'}} >
-            <Stack direction="row" sx={{marginBottom: "8px"}}>
+            direction={{xs: 'column', sm: 'row', md: 'row'}} >
                 <Button
                     size="small"
                     variant={variants.find(v => v.route === searchRoute).variant}
@@ -116,26 +100,26 @@ const Nav = ({ cookies, themeMode, setThemeMode }) => {
                     onClick={() => navigateTo(watchlistRoute)}>
                     Watchlist
                 </Button>
+            <Stack direction="row">
+                <FormControl sx={{minWidth: "90%"}}>
+                    <InputLabel id="select-label">Theme</InputLabel>
+                    {/*todo add to overflow menu??*/}
+                    <Select
+                        size="small"
+                        labelId="select-theme"
+                        id="theme"
+                        label="Theme"
+                        defaultValue={palette.name}
+                        onChange={setThemeOnCookie}
+                    >
+                        {themeList.map(item =>
+                            <MenuItem key={`${getRandom()}-${item.id}`} value={item.id}>{item.name}</MenuItem>)}
+                    </Select>
+                </FormControl>
+                <IconButton onClick={toggleThemeMode} color="inherit">
+                    {themeMode === 'dark' ? <Brightness7RoundedIcon/> : <ModeNightRoundedIcon/>}
+                </IconButton>
             </Stack>
-            <FormControl sx={{m: 1, minWidth: 120}}>
-                <InputLabel id="select-label">Themes</InputLabel>
-                {/*fixme default value should not be hardcoded*/}
-                {/*todo add to overflow menu??*/}
-                <Select
-                    size="small"
-                    labelId="select-theme"
-                    id="theme"
-                    label="Themes"
-                    defaultValue={getTheme}
-                    onChange={savePalette}
-                >
-                    {themeList.map(item =>
-                        <MenuItem key={`${getRandom()}-${item.id}`} value={item.id}>{item.name}</MenuItem>)}
-                </Select>
-            </FormControl>
-            <IconButton sx={{ ml: 1 }} onClick={setTheme} color="inherit">
-                {themeMode === 'dark' ? <Brightness7RoundedIcon /> : <ModeNightRoundedIcon />}
-            </IconButton>
         </Stack>
     )
 }

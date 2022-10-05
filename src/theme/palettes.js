@@ -20,6 +20,7 @@ export const getPalette = id => {
 }
 
 export const candy = {
+    name: "candy",
     primary : "#EF476F",
     secondary : "#26547C",
     error : "#C73E1D",
@@ -28,6 +29,7 @@ export const candy = {
 }
 
 export const ice = {
+    name: "ice",
     primary : "#0077b6",
     secondary : "#90E0EF",
     error : "#601700",
@@ -36,6 +38,7 @@ export const ice = {
 }
 
 export const mintCoffee = {
+    name: "mint coffee",
     primary : "#11C229",
     secondary : "#503302",
     error : "#A31818",
@@ -44,6 +47,7 @@ export const mintCoffee = {
 }
 
 export const scholar = {
+    name: "scholar",
     primary : "#23967F",
     secondary : "#14213E",
     error : "#A44A3F",
@@ -52,6 +56,7 @@ export const scholar = {
 }
 
 export const bloodOrange = {
+    name: "blood orange",
     primary : "#AD2831",
     secondary : "#F57606",
     error : "#79151C",
