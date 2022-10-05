@@ -40,8 +40,8 @@ export const ice = {
 export const mintCoffee = {
     name: "mint coffee",
     primary : "#11C229",
-    secondary : "#503302",
-    error : "#A31818",
+    secondary : "#754806",
+    error : "#DF2A2A",
     info : "#F2A929",
     hover : "#ECFDEF"
 }
