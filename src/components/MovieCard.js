@@ -16,9 +16,9 @@ import {
 } from "@mui/material";
 import SubscriptionsRoundedIcon from '@mui/icons-material/SubscriptionsRounded';
 import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
-import SettingsSuggestTwoToneIcon from '@mui/icons-material/SettingsSuggestTwoTone';
-import OndemandVideoTwoToneIcon from '@mui/icons-material/OndemandVideoTwoTone';
-import DeleteForeverTwoToneIcon from '@mui/icons-material/DeleteForeverTwoTone';
+import SettingsSuggestRoundedIcon from '@mui/icons-material/SettingsSuggestRounded';
+import OndemandVideoRoundedIcon from '@mui/icons-material/OndemandVideoRounded';
+import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 import {getWatchProviders} from "../api/api";
 import {getYear, handleError, handleSuccess} from "../util";
 import {API, graphqlOperation} from "aws-amplify";
@@ -182,7 +182,7 @@ const MovieCard = ({movie}) => {
                     {location.pathname === "/watchlist" &&
                         <Tooltip disableFocusListener title="Remove" placement="top">
                             <IconButton size="large" color="error" onClick={remove} aria-label="removed">
-                                <DeleteForeverTwoToneIcon/>
+                                <DeleteRoundedIcon/>
                             </IconButton>
                         </Tooltip>
                     }
@@ -195,13 +195,13 @@ const MovieCard = ({movie}) => {
                     }
                     <Tooltip disableFocusListener title="Get Recommendations" placement="top">
                         <IconButton color="secondary" size="large" onClick={getRecommendations} aria-label="get recommendations">
-                            <SettingsSuggestTwoToneIcon/>
+                            <SettingsSuggestRoundedIcon/>
                         </IconButton>
                     </Tooltip>
                     {isTrailerButtonDisplay &&
                         <Tooltip disableFocusListener title="Watch trailer" placement="top">
                             <IconButton color="secondary" size="large" hidden={true} onClick={handleTrailerClick} aria-label="watch trailer">
-                                <OndemandVideoTwoToneIcon/>
+                                <OndemandVideoRoundedIcon/>
                             </IconButton>
                         </Tooltip>
                     }
