@@ -32,8 +32,8 @@ export const ice = {
     name: "ice",
     primary : "#0077b6",
     secondary : "#90E0EF",
-    error : "#601700",
-    info : "#601700",
+    error : "#E97286",
+    info : "#FF7247",
     hover : "#EDFAFD"
 }
 
