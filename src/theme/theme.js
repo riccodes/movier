@@ -1,6 +1,5 @@
 import {createTheme, experimental_sx as sx} from "@mui/material";
 
-//fixme make this not garbage
 export const getTheme = (palette, mode = "light") => createTheme({
     palette: {
         mode,
@@ -31,11 +30,7 @@ export const getTheme = (palette, mode = "light") => createTheme({
         },
         error: {
             main: palette.error
-        },
-        // action : {
-        //     active: palette.primary,
-        //     hover: palette.hover,
-        // },
+        }
     },
     components: {
         MuiRating: {
