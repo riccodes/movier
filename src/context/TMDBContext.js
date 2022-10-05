@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import {useEffect} from "react";
 import tmdb from "themoviedb-javascript-library";
-import {handleError, handleSuccess} from "../util";
+import {handleError, handleSuccess, jsonify} from "../util";
 import {api_key, getTrending, images_host, tmdb_host} from "../api/api";
 import {useFilters} from "./FilterContext";
 import {sanitizeResults} from "../util/utils";
@@ -22,15 +22,19 @@ function TMDBProvider({children}) {
     const {year} = yearState
 
     const [movies, setMovies] = useState([])
+    const [movie, setMovie] = useState([])
     const [trending, setTrending] = useState([])
     const [trendingTimeWindow, setTrendingTimeWindow] = useState("day")
+
+    const getMovieById = movieId => {
+        tmdb.movies.getById( {id: movieId}, res => setMovie(jsonify(res)), handleError )
+    }
 
     useEffect(() => {
         getTrending("movie", trendingTimeWindow).then(response => {
             setTrending(sanitizeResults(response.data.results))
         })
     }, [trendingTimeWindow])
-
 
     useEffect(() => {
         tmdb.discover.getMovies(
@@ -52,7 +56,7 @@ function TMDBProvider({children}) {
 
     }, [certification, genre, person, rating, sort, year, watchProvider])
 
-    const value = {movies, setMovies, trending, setTrending, setTrendingTimeWindow}
+    const value = {movie, movies, setMovies, trending, setTrending, setTrendingTimeWindow, getMovieById}
     return <TMDBContext.Provider value={value}>{children}</TMDBContext.Provider>
 }
 

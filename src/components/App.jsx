@@ -8,8 +8,9 @@ import {Navigate, Route, Routes} from "react-router-dom";
 import Search from "../routes/Search";
 import Recommendations from "../routes/Recommendations";
 import Trending from "../routes/Trending";
+import Share from "../routes/Share";
 import Nav from "./Nav";
-import {recommendationsRoute, searchRoute, trendingRoute, watchlistRoute} from "../routes/routes";
+import {recommendationsRoute, searchRoute, shareRoute, trendingRoute, watchlistRoute} from "../routes/routes";
 import {useThemeHelper} from "../context/ThemeHelperContext";
 
 function App() {
@@ -46,6 +47,7 @@ function App() {
                     <Route path={watchlistRoute} element={<WatchList/>}/>
                     <Route path={recommendationsRoute} element={<Recommendations/>}/>
                     <Route path={trendingRoute} element={<Trending/>}/>
+                    <Route path={`${shareRoute}/:movieId`} element={<Share/>}/>
                 </Routes>
             </Container>
         </ThemeProvider>
