@@ -21,10 +21,10 @@ export const getPalette = id => {
 
 export const candy = {
     name: "candy",
-    primary : "#EF476F",
+    primary : "#F0567A",
     secondary : "#26547C",
-    error : "#C73E1D",
-    info : "#FFD166",
+    error : "#E87A5E",
+    info : "#F4F750",
     hover : "#FDECF0"
 }
 
