@@ -1,28 +1,18 @@
 import React, {useEffect, useState} from "react";
 import {useLocation, useNavigate} from "react-router-dom";
-import {Button, FormControl, IconButton, InputLabel, MenuItem, Select, Stack} from "@mui/material";
+import {Button, IconButton, Stack, Tooltip} from "@mui/material";
 import ManageSearchRoundedIcon from '@mui/icons-material/ManageSearchRounded';
 import SubscriptionsRoundedIcon from '@mui/icons-material/SubscriptionsRounded';
 import WhatshotRoundedIcon from '@mui/icons-material/WhatshotRounded';
-import ModeNightRoundedIcon from '@mui/icons-material/ModeNightRounded';
-import Brightness7RoundedIcon from '@mui/icons-material/Brightness7Rounded';
+import MoreVertRoundedIcon from '@mui/icons-material/MoreVertRounded';
 import {recommendationsRoute, searchRoute, trendingRoute, watchlistRoute} from "../routes/routes";
-import {themeList} from "../theme/palettes";
-import {getRandom} from "../util";
 import {useCommon} from "../context/CommonContext";
-import {useThemeHelper} from "../context/ThemeHelperContext";
+import OverFlowMenu from "./OverFlowMenu";
 
 const Nav = () => {
     const navigateTo = useNavigate()
     const location = useLocation()
     const common = useCommon()
-    const themeHelper = useThemeHelper()
-
-    const { cookies, themeMode, toggleThemeMode, setThemeOnCookie} = themeHelper
-
-    const getTheme = () => {
-        return cookies.get("theme") !== null ? cookies.get("theme") : "candy"
-    }
 
     const clearVariants = [
         {route: searchRoute, variant: "text", color: "secondary"},
@@ -32,9 +22,15 @@ const Nav = () => {
 
     const [variants, setVariants] = useState(clearVariants)
 
-    const setCurrentNav = route =>{
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const open = Boolean(anchorEl);
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const setCurrentNav = route => {
         const newVariants = variants.map(v => {
-            if (v.route === route){
+            if (v.route === route) {
                 v.variant = "contained"
                 v.color = "primary"
             } else {
@@ -79,7 +75,7 @@ const Nav = () => {
         <Stack
             spacing={{xs: 1, sm: 2, md: 3}}
             sx={{marginBottom: "8px"}}
-            direction={{xs: 'column', sm: 'row', md: 'row'}} >
+            direction="row" >
                 <Button
                     size="small"
                     variant={variants.find(v => v.route === searchRoute).variant}
@@ -96,34 +92,28 @@ const Nav = () => {
                     onClick={() => navigateTo(trendingRoute)}>
                     Trending
                 </Button>
-                <Button
+            <Button
+                size="small"
+                variant={variants.find(v => v.route === watchlistRoute).variant}
+                color={variants.find(v => v.route === watchlistRoute).color}
+                startIcon={<SubscriptionsRoundedIcon/>}
+                onClick={() => navigateTo(watchlistRoute)}>
+                Watchlist
+            </Button>
+            <Tooltip disableFocusListener title="Menu" placement="top">
+                <IconButton
+                    id="menu-button"
+                    aria-controls={open ? 'basic-menu' : undefined}
+                    aria-haspopup="true"
+                    aria-expanded={open ? 'true' : undefined}
+                    onClick={handleClick}
+                    color="secondary"
                     size="small"
-                    variant={variants.find(v => v.route === watchlistRoute).variant}
-                    color={variants.find(v => v.route === watchlistRoute).color}
-                    startIcon={<SubscriptionsRoundedIcon/>}
-                    onClick={() => navigateTo(watchlistRoute)}>
-                    Watchlist
-                </Button>
-            <Stack direction="row">
-                <FormControl sx={{minWidth: "90%"}}>
-                    <InputLabel id="select-label">Theme</InputLabel>
-                    {/*todo add to overflow menu??*/}
-                    <Select
-                        size="small"
-                        labelId="select-theme"
-                        id="theme"
-                        label="Theme"
-                        onChange={setThemeOnCookie}
-                        defaultValue={getTheme}
-                    >
-                        {themeList.map(item =>
-                            <MenuItem key={`${getRandom()}-${item.id}`} value={item.id}>{item.name}</MenuItem>)}
-                    </Select>
-                </FormControl>
-                <IconButton onClick={toggleThemeMode} color="inherit">
-                    {themeMode === 'dark' ? <Brightness7RoundedIcon/> : <ModeNightRoundedIcon/>}
+                    hidden={true} aria-label="menu">
+                    <MoreVertRoundedIcon/>
                 </IconButton>
-            </Stack>
+            </Tooltip>
+            <OverFlowMenu open={open} anchorEl={anchorEl} setAnchorEl={setAnchorEl}/>
         </Stack>
     )
 }
