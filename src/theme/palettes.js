@@ -57,8 +57,8 @@ export const scholar = {
 
 export const bloodOrange = {
     name: "blood orange",
-    primary : "#AD2831",
-    secondary : "#F57606",
+    primary : "#D03943",
+    secondary : "#EF7306",
     error : "#79151C",
     info : "#404E4F",
     hover : "#FBEEEF"
