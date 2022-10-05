@@ -16,8 +16,7 @@ function TMDBProvider({children}) {
 
     const filters = useFilters()
     const {watchProvider} = filters
-    const { certification, genre, personState, ratingState, sortState, yearState} = filters
-    const {person} = personState
+    const { certification, genre, person, ratingState, sortState, yearState} = filters
     const {rating} = ratingState
     const {sort} = sortState
     const {year} = yearState

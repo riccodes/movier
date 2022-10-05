@@ -58,19 +58,6 @@ const watchProviderList = [
 ]
 
 //fixme remove all these reducers
-
-function personReducer (state, action) {
-
-    switch (action.type) {
-        case 'setPerson': {
-            return {...state, person:action.data}
-        }
-        default: {
-            throw new Error(`Unhandled action type: ${action.type}`)
-        }
-    }
-}
-
 function ratingReducer(state, action) {
 
     switch (action.type) {
@@ -109,9 +96,6 @@ function yearReducer(state, action) {
 
 function FilterProvider({children}) {
 
-    const setPerson = person => {
-        personDispatch({type: 'setPerson', data: person})
-    }
     const setRating = rating => {
         ratingDispatch({type: 'setRating', data: rating})
     }
@@ -122,12 +106,12 @@ function FilterProvider({children}) {
         yearDispatch({type: 'setYear', data: year})
     }
 
-    const [personState, personDispatch] = React.useReducer(personReducer, {person: {id: "", name: ""}, setPerson: setPerson})
     const [ratingState, ratingDispatch] = React.useReducer(ratingReducer, {rating : "", setRating: setRating})
     const [sortState, sortDispatch] = React.useReducer(sortReducer, {sort: sorts.find(sort => sort.key === "pop.desc"), setSort: setSort})
     const [yearState, yearDispatch] = React.useReducer(yearReducer, {year : 0, setYear: setYear})
 
     const [genre, setGenre] = useState({genre: {name : ""}})
+    const [person, setPerson] = useState({person: {id: "", name: ""}})
     const [watchProvider, setWatchProvider] = useState({provider_name: ""})
     const [certification, setCertification] = useState({certification: {certification: ""}})
 
@@ -138,7 +122,11 @@ function FilterProvider({children}) {
         setCertification,
         genre,
         setGenre,
-        personState, ratingState, sortState, yearState, watchProvider, setWatchProvider,
+        person,
+        setPerson,
+        ratingState, sortState, yearState,
+        watchProvider,
+        setWatchProvider,
         watchProviderList
     }
     return <FilterContext.Provider value={value}>{children}</FilterContext.Provider>
