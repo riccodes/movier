@@ -91,7 +91,7 @@ const Nav = () => {
                     color={variants.find(v => v.route === trendingRoute).color}
                     startIcon={<WhatshotRoundedIcon/>}
                     onClick={() => navigateTo(trendingRoute)}>
-                    Trending
+                    Top
                 </Button>
                 <Button
                     size="small"
