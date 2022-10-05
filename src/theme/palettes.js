@@ -49,7 +49,7 @@ export const mintCoffee = {
 export const scholar = {
     name: "scholar",
     primary : "#23967F",
-    secondary : "#14213E",
+    secondary : "#32539A",
     error : "#A44A3F",
     info : "#FCA311",
     hover : "#EEFBF9"
