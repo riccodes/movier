@@ -13,16 +13,6 @@ function ThemeHelperProvider({children}) {
     const [palette, setPalette] = useState(candy)
     const [themeMode, setThemeMode] = useState("light")
 
-    cookies.addChangeListener(cookie => {
-        if(cookie.name === "theme"){
-            setPalette(getPalette(cookies.get('theme')))
-        }
-
-        if(cookie.name === "themeMode"){
-            setThemeMode(cookies.get("themeMode"))
-        }
-    })
-
     useEffect(()=> {
         if(cookies.get("theme") !== null) {
             setPalette(getPalette(cookies.get('theme')))
@@ -33,6 +23,16 @@ function ThemeHelperProvider({children}) {
         }
 
     }, [palette, themeMode])
+
+    cookies.addChangeListener(cookie => {
+        if(cookie.name === "theme"){
+            setPalette(getPalette(cookies.get('theme')))
+        }
+
+        if(cookie.name === "themeMode"){
+            setThemeMode(cookies.get("themeMode"))
+        }
+    })
 
     const setThemeOnCookie = (e) => {
         cookies.set('theme', e.target.value, {path: '/'})

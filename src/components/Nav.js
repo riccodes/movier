@@ -16,10 +16,9 @@ const Nav = () => {
     const navigateTo = useNavigate()
     const location = useLocation()
     const common = useCommon()
-
     const themeHelper = useThemeHelper()
-    const { themeMode, toggleThemeMode, setThemeOnCookie, palette} = themeHelper
 
+    const { themeMode, toggleThemeMode, setThemeOnCookie, palette} = themeHelper
     const clearVariants = [
         {route: searchRoute, variant: "text", color: "secondary"},
         {route: watchlistRoute, variant: "text", color: "secondary"},
@@ -70,7 +69,7 @@ const Nav = () => {
         }
 
     }, [location])
-    console.log(palette.name)
+
     return (
         <Stack
             spacing={{xs: 1, sm: 2, md: 3}}
@@ -104,12 +103,12 @@ const Nav = () => {
                 <FormControl sx={{minWidth: "90%"}}>
                     <InputLabel id="select-label">Theme</InputLabel>
                     {/*todo add to overflow menu??*/}
+                    {/*fixme select proper theme on load*/}
                     <Select
                         size="small"
                         labelId="select-theme"
                         id="theme"
                         label="Theme"
-                        defaultValue={palette.name}
                         onChange={setThemeOnCookie}
                     >
                         {themeList.map(item =>
