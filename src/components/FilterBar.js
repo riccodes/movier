@@ -73,7 +73,6 @@ const FilterBar = () => {
         tmdbApi.certifications.getMovieList(res => setCertifications(jsonify(res).certifications.US), handleError)
     }, [])
 
-    //fixme consider moving all filter functions to FilterContext
     const handleYearSelect = e => setYear(e.target.value)
     const handleGenreSelect = e => {
         const g = genres.find(gen => gen.name === e.target.value)

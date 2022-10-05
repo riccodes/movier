@@ -18,7 +18,12 @@ const Nav = () => {
     const common = useCommon()
     const themeHelper = useThemeHelper()
 
-    const { themeMode, toggleThemeMode, setThemeOnCookie, palette} = themeHelper
+    const { cookies, themeMode, toggleThemeMode, setThemeOnCookie} = themeHelper
+
+    const getTheme = () => {
+        return cookies.get("theme") !== null ? cookies.get("theme") : "candy"
+    }
+
     const clearVariants = [
         {route: searchRoute, variant: "text", color: "secondary"},
         {route: watchlistRoute, variant: "text", color: "secondary"},
@@ -103,13 +108,13 @@ const Nav = () => {
                 <FormControl sx={{minWidth: "90%"}}>
                     <InputLabel id="select-label">Theme</InputLabel>
                     {/*todo add to overflow menu??*/}
-                    {/*fixme select proper theme on load*/}
                     <Select
                         size="small"
                         labelId="select-theme"
                         id="theme"
                         label="Theme"
                         onChange={setThemeOnCookie}
+                        defaultValue={getTheme}
                     >
                         {themeList.map(item =>
                             <MenuItem key={`${getRandom()}-${item.id}`} value={item.id}>{item.name}</MenuItem>)}
