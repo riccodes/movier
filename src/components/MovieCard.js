@@ -30,9 +30,10 @@ import {useLocation, useNavigate} from "react-router-dom";
 import {useTMDB} from "../context/TMDBContext";
 import {sanitizeResults} from "../util/utils";
 import ExpandMoreTwoToneIcon from "@mui/icons-material/ExpandMoreTwoTone";
+import ShareRoundedIcon from '@mui/icons-material/ShareRounded';
 import Providers from "./Providers";
 
-const MovieCard = ({movie}) => {
+const MovieCard = ({ movie }) => {
 
     const location = useLocation()
     const navigate = useNavigate()
@@ -125,6 +126,11 @@ const MovieCard = ({movie}) => {
         setTrailerData(SET_DISPLAY, true)
     }
 
+    const handleShareClick = () => {
+        navigator.clipboard.writeText(`https://movier.riccodes.com/share/${movie.id}`)
+        setSnackBar({isOpen: true, message: "Link copied to clipboard"})
+    }
+
     const formatAverage = () => Math.round(parseFloat(movie.vote_average) * 10) / 10
 
     const determineImage = () => {
@@ -205,6 +211,11 @@ const MovieCard = ({movie}) => {
                             </IconButton>
                         </Tooltip>
                     }
+                    <Tooltip disableFocusListener title="share movie" placement="top">
+                        <IconButton color="secondary" size="large" hidden={true} onClick={handleShareClick} aria-label="share movie">
+                            <ShareRoundedIcon/>
+                        </IconButton>
+                    </Tooltip>
                 </CardActions>
             </Card>
         </Grid>

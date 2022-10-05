@@ -1,18 +1,24 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import MovieList from "../components/MovieList";
 import {useParams} from "react-router-dom";
-import {useTMDB} from "../context/TMDBContext";
+import tmdb from "themoviedb-javascript-library";
+import {handleError, jsonify} from "../util";
 
 const Share = () => {
 
     let {movieId} = useParams()
 
-    const tmdb = useTMDB()
-    const {getMovieById, movie} = tmdb
+    const [movie, setMovie] = useState()
 
-    useEffect(()=> { getMovieById(movieId) }, [movieId])
+    useEffect(()=> {
+        tmdb.movies.getById( {id: movieId}, res => setMovie(jsonify(res)), handleError )
+        console.log(movie)
+    }, [movieId])
 
-    return <MovieList movies={[ movie ]}/>
+    if(movie)
+        return <MovieList movies={[ movie ]}/>
+    else
+        return <div>Loading...</div>
 }
 
 export default Share
