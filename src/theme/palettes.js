@@ -4,7 +4,8 @@ export const themeList = [
     {id:"ice", name:"ice"},
     {id:"mintCoffee", name:"mint coffee"},
     {id:"scholar", name:"scholar"},
-    {id:"bloodOrange", name:"blood orange"}
+    {id:"bloodOrange", name:"blood orange"},
+    {id:"nebula", name:"nebula"}
 ]
 
 export const getPalette = id => {
@@ -14,18 +15,10 @@ export const getPalette = id => {
         case "mintCoffee": return mintCoffee
         case "scholar": return scholar
         case "bloodOrange": return bloodOrange
+        case "nebula": return nebula
 
         default: return candy
     }
-}
-
-export const candy = {
-    name: "candy",
-    primary : "#F0567A",
-    secondary : "#26547C",
-    error : "#E87A5E",
-    info : "#F4F750",
-    hover : "#FDECF0"
 }
 
 export const ice = {
@@ -37,13 +30,13 @@ export const ice = {
     hover : "#EDFAFD"
 }
 
-export const mintCoffee = {
-    name: "mint coffee",
-    primary : "#11C229",
-    secondary : "#754806",
-    error : "#DF2A2A",
-    info : "#F2A929",
-    hover : "#ECFDEF"
+export const candy = {
+    name: "candy",
+    primary : "#F0567A",
+    secondary : "#26547C",
+    error : "#E87A5E",
+    info : "#F4F750",
+    hover : "#FDECF0"
 }
 
 export const scholar = {
@@ -55,11 +48,29 @@ export const scholar = {
     hover : "#EEFBF9"
 }
 
+export const mintCoffee = {
+    name: "mint coffee",
+    primary : "#11C229",
+    secondary : "#754806",
+    error : "#DF2A2A",
+    info : "#F2A929",
+    hover : "#ECFDEF"
+}
+
 export const bloodOrange = {
     name: "blood orange",
     primary : "#D03943",
     secondary : "#EF7306",
     error : "#79151C",
     info : "#404E4F",
+    hover : "#FBEEEF"
+}
+
+export const nebula = {
+    name: "nebula",
+    primary : "#543285",
+    secondary : "#C841BF",
+    error : "#A52927",
+    info : "#B8874B",
     hover : "#FBEEEF"
 }
