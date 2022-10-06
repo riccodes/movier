@@ -9,21 +9,37 @@ const Trending = () => {
     const inactiveChip = {color:"secondary", variant: "outlined"}
 
     const tmdb = useTMDB()
-    const {trending, setTrendingTimeWindow} = tmdb
+    const {trending, topRated, setTrending, setTrendingTimeWindow} = tmdb
+
     const [dailyChip, setDailyChip] = useState(activeChip)
     const [weeklyChip, setWeeklyChip] = useState(inactiveChip)
+    const [topRatedChip, setTopRatedChip] = useState(inactiveChip)
 
     const handleChipState = label => {
 
-        if(label === "day"){
-            setDailyChip(activeChip)
-            setWeeklyChip(inactiveChip)
-        } else if(label === "week"){
-            setDailyChip(inactiveChip)
-            setWeeklyChip(activeChip)
-        }
+        switch (label){
+            case "day":
+                setDailyChip(activeChip)
+                setWeeklyChip(inactiveChip)
+                setTopRatedChip(inactiveChip)
+                setTrendingTimeWindow(label)
+                break
+            case "week":
+                setDailyChip(inactiveChip)
+                setWeeklyChip(activeChip)
+                setTopRatedChip(inactiveChip)
+                setTrendingTimeWindow(label)
+                break
+            case "topRated":
+                setDailyChip(inactiveChip)
+                setWeeklyChip(inactiveChip)
+                setTopRatedChip(activeChip)
+                setTrending(topRated)
+                break
+            default:
+                break
 
-        setTrendingTimeWindow(label)
+        }
     }
 
     return (
@@ -44,6 +60,14 @@ const Trending = () => {
                 sx={{margin: "4px"}}
                 label={"Weekly"}
                 onClick={() => { handleChipState("week") }}
+            />
+            <Chip
+                size="small"
+                color={topRatedChip.color}
+                variant={topRatedChip.variant}
+                sx={{margin: "4px"}}
+                label={"Top Rated"}
+                onClick={() => { handleChipState("topRated") }}
             />
            <MovieList movies={trending} />
         </>

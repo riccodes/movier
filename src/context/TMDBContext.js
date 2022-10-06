@@ -23,11 +23,19 @@ function TMDBProvider({children}) {
 
     const [movies, setMovies] = useState([])
     const [trending, setTrending] = useState([])
+    const [topRated, setTopRated] = useState([])
     const [trendingTimeWindow, setTrendingTimeWindow] = useState("day")
 
     const getMovieById = (movieId, handleMovie) => {
         tmdb.movies.getById( {id: movieId}, res => handleMovie(res), handleError )
     }
+
+    useEffect(() => {
+        tmdb.movies.getTopRated({},
+            res => handleSuccess(res, "results", (results) => setTopRated(sanitizeResults(results))),
+            handleError
+        )
+    }, [])
 
     useEffect(() => {
         getTrending("movie", trendingTimeWindow).then(response => {
@@ -55,7 +63,7 @@ function TMDBProvider({children}) {
 
     }, [certification, genre, person, rating, sort, year, watchProvider])
 
-    const value = { movies, setMovies, trending, setTrending, setTrendingTimeWindow, getMovieById}
+    const value = { movies, setMovies, trending, topRated, setTrending, setTrendingTimeWindow, getMovieById}
     return <TMDBContext.Provider value={value}>{children}</TMDBContext.Provider>
 }
 
