@@ -34,7 +34,7 @@ const Scroller = () => {
         window.addEventListener("scroll", handleScroll)
 
         return () => {
-            window.addEventListener("scroll", _.debounce(() => { setIsShowFab(true) }, 1000))
+            window.addEventListener("scroll", _.debounce(() => { setIsShowFab(true) }, 600))
         }
     }, [y])
 
