@@ -29,11 +29,22 @@ function CommonProvider({children}) {
     const [snackBar, setSnackBar] = useState({isOpen: false, message: ""})
     const [alert, setAlert] = useState({isOpen: false, message: "", icon: null })
     const [recommendation, setRecommendation] = useState()
+    const [loading, setLoading] = useState(true)
 
     const [trailerState, trailerDispatch] =
         React.useReducer(trailerReducer, {isOpen: false, trailer: {name: "", key: ""} , setTrailerData})
 
-    const value = {alert, setAlert, snackBar, setSnackBar, recommendation, setRecommendation, trailerState}
+    const value = {
+        alert,
+        loading,
+        setLoading,
+        setAlert,
+        snackBar,
+        setSnackBar,
+        recommendation,
+        setRecommendation,
+        trailerState
+    }
     return <CommonContext.Provider value={value}>{children}</CommonContext.Provider>
 }
 

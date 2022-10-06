@@ -5,6 +5,7 @@ import {handleError, handleSuccess} from "../util";
 import {api_key, getTrending, images_host, tmdb_host} from "../api/api";
 import {useFilters} from "./FilterContext";
 import {sanitizeResults} from "../util/utils";
+import {useCommon} from "./CommonContext";
 
 tmdb.common.api_key = api_key;
 tmdb.common.base_uri = tmdb_host;
@@ -15,11 +16,12 @@ const TMDBContext = React.createContext()
 function TMDBProvider({children}) {
 
     const filters = useFilters()
-    const {watchProvider} = filters
-    const { certification, genre, person, ratingState, sortState, yearState} = filters
+    const { certification, genre, person, ratingState, sortState, yearState, watchProvider} = filters
     const {rating} = ratingState
     const {sort} = sortState
     const {year} = yearState
+
+    const {setLoading} = useCommon()
 
     const [movies, setMovies] = useState([])
     const [trending, setTrending] = useState([])
@@ -27,21 +29,41 @@ function TMDBProvider({children}) {
     const [trendingTimeWindow, setTrendingTimeWindow] = useState("day")
 
     const getMovieById = (movieId, handleMovie) => {
-        tmdb.movies.getById( {id: movieId}, res => handleMovie(res), handleError )
+        setLoading(true)
+
+        const handleMovieIdChange = res => {
+            handleMovie(res)
+            setLoading(false)
+        }
+
+        tmdb.movies.getById( {id: movieId}, handleMovieIdChange, handleError )
+    }
+
+    const handleTopRatedChange = (res) => {
+        setTopRated(sanitizeResults(res))
+        setLoading(false)
+    }
+
+    const handleFilterChange = (res) => {
+        setMovies(sanitizeResults(res))
+        setLoading(false)
     }
 
     useEffect(() => {
+        setLoading(true)
         tmdb.movies.getTopRated({},
-            res => handleSuccess(res, "results", (results) => setTopRated(sanitizeResults(results))),
+            res => handleSuccess(res, "results", handleTopRatedChange),
             handleError
         )
-    }, [])
+    }, [setLoading])
 
     useEffect(() => {
+        setLoading(true)
         getTrending("movie", trendingTimeWindow).then(response => {
             setTrending(sanitizeResults(response.data.results))
+            setLoading(false)
         })
-    }, [trendingTimeWindow])
+    }, [trendingTimeWindow, setLoading])
 
     useEffect(() => {
         tmdb.discover.getMovies(
@@ -57,7 +79,7 @@ function TMDBProvider({children}) {
                 "vote_average.gte": rating,
                 "with_watch_providers": watchProvider.provider_id
             },
-            res => handleSuccess(res, "results", (results) => setMovies(sanitizeResults(results))),
+            res => handleSuccess(res, "results", handleFilterChange),
             handleError
         )
 

@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import {Chip, Typography} from "@mui/material";
 import {useTMDB} from "../context/TMDBContext";
 import MovieList from "../components/MovieList";
+import Loader from "../components/Loader";
 
 const Trending = () => {
 
@@ -69,7 +70,7 @@ const Trending = () => {
                 label={"Top Rated"}
                 onClick={() => { handleChipState("topRated") }}
             />
-           <MovieList movies={trending} />
+            <Loader><MovieList movies={trending} /></Loader>
         </>
     )
 }

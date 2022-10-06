@@ -4,6 +4,7 @@ import {listMovies} from "../graphql/queries";
 import {useEffect, useState} from "react";
 import Amplify from 'aws-amplify'
 import awsmobile from "../aws-exports";
+import {useCommon} from "./CommonContext";
 
 Amplify.configure(awsmobile)
 
@@ -20,13 +21,15 @@ const getWatchList = async () => {
 
 function WatchListProvider({children}) {
     const [watchlist, setWatchlist] = useState([])
+    const {setLoading} = useCommon()
 
     useEffect(()=>{
-        getWatchList().then(data => { setWatchlist(data) })
-    }, [])
+        getWatchList().then(data => {
+            setWatchlist(data)
+            setLoading(false)
+        })
+    }, [setLoading])
 
-    // NOTE: you *might* need to memoize this value
-    // Learn more in http://kcd.im/optimize-context
     const value = {watchlist, setWatchlist}
     return <WatchListContext.Provider value={value}>{children}</WatchListContext.Provider>
 }

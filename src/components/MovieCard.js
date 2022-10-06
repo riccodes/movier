@@ -38,14 +38,11 @@ const MovieCard = ({ movie }) => {
     const location = useLocation()
     const navigate = useNavigate()
 
-    const list = useWatchList()
-    const {watchlist, setWatchlist} = list
+    const {watchlist, setWatchlist} = useWatchList()
 
-    const tmdb = useTMDB()
-    const {setMovies} = tmdb
+    const {setMovies} = useTMDB()
 
-    const common = useCommon()
-    const {setRecommendation, setSnackBar, trailerState} = common
+    const {setLoading, setRecommendation, setSnackBar, trailerState} = useCommon()
     const {setTrailerData} = trailerState
 
     const [providers, setProviders] = useState()
@@ -85,13 +82,18 @@ const MovieCard = ({ movie }) => {
             navigate("/recommendations")
         } else
             setSnackBar({isOpen: true, message: "No recommendations found"})
+
+        setLoading(false)
     }
 
-    const getRecommendations = () => tmdbApi.movies.getRecommendations(
-        {id: movie.id},
-        (res) => handleSuccess(res, "results", handleRecommendations),
-        handleError
-    )
+    const getRecommendations = () => {
+        setLoading(true)
+        return tmdbApi.movies.getRecommendations(
+            {id: movie.id},
+            (res) => handleSuccess(res, "results", handleRecommendations),
+            handleError
+        )
+    }
 
     const saveToWatchList = () => {
         const saveMovie = async () => {

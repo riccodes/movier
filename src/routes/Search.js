@@ -2,16 +2,16 @@ import React from "react";
 import FilterBar from "../components/FilterBar";
 import {useTMDB} from "../context/TMDBContext";
 import MovieList from "../components/MovieList";
+import Loader from "../components/Loader";
 
 export const Search = () => {
 
-    const tmdb = useTMDB()
-    const {movies} = tmdb
+    const {movies} = useTMDB()
 
     return (
         <>
             <FilterBar />
-            <MovieList movies={movies}/>
+            <Loader><MovieList movies={movies}/></Loader>
         </>
     )
 }
