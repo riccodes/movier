@@ -26,9 +26,8 @@ import {createMovie, deleteMovie} from "../graphql/mutations";
 import {CHANGE_TRAILER, SET_DISPLAY, useCommon} from "../context/CommonContext";
 import tmdbApi from "themoviedb-javascript-library";
 import {useWatchList} from "../context/WatchListContext";
-import {useLocation, useNavigate} from "react-router-dom";
+import {useLocation} from "react-router-dom";
 import {useTMDB} from "../context/TMDBContext";
-import {sanitizeResults} from "../util/utils";
 import ExpandMoreTwoToneIcon from "@mui/icons-material/ExpandMoreTwoTone";
 import ShareRoundedIcon from '@mui/icons-material/ShareRounded';
 import Providers from "./Providers";
@@ -36,13 +35,12 @@ import Providers from "./Providers";
 const MovieCard = ({ movie }) => {
 
     const location = useLocation()
-    const navigate = useNavigate()
 
     const {watchlist, setWatchlist} = useWatchList()
 
-    const {setMovies} = useTMDB()
+    const {getRecommendations} = useTMDB()
 
-    const {setLoading, setRecommendation, setSnackBar, trailerState} = useCommon()
+    const {setSnackBar, trailerState} = useCommon()
     const {setTrailerData} = trailerState
 
     const [providers, setProviders] = useState()
@@ -74,26 +72,6 @@ const MovieCard = ({ movie }) => {
         })
 
     }, [movie.id])
-
-    const handleRecommendations = response => {
-        if (response.length > 0) {
-            setRecommendation(movie.title)
-            setMovies(sanitizeResults(response))
-            navigate("/recommendations")
-        } else
-            setSnackBar({isOpen: true, message: "No recommendations found"})
-
-        setLoading(false)
-    }
-
-    const getRecommendations = () => {
-        setLoading(true)
-        return tmdbApi.movies.getRecommendations(
-            {id: movie.id},
-            (res) => handleSuccess(res, "results", handleRecommendations),
-            handleError
-        )
-    }
 
     const saveToWatchList = () => {
         const saveMovie = async () => {
@@ -202,7 +180,7 @@ const MovieCard = ({ movie }) => {
                         </Tooltip>
                     }
                     <Tooltip disableFocusListener title="Get Recommendations" placement="top">
-                        <IconButton color="secondary" size="large" onClick={getRecommendations} aria-label="get recommendations">
+                        <IconButton color="secondary" size="large" onClick={()=> getRecommendations(movie)} aria-label="get recommendations">
                             <SettingsSuggestRoundedIcon/>
                         </IconButton>
                     </Tooltip>
