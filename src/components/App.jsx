@@ -1,13 +1,6 @@
 import './css/App.css';
-import React, {useCallback, useEffect, useState} from "react";
-import {
-    Alert,
-    Container,
-    CssBaseline, Fab,
-    Snackbar,
-    ThemeProvider
-} from "@mui/material";
-import UpIcon from '@mui/icons-material/KeyboardArrowUp';
+import React from "react";
+import {Alert, Container, CssBaseline, Snackbar, ThemeProvider} from "@mui/material";
 import Trailer from "./Trailer";
 import {useCommon} from "../context/CommonContext";
 import WatchList from "../routes/WatchList";
@@ -20,6 +13,7 @@ import {recommendationsRoute, searchRoute, shareRoute, trendingRoute, watchlistR
 import {useThemeHelper} from "../context/ThemeHelperContext";
 import BottomNav from "./BottomNav";
 import TopBar from "./TopBar";
+import Scroller from "./Scroller";
 
 function App() {
 
@@ -29,48 +23,11 @@ function App() {
     const common = useCommon()
     const {alert, snackBar, setSnackBar} = common
 
-    const toTop = () => { window.scrollTo({top: 0, left: 0, behavior: 'smooth'}) }
-
-    const [y, setY] = useState(window.scrollY);
-    const [isShowFab, setIsShowFab] = useState(true)
-
-    const handleScroll = useCallback(
-        e => {
-            const window = e.currentTarget;
-            if (y > window.scrollY) {
-                console.log(y);
-                setIsShowFab(false)
-            } else if (y < window.scrollY) {
-                console.log(y);
-                setIsShowFab(false)
-            } else if (y === window.scrollY) {
-                console.log(y)
-                setIsShowFab(true)
-            }
-            setY(window.scrollY);
-        }, [y]
-    );
-
-    useEffect(() => {
-        window.addEventListener("scroll", handleScroll);
-
-        return () => { // return a cleanup function to unregister our function since its gonna run multiple times
-            window.addEventListener("scroll", handleScroll);
-        };
-    }, [y]);
-
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline />
             <TopBar/>
-            {isShowFab &&
-                <Fab
-                    onClick={toTop}
-                    sx={{position: 'fixed', bottom: 60, right: 10}}
-                    color="primary" aria-label="add">
-                    <UpIcon/>
-                </Fab>
-            }
+            <Scroller/>
             <Container sx={{marginTop: "16px"}} maxWidth="xl">
                 {/*fixme this glitches out sometimes*/}
                 <Trailer/>
