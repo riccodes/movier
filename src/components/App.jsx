@@ -1,9 +1,9 @@
 import './css/App.css';
-import React from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import {
     Alert,
     Container,
-    CssBaseline, Fab, Paper,
+    CssBaseline, Fab,
     Snackbar,
     ThemeProvider
 } from "@mui/material";
@@ -29,15 +29,48 @@ function App() {
     const common = useCommon()
     const {alert, snackBar, setSnackBar} = common
 
+    const toTop = () => { window.scrollTo({top: 0, left: 0, behavior: 'smooth'}) }
+
+    const [y, setY] = useState(window.scrollY);
+    const [isShowFab, setIsShowFab] = useState(true)
+
+    const handleScroll = useCallback(
+        e => {
+            const window = e.currentTarget;
+            if (y > window.scrollY) {
+                console.log(y);
+                setIsShowFab(false)
+            } else if (y < window.scrollY) {
+                console.log(y);
+                setIsShowFab(false)
+            } else if (y === window.scrollY) {
+                console.log(y)
+                setIsShowFab(true)
+            }
+            setY(window.scrollY);
+        }, [y]
+    );
+
+    useEffect(() => {
+        window.addEventListener("scroll", handleScroll);
+
+        return () => { // return a cleanup function to unregister our function since its gonna run multiple times
+            window.addEventListener("scroll", handleScroll);
+        };
+    }, [y]);
+
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline />
             <TopBar/>
-            <Fab
-                sx={{position: 'fixed', bottom: 60, right: 10}}
-                color="primary" aria-label="add">
-                <UpIcon/>
-            </Fab>
+            {isShowFab &&
+                <Fab
+                    onClick={toTop}
+                    sx={{position: 'fixed', bottom: 60, right: 10}}
+                    color="primary" aria-label="add">
+                    <UpIcon/>
+                </Fab>
+            }
             <Container sx={{marginTop: "16px"}} maxWidth="xl">
                 {/*fixme this glitches out sometimes*/}
                 <Trailer/>
