@@ -43,11 +43,10 @@ const FilterBar = () => {
         person, setPerson,
         rating, setRating,
         sort, setSort,
-        yearState,
+        year, setYear,
         watchProvider, setWatchProvider,
         watchProviderList
     } = useFilters()
-    const {year, setYear} = yearState
 
     const MINIMUM_RATING = "Minimum Rating"
 

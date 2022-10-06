@@ -4,7 +4,7 @@ import {useState} from "react";
 
 const FilterContext = React.createContext()
 
-const watchProviderList = [
+export const watchProviderList = [
     {
         "logo_path": "/t2yyOv40HZeVlLjYsCsPHnWLk4W.jpg",
         "provider_name": "Netflix",
