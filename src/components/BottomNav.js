@@ -8,6 +8,7 @@ import {recommendationsRoute, searchRoute, trendingRoute, watchlistRoute} from "
 import {useLocation, useNavigate} from "react-router-dom";
 import {useCommon} from "../context/CommonContext";
 import OverFlowMenu from "./OverFlowMenu";
+import {toTop} from "../util/utils";
 
 const BottomNav = () => {
     const location = useLocation()
@@ -27,12 +28,12 @@ const BottomNav = () => {
         const {setAlert, recommendation} = common
 
         setAlert({isOpen: false, message: ""})
+        toTop()
 
         switch (pathname){
             case "/" + recommendationsRoute:
                 setValue(null)
                 setAlert({isOpen: true, message: `Recommendations based on: ${recommendation}`})
-                window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
                 break
             case "/" + trendingRoute:
                 setValue(1)

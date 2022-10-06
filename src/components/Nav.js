@@ -8,6 +8,7 @@ import MoreVertRoundedIcon from '@mui/icons-material/MoreVertRounded';
 import {recommendationsRoute, searchRoute, trendingRoute, watchlistRoute} from "../routes/routes";
 import {useCommon} from "../context/CommonContext";
 import OverFlowMenu from "./OverFlowMenu";
+import {toTop} from "../util/utils";
 
 const Nav = () => {
     const navigateTo = useNavigate()
@@ -54,9 +55,9 @@ const Nav = () => {
             case "/" + recommendationsRoute:
                 setAlert({isOpen: true, message: `Recommendations based on: ${recommendation}`})
                 setVariants(clearVariants)
-                window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+                toTop()
                 break
-            case "/" + trendingRoute:
+            case "/" + trendingRoute:window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
                 setCurrentNav(trendingRoute)
                 break
             case "/" + watchlistRoute:
