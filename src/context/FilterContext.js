@@ -4,7 +4,7 @@ import {useState} from "react";
 
 const FilterContext = React.createContext()
 
-export const watchProviderList = [
+const watchProviderList = [
     {
         "logo_path": "/t2yyOv40HZeVlLjYsCsPHnWLk4W.jpg",
         "provider_name": "Netflix",
@@ -74,8 +74,8 @@ function FilterProvider({children}) {
         rating, setRating,
         sort, setSort,
         year, setYear,
-        setWatchProvider, watchProviderList,
-        watchProvider
+        setWatchProvider, watchProvider,
+        watchProviderList
     }
     return <FilterContext.Provider value={value}>{children}</FilterContext.Provider>
 }
