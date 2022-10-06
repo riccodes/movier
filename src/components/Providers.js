@@ -10,19 +10,26 @@ const Providers = ({ providers }) => {
     const [netflix, setNetflix] = useState(false)
     const [hulu, setHulu] = useState(false)
     const [hbo, setHbo] = useState(false)
+    const [amazonVideo, setAmazonVideo] = useState(false)
 
     useEffect(()=> {
-        if(providers["flatrate"]
-            && providers["flatrate"].find(prov => prov.provider_id === watchProviderList[0].provider_id)){
-            setNetflix(true)
-        }
-        if(providers["flatrate"]
-            && providers["flatrate"].find(prov => prov.provider_id === watchProviderList[1].provider_id)){
-            setHulu(true)
-        }
-        if(providers["flatrate"]
-            && providers["flatrate"].find(prov => prov.provider_id === watchProviderList[2].provider_id)){
-            setHbo(true)
+        if(providers){
+            if(providers["flatrate"]
+                && providers["flatrate"].find(prov => prov.provider_id === watchProviderList[0].provider_id)){
+                setNetflix(true)
+            }
+            if(providers["flatrate"]
+                && providers["flatrate"].find(prov => prov.provider_id === watchProviderList[1].provider_id)){
+                setHulu(true)
+            }
+            if(providers["flatrate"]
+                && providers["flatrate"].find(prov => prov.provider_id === watchProviderList[2].provider_id)){
+                setHbo(true)
+            }
+            if(providers["flatrate"]
+                && providers["flatrate"].find(prov => prov.provider_id === watchProviderList[3].provider_id)){
+                setAmazonVideo(true)
+            }
         }
     }, [providers])
 
@@ -62,6 +69,13 @@ const Providers = ({ providers }) => {
                                     style={{marginLeft: "4px"}}
                                     width="23"
                                     src={`https://image.tmdb.org/t/p/w200${watchProviderList[2].logo_path}`}/>
+                            }
+                            { amazonVideo &&
+                                <img
+                                    alt={watchProviderList[0].name}
+                                    style={{marginLeft: "4px"}}
+                                    width="23"
+                                    src={`https://image.tmdb.org/t/p/w200${watchProviderList[3].logo_path}`}/>
                             }
                         </AccordionSummary>
                         <AccordionDetails>
