@@ -18,9 +18,7 @@ function TMDBProvider({children}) {
 
     const navigate = useNavigate()
 
-    const { certification, genre, person, ratingState, sortState, yearState, watchProvider} = useFilters()
-    const {rating} = ratingState
-    const {sort} = sortState
+    const { certification, genre, person, rating, sort, yearState, watchProvider} = useFilters()
     const {year} = yearState
 
     const {setLoading, setRecommendation, setSnackBar} = useCommon()

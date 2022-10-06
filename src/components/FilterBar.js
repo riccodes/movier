@@ -31,17 +31,22 @@ import {useFilters} from "../context/FilterContext";
 import {sanitizeResults} from "../util/utils";
 import {useTMDB} from "../context/TMDBContext";
 import IconSelector from "./IconSelector";
+import {parseInt} from "lodash";
 
 const FilterBar = () => {
 
-    const tmdb = useTMDB()
-    const {setMovies} = tmdb
+    const {setMovies} = useTMDB()
 
-    const filters = useFilters()
-    const {watchProvider, setWatchProvider, watchProviderList} = filters
-    const { genre, setGenre, certification, setCertification, person, setPerson, ratingState, sortState, yearState} = filters
-    const {rating, setRating} = ratingState
-    const {sort, setSort} = sortState
+    const {
+        genre, setGenre,
+        certification, setCertification,
+        person, setPerson,
+        rating, setRating,
+        sort, setSort,
+        yearState,
+        watchProvider, setWatchProvider,
+        watchProviderList
+    } = useFilters()
     const {year, setYear} = yearState
 
     const MINIMUM_RATING = "Minimum Rating"
@@ -97,7 +102,7 @@ const FilterBar = () => {
         if (e) {
             const newRating = e?.target?.value
 
-            setRating(newRating)
+            setRating(parseInt(newRating))
             setRatingLabel(`${MINIMUM_RATING}: ${newRating}`)
         }
     }

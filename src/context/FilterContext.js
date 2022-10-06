@@ -57,77 +57,25 @@ const watchProviderList = [
     }
 ]
 
-//fixme remove all these reducers
-function ratingReducer(state, action) {
-
-    switch (action.type) {
-        case 'setRating': {
-            return {...state, rating:action.data}
-        }
-        default: {
-            throw new Error(`Unhandled action type: ${action.type}`)
-        }
-    }
-}
-
-function sortReducer(state, action) {
-
-    switch (action.type) {
-        case 'setSort': {
-            return {...state, sort: action.data}
-        }
-        default: {
-            throw new Error(`Unhandled action type: ${action.type}`)
-        }
-    }
-}
-
-function yearReducer(state, action) {
-
-    switch (action.type) {
-        case 'setYear': {
-            return {...state, year:action.data}
-        }
-        default: {
-            throw new Error(`Unhandled action type: ${action.type}`)
-        }
-    }
-}
-
 function FilterProvider({children}) {
 
-    const setRating = rating => {
-        ratingDispatch({type: 'setRating', data: rating})
-    }
-    const setSort = sort => {
-        sortDispatch({type: 'setSort', data: sort})
-    }
-    const setYear = year => {
-        yearDispatch({type: 'setYear', data: year})
-    }
-
-    const [ratingState, ratingDispatch] = React.useReducer(ratingReducer, {rating : "", setRating: setRating})
-    const [sortState, sortDispatch] = React.useReducer(sortReducer, {sort: sorts.find(sort => sort.key === "pop.desc"), setSort: setSort})
-    const [yearState, yearDispatch] = React.useReducer(yearReducer, {year : 0, setYear: setYear})
-
     const [genre, setGenre] = useState({genre: {name : ""}})
+    const [sort, setSort] = useState(sorts.find(sort => sort.key === "pop.desc"))
+    const [rating, setRating] = useState(0)
+    const [year, setYear] = useState(0)
     const [person, setPerson] = useState({person: {id: "", name: ""}})
     const [watchProvider, setWatchProvider] = useState({provider_name: ""})
     const [certification, setCertification] = useState({certification: {certification: ""}})
 
-    // NOTE: you *might* need to memoize this value
-    // Learn more in http://kcd.im/optimize-context
     const value = {
-        certification,
-        setCertification,
-        genre,
-        setGenre,
-        person,
-        setPerson,
-        ratingState, sortState, yearState,
-        watchProvider,
-        setWatchProvider,
-        watchProviderList
+        certification, setCertification,
+        genre, setGenre,
+        person, setPerson,
+        rating, setRating,
+        sort, setSort,
+        year, setYear,
+        setWatchProvider, watchProviderList,
+        watchProvider
     }
     return <FilterContext.Provider value={value}>{children}</FilterContext.Provider>
 }
