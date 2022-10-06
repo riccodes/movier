@@ -4,7 +4,7 @@ import ExpandMoreTwoToneIcon from "@mui/icons-material/ExpandMoreTwoTone";
 import WatchProvs from "./WatchProvs";
 import {useFilters} from "../context/FilterContext";
 
-const Providers = ({providers}) => {
+const Providers = ({ providers }) => {
     const {watchProviderList} = useFilters()
 
     const [netflix, setNetflix] = useState(false)
@@ -12,16 +12,19 @@ const Providers = ({providers}) => {
     const [hbo, setHbo] = useState(false)
 
     useEffect(()=> {
-        if(providers["flatrate"] && providers["flatrate"].find(prov => prov.provider_id === watchProviderList[0].provider_id)){
+        if(providers["flatrate"]
+            && providers["flatrate"].find(prov => prov.provider_id === watchProviderList[0].provider_id)){
             setNetflix(true)
         }
-        if(providers["flatrate"] && providers["flatrate"].find(prov => prov.provider_id === watchProviderList[1].provider_id)){
+        if(providers["flatrate"]
+            && providers["flatrate"].find(prov => prov.provider_id === watchProviderList[1].provider_id)){
             setHulu(true)
         }
-        if(providers["flatrate"] && providers["flatrate"].find(prov => prov.provider_id === watchProviderList[2].provider_id)){
+        if(providers["flatrate"]
+            && providers["flatrate"].find(prov => prov.provider_id === watchProviderList[2].provider_id)){
             setHbo(true)
         }
-    }, [watchProviderList, providers])
+    }, [providers])
 
     if (providers) {
 

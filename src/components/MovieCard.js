@@ -20,7 +20,7 @@ import Actions from "./Actions";
 
 const MovieCard = ({ movie }) => {
 
-    const [providers, setProviders] = useState()
+    const [providers, setProviders] = useState([])
 
     useEffect(() => {
         getWatchProviders(movie.id)
