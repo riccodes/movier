@@ -6,13 +6,16 @@ const WatchProvs = ({provs, label}) => {
         return (
             <Box sx={{marginBottom: "4px"}}>
                 <Typography variant="subtitle2">{label}</Typography>
-                <Typography variant="caption">
-                    {provs.map((p, i) => {
-                        return i !== provs.length-1
-                            ? p.provider_name + ", "
-                            : p.provider_name
-                    })}
-                </Typography>
+                    {provs.map(p =>(
+                            <div>
+                                <img
+                                    style={{marginRight: "4px", verticalAlign: "middle"}}
+                                    alt={p.provider_name}
+                                    width="20"
+                                    src={`https://image.tmdb.org/t/p/w200${p.logo_path}`}/>
+                                <Typography variant="caption">{p.provider_name}</Typography>
+                            </div>
+                        ))}
             </Box>
         )
     else return <div/>

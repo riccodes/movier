@@ -11,6 +11,7 @@ const Providers = ({ providers }) => {
     const [hulu, setHulu] = useState(false)
     const [hbo, setHbo] = useState(false)
     const [amazonVideo, setAmazonVideo] = useState(false)
+    const [disney, setDisney] = useState(false)
 
     useEffect(()=> {
         if(providers){
@@ -29,6 +30,10 @@ const Providers = ({ providers }) => {
             if(providers["flatrate"]
                 && providers["flatrate"].find(prov => prov.provider_id === watchProviderList[3].provider_id)){
                 setAmazonVideo(true)
+            }
+            if(providers["flatrate"]
+                && providers["flatrate"].find(prov => prov.provider_id === watchProviderList[4].provider_id)){
+                setDisney(true)
             }
         }
     }, [providers])
@@ -58,24 +63,31 @@ const Providers = ({ providers }) => {
                             }
                             { hulu &&
                                 <img
-                                    alt={watchProviderList[0].name}
+                                    alt={watchProviderList[1].name}
                                     style={{marginLeft: "4px"}}
                                     width="23"
                                     src={`https://image.tmdb.org/t/p/w200${watchProviderList[1].logo_path}`}/>
                             }
                             { hbo &&
                                 <img
-                                    alt={watchProviderList[0].name}
+                                    alt={watchProviderList[2].name}
                                     style={{marginLeft: "4px"}}
                                     width="23"
                                     src={`https://image.tmdb.org/t/p/w200${watchProviderList[2].logo_path}`}/>
                             }
                             { amazonVideo &&
                                 <img
-                                    alt={watchProviderList[0].name}
+                                    alt={watchProviderList[3].name}
                                     style={{marginLeft: "4px"}}
                                     width="23"
                                     src={`https://image.tmdb.org/t/p/w200${watchProviderList[3].logo_path}`}/>
+                            }
+                            { disney &&
+                                <img
+                                    alt={watchProviderList[4].name}
+                                    style={{marginLeft: "4px"}}
+                                    width="23"
+                                    src={`https://image.tmdb.org/t/p/w200${watchProviderList[4].logo_path}`}/>
                             }
                         </AccordionSummary>
                         <AccordionDetails>

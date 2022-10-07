@@ -15,15 +15,15 @@ const Scroller = () => {
     };
 
     const [y, setY] = useState(window.scrollY)
-    const [isShowFab, setIsShowFab] = useState(true)
+    const [isShowFab, setIsShowFab] = useState(false)
 
     const handleScroll = useCallback(e => {
             const window = e.currentTarget;
 
             if (y > window.scrollY) {
-                setIsShowFab(false)
+                setIsShowFab(true)
             } else if (y < window.scrollY) {
-                setIsShowFab(false)
+                setIsShowFab(true)
             }
 
             setY(window.scrollY)
@@ -34,7 +34,7 @@ const Scroller = () => {
         window.addEventListener("scroll", handleScroll)
 
         return () => {
-            window.addEventListener("scroll", _.debounce(() => { setIsShowFab(true) }, 600))
+            window.addEventListener("scroll", _.debounce(() => { setIsShowFab(false) }, 3000))
         }
     }, [y])
 
