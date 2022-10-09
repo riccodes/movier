@@ -7,8 +7,9 @@ const WatchProvs = ({provs, label}) => {
             <Box sx={{marginBottom: "4px"}}>
                 <Typography variant="subtitle2">{label}</Typography>
                     {provs.map(p =>(
-                            <div>
+                            <div key={p.provider_name}>
                                 <img
+                                    key={p.provider_name}
                                     style={{marginRight: "4px", verticalAlign: "middle"}}
                                     alt={p.provider_name}
                                     width="20"

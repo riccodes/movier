@@ -46,7 +46,7 @@ const Actions = ({ movie }) => {
             res => handleSuccess(res, "results", parseTrailerResponse),
             handleError
         )
-    })
+    },[])
 
     const saveToWatchList = () => {
         const saveMovie = async () => {

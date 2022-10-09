@@ -4,8 +4,7 @@ import {SET_DISPLAY, useCommon} from "../context/CommonContext";
 
 const Trailer = () => {
 
-    const common = useCommon()
-    const {trailerState} = common
+    const {trailerState} = useCommon()
     const {isOpen, trailer, setTrailerData} = trailerState
 
     return(
