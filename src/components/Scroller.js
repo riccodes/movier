@@ -1,42 +1,19 @@
-import React, {useCallback, useEffect, useState} from "react";
-import _ from "lodash";
+import React from "react";
 import {Fab, Slide} from "@mui/material";
 import UpIcon from "@mui/icons-material/KeyboardArrowUp";
 import {toTop} from "../util/utils";
 import {useTheme} from '@mui/material/styles';
+import {useScroll} from "../context/ScrollContext";
 
 const Scroller = () => {
 
     const theme = useTheme()
+    const {isShowFab} = useScroll()
 
     const transitionDuration = {
         enter: theme.transitions.duration.enteringScreen,
         exit: theme.transitions.duration.leavingScreen,
     };
-
-    const [y, setY] = useState(window.scrollY)
-    const [isShowFab, setIsShowFab] = useState(false)
-
-    const handleScroll = useCallback(e => {
-            const window = e.currentTarget;
-
-            if (y > window.scrollY) {
-                setIsShowFab(true)
-            } else if (y < window.scrollY) {
-                setIsShowFab(true)
-            }
-
-            setY(window.scrollY)
-        }, [y]
-    )
-
-    useEffect(() => {
-        window.addEventListener("scroll", handleScroll)
-
-        return () => {
-            window.addEventListener("scroll", _.debounce(() => { setIsShowFab(false) }, 3000))
-        }
-    }, [y])
 
     return isShowFab
         ? //Show

@@ -14,6 +14,7 @@ import {useThemeHelper} from "../context/ThemeHelperContext";
 import BottomNav from "./BottomNav";
 import TopBar from "./TopBar";
 import Scroller from "./Scroller";
+import {ScrollProvider} from "../context/ScrollContext";
 
 function App() {
 
@@ -27,7 +28,9 @@ function App() {
         <ThemeProvider theme={theme}>
             <CssBaseline />
             <TopBar/>
-            <Scroller/>
+            <ScrollProvider>
+                <Scroller/>
+            </ScrollProvider>
             <Container sx={{marginTop: "16px"}} maxWidth="xl">
                 {/*fixme this glitches out sometimes*/}
                 <Trailer/>
@@ -52,7 +55,9 @@ function App() {
                     <Route path={trendingRoute} element={<Trending/>}/>
                     <Route path={`${shareRoute}/:movieId`} element={<Share/>}/>
                 </Routes>
-                <BottomNav />
+                <ScrollProvider>
+                    <BottomNav />
+                </ScrollProvider>
             </Container>
         </ThemeProvider>
     )

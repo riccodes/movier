@@ -9,15 +9,17 @@ import {useLocation, useNavigate} from "react-router-dom";
 import {useCommon} from "../context/CommonContext";
 import OverFlowMenu from "./OverFlowMenu";
 import {toTop} from "../util/utils";
+import {useScroll} from "../context/ScrollContext";
 
 const BottomNav = () => {
     const location = useLocation()
     const common = useCommon()
     const navigate = useNavigate()
+    const {isShowNav} = useScroll()
 
     const [value, setValue] = useState()
 
-    const [anchorEl, setAnchorEl] = React.useState(null);
+    const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
     const handleMenuClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -50,14 +52,15 @@ const BottomNav = () => {
 
     }, [location])
 
-    return (
+    return isShowNav
+        ?
         <Paper sx={{position: 'fixed', bottom: 0, left: 0, right: 0}} elevation={3}>
             <BottomNavigation
                 showLabels
                 value={value}
             >
                 <BottomNavigationAction
-                    onClick={()=> navigate(searchRoute)}
+                    onClick={() => navigate(searchRoute)}
                     label="Search"
                     icon={<SearchRoundedIcon/>}/>
                 <BottomNavigationAction
@@ -65,7 +68,7 @@ const BottomNav = () => {
                     label="Top"
                     icon={<WhatshotRoundedIcon/>}/>
                 <BottomNavigationAction
-                    onClick={()=> navigate(watchlistRoute)}
+                    onClick={() => navigate(watchlistRoute)}
                     label="watchlist"
                     icon={<SubscriptionsRoundedIcon/>}/>
                 <BottomNavigationAction
@@ -74,7 +77,8 @@ const BottomNav = () => {
             </BottomNavigation>
             <OverFlowMenu open={open} anchorEl={anchorEl} setAnchorEl={setAnchorEl}/>
         </Paper>
-    )
+        :
+        <div/>
 }
 
 export default BottomNav

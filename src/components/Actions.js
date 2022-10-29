@@ -31,13 +31,9 @@ const Actions = ({ movie }) => {
         if (trailers.length > 0) {
             const trailerArray = trailers.filter(video => video.type === "Trailer")
 
-            if (trailerArray.length > 0)
-                setCurrentTrailer(trailerArray[0])
-            else
-                setCurrentTrailer(trailers[0])
-        } else {
-            setIsTrailerButtonDisplay(false)
-        }
+            if (trailerArray.length > 0)    setCurrentTrailer(trailerArray[0])
+            else                            setCurrentTrailer(trailers[0])
+        } else { setIsTrailerButtonDisplay(false) }
     }
 
     useEffect(()=> {
