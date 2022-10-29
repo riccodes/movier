@@ -7,7 +7,7 @@ function ScrollProvider ({ children })  {
 
     const [y, setY] = useState(window.scrollY)
     const [isShowFab, setIsShowFab] = useState(false)
-    const [isShowNav, setIsShowNav] = useState(false)
+    const [isShowNav, setIsShowNav] = useState(true)
 
     const handleScroll = useCallback(e => {
             const window = e.currentTarget;
