@@ -13,9 +13,9 @@ function ScrollProvider ({ children })  {
             const window = e.currentTarget;
 
             if (y > window.scrollY) {
-                setIsShowFab(false)
-            } else if (y < window.scrollY) {
                 setIsShowFab(true)
+            } else if (y < window.scrollY) {
+                setIsShowFab(false)
                 setIsShowNav(false)
             }
 
@@ -30,7 +30,7 @@ function ScrollProvider ({ children })  {
             window.addEventListener("scroll", _.debounce(() => {
                 setIsShowFab(false)
                 setIsShowNav(true)
-            }, 3000))
+            }, 2000))
         }
     }, [y, handleScroll])
 
