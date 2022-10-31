@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {BottomNavigation, BottomNavigationAction, Paper} from "@mui/material";
+import {BottomNavigation, BottomNavigationAction, Paper, Slide} from "@mui/material";
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import SubscriptionsRoundedIcon from '@mui/icons-material/SubscriptionsRounded';
 import WhatshotRoundedIcon from '@mui/icons-material/WhatshotRounded';
@@ -54,29 +54,31 @@ const BottomNav = () => {
 
     return isShowNav
         ?
-        <Paper sx={{position: 'fixed', bottom: 0, left: 0, right: 0}} elevation={3}>
-            <BottomNavigation
-                showLabels
-                value={value}
-            >
-                <BottomNavigationAction
-                    onClick={() => navigate(searchRoute)}
-                    label="Search"
-                    icon={<SearchRoundedIcon/>}/>
-                <BottomNavigationAction
-                    onClick={()=> navigate(trendingRoute)}
-                    label="Top"
-                    icon={<WhatshotRoundedIcon/>}/>
-                <BottomNavigationAction
-                    onClick={() => navigate(watchlistRoute)}
-                    label="watchlist"
-                    icon={<SubscriptionsRoundedIcon/>}/>
-                <BottomNavigationAction
-                    onClick={handleMenuClick}
-                    icon={<MoreVertRoundedIcon/>}/>
-            </BottomNavigation>
-            <OverFlowMenu open={open} anchorEl={anchorEl} setAnchorEl={setAnchorEl}/>
-        </Paper>
+        <Slide direction="up" in={isShowNav} mountOnEnter unmountOnExit>
+            <Paper sx={{position: 'fixed', bottom: 0, left: 0, right: 0}} elevation={3}>
+                <BottomNavigation
+                    showLabels
+                    value={value}
+                >
+                    <BottomNavigationAction
+                        onClick={() => navigate(searchRoute)}
+                        label="Search"
+                        icon={<SearchRoundedIcon/>}/>
+                    <BottomNavigationAction
+                        onClick={()=> navigate(trendingRoute)}
+                        label="Top"
+                        icon={<WhatshotRoundedIcon/>}/>
+                    <BottomNavigationAction
+                        onClick={() => navigate(watchlistRoute)}
+                        label="watchlist"
+                        icon={<SubscriptionsRoundedIcon/>}/>
+                    <BottomNavigationAction
+                        onClick={handleMenuClick}
+                        icon={<MoreVertRoundedIcon/>}/>
+                </BottomNavigation>
+                <OverFlowMenu open={open} anchorEl={anchorEl} setAnchorEl={setAnchorEl}/>
+            </Paper>
+        </Slide>
         :
         <div/>
 }
