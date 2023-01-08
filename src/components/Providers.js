@@ -12,6 +12,8 @@ const Providers = ({ providers }) => {
     const [hbo, setHbo] = useState(false)
     const [amazonVideo, setAmazonVideo] = useState(false)
     const [disney, setDisney] = useState(false)
+    const [epix, setEpix] = useState(false)
+    const [starz, setStarz] = useState(false)
 
     useEffect(()=> {
         if(providers){
@@ -34,6 +36,14 @@ const Providers = ({ providers }) => {
             if(providers["flatrate"]
                 && providers["flatrate"].find(prov => prov.provider_id === watchProviderList[4].provider_id)){
                 setDisney(true)
+            }
+            if(providers["flatrate"]
+                && providers["flatrate"].find(prov => prov.provider_id === watchProviderList[5].provider_id)){
+                setEpix(true)
+            }
+            if(providers["flatrate"]
+                && providers["flatrate"].find(prov => prov.provider_id === watchProviderList[6].provider_id)){
+                setStarz(true)
             }
         }
     }, [providers])
@@ -88,6 +98,20 @@ const Providers = ({ providers }) => {
                                     style={{marginLeft: "4px"}}
                                     width="23"
                                     src={`https://image.tmdb.org/t/p/w200${watchProviderList[4].logo_path}`}/>
+                            }
+                            { epix &&
+                                <img
+                                    alt={watchProviderList[5].name}
+                                    style={{marginLeft: "4px"}}
+                                    width="23"
+                                    src={`https://image.tmdb.org/t/p/w200${watchProviderList[5].logo_path}`}/>
+                            }
+                            { starz &&
+                                <img
+                                    alt={watchProviderList[6].name}
+                                    style={{marginLeft: "4px"}}
+                                    width="23"
+                                    src={`https://image.tmdb.org/t/p/w200${watchProviderList[6].logo_path}`}/>
                             }
                         </AccordionSummary>
                         <AccordionDetails>

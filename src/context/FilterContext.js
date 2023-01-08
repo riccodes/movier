@@ -31,6 +31,16 @@ const watchProviderList = [
         "provider_id": 337
     },
     {
+        "logo_path": "/c7nw5oRfx5iZfyX0QmtOK0pbVaJ.jpg",
+        "provider_name": "Epix",
+        "provider_id": 34
+    },
+    {
+        "logo_path": "/eWp5LdR4p4uKL0wACBBXapDV2lB.jpg",
+        "provider_name": "Starz",
+        "provider_id": 43
+    },
+    {
         "logo_path": "/oIkQkEkwfmcG7IGpRR1NB8frZZM.jpg",
         "provider_name": "YouTube",
         "provider_id": 192
