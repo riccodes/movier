@@ -74,7 +74,7 @@ function FilterProvider({children}) {
         rating, setRating,
         sort, setSort,
         year, setYear,
-        setWatchProvider, watchProvider,
+        watchProvider, setWatchProvider,
         watchProviderList
     }
     return <FilterContext.Provider value={value}>{children}</FilterContext.Provider>
