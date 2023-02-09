@@ -18,7 +18,7 @@ const Trending = () => {
     const [netflixChip, setNetflixChip] = useState(inactiveChip)
 
     async function getTrendingForProvider(providerId) {
-         return await trending.filter(m => {theme
+         return await trending.filter(m => {
             return getWatchProviders(m.id).then(res => {
                 if(res.data.results["US"]?.flatrate?.some(p => p.provider_id === providerId)){
                     return m
