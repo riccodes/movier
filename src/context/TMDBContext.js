@@ -117,7 +117,7 @@ function TMDBProvider({children}) {
 function useTMDB() {
     const context = React.useContext(TMDBContext)
     if (context === undefined) {
-        throw new Error('useWatchList must be used within a WatchListProvider')
+        throw new Error('useTMDB must be used within a TMDBProvider')
     }
     return context
 }
