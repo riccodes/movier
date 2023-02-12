@@ -1,4 +1,5 @@
 import {render, screen} from "@testing-library/react";
+import user from '@testing-library/user-event'
 import FilterBar from "../FilterBar";
 import {TMDBProvider} from "../../context/TMDBContext";
 import {BrowserRouter} from "react-router-dom";
@@ -47,5 +48,24 @@ test("FilterBar render tests", async () => {
     // check slider renders
     const testing = screen.getByLabelText("Set year")
     expect(testing).toBeInTheDocument()
+})
 
+
+test("FilterBar select and clear filters tests", () => {
+    render(
+        <BrowserRouter>
+            <FilterProvider>
+                <CommonProvider>
+                    <TMDBProvider>
+                        <FilterBar/>
+                    </TMDBProvider>
+                </CommonProvider>
+            </FilterProvider>
+        </BrowserRouter>
+    )
+
+    const genreFilter = screen.getAllByText(/Genre/i)
+
+    user.selectOptions(genreFilter[1])
+    expect(genreFilter).toHaveFocus()
 })
