@@ -6,7 +6,7 @@ import {BrowserRouter} from "react-router-dom";
 import {WatchListProvider} from "../../context/WatchListContext";
 import {TMDBProvider} from "../../context/TMDBContext";
 import {FilterProvider} from "../../context/FilterContext";
-test('Basic render', async () => {
+test('App render tests', async () => {
     render(
         <BrowserRouter>
             <ThemeHelperProvider>
@@ -27,7 +27,6 @@ test('Basic render', async () => {
 
     const filterTitle = screen.getByText(/Filters/i);
     expect(filterTitle).toBeInTheDocument();
-
 });
 
 

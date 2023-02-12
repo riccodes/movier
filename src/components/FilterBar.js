@@ -4,19 +4,18 @@ import {
     AccordionDetails,
     AccordionSummary,
     Autocomplete,
-    Button, Container,
+    Button,
+    Container,
     FormControl,
     Rating,
     Slider,
-    Stack, Switch,
-    TextField, ToggleButton, ToggleButtonGroup,
+    Stack,
+    TextField,
     Typography
 } from "@mui/material";
 import ExpandMoreTwoToneIcon from "@mui/icons-material/ExpandMoreTwoTone";
 import FilterAltTwoToneIcon from '@mui/icons-material/FilterAltTwoTone';
 import BackspaceTwoToneIcon from '@mui/icons-material/BackspaceTwoTone';
-import MovieFilterIcon from '@mui/icons-material/MovieFilter';
-import LiveTvIcon from '@mui/icons-material/LiveTv';
 import Selector from "./Selector";
 import {
     currentYear,
@@ -123,21 +122,12 @@ const FilterBar = () => {
 
     return (
         <Container maxWidth="xl">
-            <ToggleButtonGroup sx={{marginBottom: "4px"}} exclusive>
-                <ToggleButton value="movies">
-                    <MovieFilterIcon/>
-                </ToggleButton>
-                <ToggleButton value="tv">
-                    <LiveTvIcon/>
-                </ToggleButton>
-            </ToggleButtonGroup>
             <Accordion defaultExpanded sx={{marginBottom: "16px"}} elevation={3}>
                 <AccordionSummary
                     expandIcon={<ExpandMoreTwoToneIcon/>}
                     aria-controls="panel1a-content"
                     id="panel1a-header"
                 >
-                    <Switch name="content"/>
                     <FilterAltTwoToneIcon/>
                     <Typography>Filters</Typography>
                 </AccordionSummary>
