@@ -7,7 +7,7 @@ import {WatchListProvider} from "../../context/WatchListContext";
 import {CommonProvider} from "../../context/CommonContext";
 import {TMDBProvider} from "../../context/TMDBContext";
 
-test('basic render', async () => {
+test('MovieCard render tests', async () => {
     render(
         <BrowserRouter>
             <FilterProvider>
@@ -30,6 +30,5 @@ test('basic render', async () => {
 
     const sections = await screen.findAllByRole('button')
     expect(sections[0]).toHaveTextContent("Overview")
-
 })
 
