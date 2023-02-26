@@ -1,5 +1,5 @@
 import React from "react";
-import {Fab, Slide} from "@mui/material";
+import {Fab, Grow} from "@mui/material";
 import UpIcon from "@mui/icons-material/KeyboardArrowUp";
 import {toTop} from "../util/utils";
 import {useTheme} from '@mui/material/styles';
@@ -17,8 +17,7 @@ const Scroller = () => {
 
     return isShowFab
         ? //Show
-        <Slide
-            direction="up"
+        <Grow
             in={isShowFab}
             timeout={ transitionDuration }
             style={{ transitionDelay: `${isShowFab ? transitionDuration.exit : 0}ms` }}
@@ -30,7 +29,7 @@ const Scroller = () => {
                 color="primary" aria-label="add">
                 <UpIcon/>
             </Fab>
-        </Slide>
+        </Grow>
         : //Hide
         <div/>
 }

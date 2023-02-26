@@ -12,7 +12,6 @@ import Share from "../routes/Share";
 import {recommendationsRoute, searchRoute, shareRoute, trendingRoute, watchlistRoute} from "../routes/routes";
 import {useThemeHelper} from "../context/ThemeHelperContext";
 import BottomNav from "./BottomNav";
-import TopBar from "./TopBar";
 import Scroller from "./Scroller";
 import {ScrollProvider} from "../context/ScrollContext";
 
@@ -27,7 +26,6 @@ function App() {
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline />
-            <TopBar/>
             <ScrollProvider>
                 <Scroller/>
             </ScrollProvider>

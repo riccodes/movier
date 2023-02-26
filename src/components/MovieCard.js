@@ -23,9 +23,10 @@ const MovieCard = ({ movie }) => {
     const [providers, setProviders] = useState()
 
     useEffect(() => {
+        //fixme maybe move this to the TMDBContext
         getWatchProviders(movie.id)
-            .then(providers => {
-                setProviders(providers.data.results["US"])
+            .then(res => {
+                setProviders(res.data.results["US"])
         })
     }, [movie.id])
 

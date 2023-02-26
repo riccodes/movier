@@ -5,6 +5,7 @@ import {
     AccordionSummary,
     Autocomplete,
     Button,
+    Container,
     FormControl,
     Rating,
     Slider,
@@ -120,111 +121,113 @@ const FilterBar = () => {
     }
 
     return (
-        <Accordion defaultExpanded sx={{marginBottom: "16px"}} elevation={3}>
-            <AccordionSummary
-                expandIcon={<ExpandMoreTwoToneIcon/>}
-                aria-controls="panel1a-content"
-                id="panel1a-header"
-            >
-                <FilterAltTwoToneIcon/>
-                <Typography>Filters</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-                <Button
-                    fullWidth
-                    sx={{marginBottom: "8px", marginTop: "2px"}}
-                    startIcon={ <BackspaceTwoToneIcon/> }
-                    onClick={ clearFilters }
-                    color="secondary"
-                    variant="contained">
-                    Clear All Fields
-                </Button>
-                <Stack
-                    direction={{xs: 'column', sm: 'row'}}
-                    spacing={{xs: 0, sm: 2, md: 4}}
-                    alignItems="center">
-                    <Selector
-                        handleSelection={handleGenreSelect}
-                        label="Genres"
-                        items={genres}
-                        target="name"
-                        value={genre.name}/>
-                    <Selector
-                        handleSelection={handleSortSelect}
-                        label="Sort By"
-                        items={sorts}
-                        target="name"
-                        value={sort.name}/>
-                    <Selector
-                        handleSelection={handleCertificationSelect}
-                        label="Certifications" items={certifications}
-                        target="certification"
-                        value={certification.certification}/>
-                    <IconSelector
-                        handleSelection={handleWatchProviderSelect}
-                        label="Watch On" items={watchProviderList}
-                        target="provider_name"
-                        value={watchProvider.provider_name}/>
-                </Stack>
-                <Stack
-                    direction={{xs: 'column', sm: 'row'}}
-                    spacing={{xs: 0, sm: 2, md: 4}}
-                    alignItems="center">
-                    <FormControl fullWidth>
-                        <Autocomplete
-                            sx={{marginBottom: "8px"}}
-                            disablePortal
-                            id="search-person"
-                            options={generatePersonsOptions(persons)}
-                            onInputChange={handlePersonQueryChange}
-                            onChange={handlePersonSelect}
-                            value={person.name}
-                            renderInput={(params) => <TextField {...params} label="Search by person"/>}
-                        />
-                    </FormControl>
-                    <FormControl fullWidth>
-                        <Autocomplete
-                            disablePortal
-                            id="search-movie"
-                            sx={{marginBottom: "8px"}}
-                            options={generateMoviesOptions(movieResults)}
-                            onInputChange={handleMovieQueryChange}
-                            onChange={handleMovieQueryChange}
-                            value={movieQuery}
-                            renderInput={(params) => <TextField {...params} label="Search by Movie Title"/>}
-                        />
-                    </FormControl>
-                </Stack>
-                <Stack direction={{xs: 'column', sm: 'row'}}
-                       spacing={{xs: 1, sm: 2, md: 4}}
-                       sx={{marginBottom: "32px"}}
-                       alignItems="center">
-
-                    {minYear}
-
-                    <Slider
-                        value={year}
-                        aria-label="Set year"
-                        defaultValue={0}
-                        valueLabelDisplay="on"
-                        onChange={handleYearSelect}
-                        step={1}
-                        min={minYear}
-                        max={currentYear}/>
-
-                    {currentYear}
-
-                    <Stack alignItems="center">
-                        <Typography variant="subtitle1">{ratingLabel}</Typography>
-                        <Rating
-                            onClick={handleRatingSelect}
-                            name="rating-selector"
-                            max={10}
-                            value={rating}/>
+        <Container maxWidth="xl">
+            <Accordion defaultExpanded sx={{marginBottom: "16px"}} elevation={3}>
+                <AccordionSummary
+                    expandIcon={<ExpandMoreTwoToneIcon/>}
+                    aria-controls="panel1a-content"
+                    id="panel1a-header"
+                >
+                    <FilterAltTwoToneIcon/>
+                    <Typography>Filters</Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                    <Button
+                        fullWidth
+                        sx={{marginBottom: "8px", marginTop: "2px"}}
+                        startIcon={ <BackspaceTwoToneIcon/> }
+                        onClick={ clearFilters }
+                        color="secondary"
+                        variant="contained">
+                        Clear All Fields
+                    </Button>
+                    <Stack
+                        direction={{xs: 'column', sm: 'row'}}
+                        spacing={{xs: 0, sm: 2, md: 4}}
+                        alignItems="center">
+                        <Selector
+                            handleSelection={handleGenreSelect}
+                            label="Genres"
+                            items={genres}
+                            target="name"
+                            value={genre.name}/>
+                        <Selector
+                            handleSelection={handleSortSelect}
+                            label="Sort By"
+                            items={sorts}
+                            target="name"
+                            value={sort.name}/>
+                        <Selector
+                            handleSelection={handleCertificationSelect}
+                            label="Certifications" items={certifications}
+                            target="certification"
+                            value={certification.certification}/>
+                        <IconSelector
+                            handleSelection={handleWatchProviderSelect}
+                            label="Watch On" items={watchProviderList}
+                            target="provider_name"
+                            value={watchProvider.provider_name}/>
                     </Stack>
-                </Stack>
-            </AccordionDetails>
-        </Accordion>
+                    <Stack
+                        direction={{xs: 'column', sm: 'row'}}
+                        spacing={{xs: 0, sm: 2, md: 4}}
+                        alignItems="center">
+                        <FormControl fullWidth>
+                            <Autocomplete
+                                sx={{marginBottom: "8px"}}
+                                disablePortal
+                                id="search-person"
+                                options={generatePersonsOptions(persons)}
+                                onInputChange={handlePersonQueryChange}
+                                onChange={handlePersonSelect}
+                                value={person.name}
+                                renderInput={(params) => <TextField {...params} label="Search by person"/>}
+                            />
+                        </FormControl>
+                        <FormControl fullWidth>
+                            <Autocomplete
+                                disablePortal
+                                id="search-movie"
+                                sx={{marginBottom: "8px"}}
+                                options={generateMoviesOptions(movieResults)}
+                                onInputChange={handleMovieQueryChange}
+                                onChange={handleMovieQueryChange}
+                                value={movieQuery}
+                                renderInput={(params) => <TextField {...params} label="Search by Movie Title"/>}
+                            />
+                        </FormControl>
+                    </Stack>
+                    <Stack direction={{xs: 'column', sm: 'row'}}
+                           spacing={{xs: 1, sm: 2, md: 4}}
+                           sx={{marginBottom: "32px"}}
+                           alignItems="center">
+
+                        {minYear}
+
+                        <Slider
+                            value={year}
+                            aria-label="Set year"
+                            defaultValue={0}
+                            valueLabelDisplay="on"
+                            onChange={handleYearSelect}
+                            step={1}
+                            min={minYear}
+                            max={currentYear}/>
+
+                        {currentYear}
+
+                        <Stack alignItems="center">
+                            <Typography variant="subtitle1">{ratingLabel}</Typography>
+                            <Rating
+                                onClick={handleRatingSelect}
+                                name="rating-selector"
+                                max={10}
+                                value={rating}/>
+                        </Stack>
+                    </Stack>
+                </AccordionDetails>
+            </Accordion>
+        </Container>
     )
 }
 
