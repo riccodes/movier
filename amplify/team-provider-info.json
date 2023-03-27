@@ -11,5 +11,23 @@
       "StackId": "arn:aws:cloudformation:us-east-2:751536088014:stack/amplify-movier-dev-203958/4fbee510-3497-11ed-a87f-06b592691094",
       "AmplifyAppId": "d3iae8c7c00u2u"
     }
+  },
+  "movier": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-movier-movier-181700-authRole",
+      "UnauthRoleArn": "arn:aws:iam::751536088014:role/amplify-movier-movier-181700-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::751536088014:role/amplify-movier-movier-181700-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-movier-movier-181700-deployment",
+      "UnauthRoleName": "amplify-movier-movier-181700-unauthRole",
+      "StackName": "amplify-movier-movier-181700",
+      "StackId": "arn:aws:cloudformation:us-east-2:751536088014:stack/amplify-movier-movier-181700/7ab54fb0-ccf5-11ed-aa85-06b6f39de686",
+      "AmplifyAppId": "d3iae8c7c00u2u"
+    },
+    "categories": {
+      "api": {
+        "movier": {}
+      }
+    }
   }
 }
