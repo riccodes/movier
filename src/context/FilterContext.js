@@ -16,9 +16,9 @@ const watchProviderList = [
         "provider_id": 15
     },
     {
-        "logo_path": "/Ajqyt5aNxNGjmF9uOfxArGrdf3X.jpg",
-        "provider_name": "HBO Max",
-        "provider_id": 384
+        "logo_path": "/7TVfqxyWGqaJZM715IPHTwtgcXo.jpg",
+        "provider_name": "Max",
+        "provider_id": 1899
     },
     {
         "logo_path": "/emthp39XA2YScoYL1p0sdbAH2WA.jpg",
